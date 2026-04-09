@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eigenally | Strategy & Systems for Growth</title>
+    <meta name="description" content="Eigenally is a fractional CMO and full-stack marketing practice led by Aishwarya Swarup. 10+ years, 30+ brands, across FoodTech, Fintech, Gaming, Media, D2C, and Luxury.">
+    <meta property="og:title" content="Eigenally | Strategy & Systems for Growth">
+    <meta property="og:description" content="Clarity on what to build. Systems for how to grow. Fractional CMO, GTM architecture, performance marketing, and creative IP — by Aishwarya Swarup.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Eigenally | Strategy & Systems for Growth">
+    <meta name="twitter:description" content="Fractional CMO and full-stack marketing by Aishwarya Swarup. 518% revenue growth. 200K+ merchants. 1Bn+ interactions.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* ===== RESET & VARIABLES ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-green: #0B3D2E;
+            --dark-bg: #0A2A1F;
+            --off-white: #F4F4F2;
+            --border-color: rgba(244, 244, 242, 0.2);
+            --grid-color: rgba(76, 175, 80, 0.1);
+            --accent-red: #C82C1F;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            color: var(--off-white);
+            background: var(--dark-bg); /* fallback when WebGL unavailable */
+            line-height: 1.6;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            /* Self-healing cutting mat: major grid every 5 cells, minor every cell */
+            background-image:
+                /* Major grid lines only — cutting mat large squares */
+                linear-gradient(rgba(160, 230, 185, 0.22) 1.5px, transparent 1.5px),
+                linear-gradient(90deg, rgba(160, 230, 185, 0.22) 1.5px, transparent 1.5px);
+            background-size: 120px 120px, 120px 120px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .sticky-header {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(11, 61, 46, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 40px;
+        }
+        .nav-container {
+            max-width: 1400px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center; gap: 40px;
+        }
+        .logo {
+            font-family: 'Courier Prime', 'Monaco', monospace;
+            font-size: 18px; font-weight: 700; letter-spacing: 0.05em;
+            white-space: nowrap; text-transform: uppercase;
+        }
+        .logo span { color: var(--accent-red); }
+        .nav-links {
+            display: flex; gap: 4px; align-items: center; flex: 1; justify-content: center;
+        }
+        .nav-links a {
+            color: rgba(244, 244, 242, 0.8); text-decoration: none;
+            font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em;
+            padding: 8px 14px; border: 1px solid transparent;
+            transition: all 0.3s; white-space: nowrap;
+        }
+        .nav-links a:hover { border-color: var(--border-color); color: var(--off-white); }
+        .cta-button {
+            padding: 12px 24px;
+            background: var(--off-white); color: var(--primary-green);
+            border: 1px solid var(--off-white); cursor: pointer;
+            font-size: 12px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.05em; transition: all 0.3s; white-space: nowrap;
+        }
+        .cta-button:hover { background: var(--primary-green); color: var(--off-white); }
+        .hamburger { display: none; background: none; border: none; color: var(--off-white); font-size: 24px; cursor: pointer; }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu-overlay {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10, 42, 31, 0.98); z-index: 200; padding: 80px 40px 40px; overflow-y: auto;
+        }
+        .mobile-menu-overlay.active { display: flex; flex-direction: column; }
+        .close-menu { position: absolute; top: 20px; right: 20px; font-size: 32px; cursor: pointer; color: var(--off-white); background: none; border: none; }
+        .mobile-nav { display: flex; flex-direction: column; gap: 20px; }
+        .mobile-nav a { color: var(--off-white); text-decoration: none; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh; padding: 100px 40px;
+            max-width: 1400px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .hero-content {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 80px; width: 100%; align-items: center;
+        }
+        .hero-left { display: flex; flex-direction: column; gap: 40px; }
+        .hero-title {
+            font-size: 64px; font-weight: 700; line-height: 1.1; color: var(--off-white);
+            font-family: 'Courier Prime', monospace; letter-spacing: -0.02em;
+        }
+        .hero-title span { display: block; }
+        .hero-signals { display: flex; flex-direction: column; gap: 16px; font-size: 18px; color: rgba(244, 244, 242, 0.85); font-weight: 500; }
+        .hero-signals span::before { content: "◆ "; color: var(--accent-red); margin-right: 8px; }
+        .hero-services {
+            display: flex; flex-wrap: wrap; gap: 8px;
+        }
+        .hero-services-tag {
+            font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+            font-family: 'Courier Prime', monospace; color: rgba(244,244,242,0.65);
+            border: 1px solid rgba(244,244,242,0.18); padding: 5px 12px;
+        }
+        .hero-proof { font-size: 18px; color: rgba(244, 244, 242, 0.9); font-family: 'Courier Prime', monospace; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; }
+        .hero-right {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 32px; padding: 48px; border: 1px solid var(--border-color);
+            background: rgba(11, 61, 46, 0.65); text-align: center;
+        }
+        .hero-right-text { font-size: 22px; font-weight: 600; color: var(--off-white); line-height: 1.4; font-family: 'Courier Prime', monospace; }
+        .hero-right-sub { font-size: 16px; color: rgba(244, 244, 242, 0.6); }
+        .hero-calendly-btn {
+            padding: 16px 32px; background: var(--accent-red); color: var(--off-white);
+            border: 1px solid var(--accent-red); cursor: pointer; font-size: 13px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+            transition: all 0.3s; text-decoration: none; display: inline-block;
+        }
+        .hero-calendly-btn:hover { background: transparent; color: var(--accent-red); }
+
+        /* ===== CREDIBILITY / MARQUEE ===== */
+        .credibility {
+            padding: 100px 40px; background: var(--primary-green);
+            border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
+        }
+        .marquee-wrapper { overflow: hidden; margin-bottom: 50px; }
+        .marquee { display: flex; width: max-content; }
+        .marquee-content {
+            display: flex; gap: 60px; align-items: center; padding: 0 30px;
+            flex-shrink: 0; animation: scroll 35s linear infinite;
+        }
+        .marquee-content img { height: 44px; width: auto; max-width: 160px; flex-shrink: 0; object-fit: contain; opacity: 0.75; transition: opacity 0.3s; filter: grayscale(100%) brightness(1.2); vertical-align: middle; }
+        .marquee-content img:hover { opacity: 1; filter: grayscale(0%) brightness(1.3); }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+        .credibility-text { max-width: 1400px; margin: 0 auto; text-align: center; font-size: 18px; color: rgba(244, 244, 242, 0.9); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
+        .credibility-text p { margin: 10px 0; }
+
+        /* ===== METRICS STRIP ===== */
+        .metrics-strip {
+            padding: 100px 40px; background: var(--dark-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .metrics-strip h2 {
+            font-size: 56px; text-align: left; font-family: 'Courier Prime', monospace;
+            font-weight: 700; letter-spacing: -0.02em; margin-bottom: 60px;
+            max-width: 1400px; margin-left: auto; margin-right: auto;
+        }
+        .metrics-grid {
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
+        }
+        .metric-item { text-align: center; }
+        .metric-number {
+            font-size: 56px; font-weight: 700; color: var(--accent-red);
+            font-family: 'Courier Prime', monospace; line-height: 1;
+            display: block; margin-bottom: 8px;
+        }
+        .metric-label { font-size: 14px; color: var(--off-white); font-weight: 600; margin-bottom: 4px; }
+        .metric-source { font-size: 11px; color: rgba(244, 244, 242, 0.4); font-style: italic; }
+
+        /* ===== SERVICES SECTION ===== */
+        .services-section {
+            padding: 100px 40px; background: transparent;
+            border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
+        }
+        .services-section h2 { font-size: 56px; margin-bottom: 60px; text-align: left; font-family: 'Courier Prime', monospace; font-weight: 700; letter-spacing: -0.02em; max-width: 1400px; margin-left: auto; margin-right: auto; }
+        .services-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 0; max-width: 1400px; margin: 0 auto;
+            border: 1px solid var(--border-color);
+        }
+        .service-card {
+            background: rgba(11, 61, 46, 0.75);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            position: relative; cursor: pointer;
+            transition: background 0.35s ease;
+        }
+        .service-card:nth-child(3n) { border-right: none; }
+        .service-card:nth-child(n+7) { border-bottom: none; }
+        .service-card:nth-child(8) { grid-column: span 2; border-right: none; }
+        .service-card:hover { background: rgba(11, 61, 46, 0.97); z-index: 10; }
+        .service-card-header {
+            position: relative; height: 200px; overflow: hidden;
+        }
+        .service-card-header img {
+            width: 100%; height: 100%; object-fit: cover; opacity: 0.35;
+            transition: opacity 0.35s ease; display: block;
+        }
+        .service-card:hover .service-card-header img { opacity: 0.55; }
+        .service-card-header-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to bottom, rgba(11,61,46,0.3), rgba(11,61,46,0.88));
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 20px 28px; text-align: center;
+        }
+        .service-card-num {
+            font-size: 13px; font-weight: 700; color: var(--accent-red);
+            font-family: 'Courier Prime', monospace; text-transform: uppercase;
+            letter-spacing: 0.15em; margin-bottom: 6px;
+        }
+        .service-card-title {
+            font-size: 18px; font-weight: 700; color: var(--off-white);
+            font-family: 'Courier Prime', monospace; text-transform: uppercase;
+            letter-spacing: 0.08em; line-height: 1.3;
+        }
+        .service-card-body {
+            position: absolute; left: -1px; right: -1px; top: 100%;
+            background: rgba(11, 61, 46, 0.97);
+            border: 1px solid var(--border-color); border-top: none;
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+            padding: 0 28px; z-index: 20;
+        }
+        .service-card:hover .service-card-body { max-height: 480px; padding: 24px 28px 32px; }
+        .service-card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .service-card ul li {
+            font-size: 15px; color: rgba(244, 244, 242, 0.85); line-height: 1.5;
+            padding-left: 18px; position: relative;
+        }
+        .service-card ul li::before { content: "→"; color: var(--accent-red); position: absolute; left: 0; }
+
+        /* ===== FRACTIONAL CMO SECTION ===== */
+        .fractional-section { padding: 100px 40px; background-color: var(--dark-bg); background-image: linear-gradient(rgba(160,230,185,0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(160,230,185,0.10) 1px, transparent 1px); background-size: 48px 48px; border-top: 1px solid var(--border-color); }
+        .fractional-inner { max-width: 1400px; margin: 0 auto; }
+        .fractional-section h2 { font-size: 56px; margin-bottom: 12px; text-align: left; font-family: 'Courier Prime', monospace; font-weight: 700; letter-spacing: -0.02em; }
+        .fractional-subhead { text-align: left; font-size: 20px; color: rgba(244, 244, 242, 0.7); margin-bottom: 60px; }
+        .fractional-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-bottom: 60px; }
+        .fractional-card {
+            padding: 48px; background: rgba(11, 61, 46, 0.75); border: 1px solid var(--border-color);
+            transition: all 0.3s; position: relative;
+        }
+        .fractional-card:hover { border-color: var(--accent-red); z-index: 10; }
+        .fractional-card-label {
+            font-size: 13px; font-weight: 700; color: var(--accent-red);
+            font-family: 'Courier Prime', monospace; text-transform: uppercase;
+            letter-spacing: 0.15em; margin-bottom: 8px;
+        }
+        .fractional-card-title {
+            font-size: 22px; font-weight: 700; color: var(--off-white);
+            font-family: 'Courier Prime', monospace; margin-bottom: 8px;
+        }
+        .fractional-card-sub {
+            font-size: 14px; color: rgba(244, 244, 242, 0.6); font-style: italic;
+            margin-bottom: 0;
+        }
+        .fractional-card ul {
+            list-style: none; display: flex; flex-direction: column; gap: 12px;
+            position: absolute; left: -1px; right: -1px; top: 100%;
+            background: rgba(11, 61, 46, 0.97); border: 1px solid var(--accent-red); border-top: none;
+            max-height: 0; overflow: hidden; z-index: 20;
+            transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+            padding: 0 48px;
+        }
+        .fractional-card:hover ul { max-height: 800px; padding: 24px 48px 32px; }
+        .fractional-card ul li {
+            font-size: 15px; color: rgba(244, 244, 242, 0.85); line-height: 1.6;
+            padding-left: 20px; position: relative;
+        }
+        .fractional-card ul li::before { content: "→"; color: var(--accent-red); position: absolute; left: 0; }
+        .fractional-cta { text-align: center; }
+        .fractional-cta-btn {
+            padding: 16px 40px; background: var(--off-white); color: var(--primary-green);
+            border: 1px solid var(--off-white); cursor: pointer; font-size: 13px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+            transition: all 0.3s; text-decoration: none; display: inline-block;
+        }
+        .fractional-cta-btn:hover { background: var(--primary-green); color: var(--off-white); }
+
+        /* ===== FRACTIONAL TOOLKIT + CHART ===== */
+        .fractional-toolkit {
+            max-width: 1400px; margin: 0 auto 60px; padding: 0;
+        }
+        .fractional-toolkit-label, .fractional-engagements-label, .skills-chart-section .fractional-toolkit-label {
+            font-size: 13px; font-weight: 700; color: var(--accent-red);
+            font-family: 'Courier Prime', monospace; text-transform: uppercase;
+            letter-spacing: 0.2em; margin-bottom: 24px; display: block;
+        }
+        .fractional-engagements-label {
+            max-width: 1400px; margin: 0 auto 24px; display: block;
+        }
+        .fractional-toolkit-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
+        }
+        .toolkit-col { display: flex; flex-direction: column; gap: 2px; }
+        .toolkit-col-label {
+            font-size: 9px; font-weight: 700; color: rgba(244,244,242,0.35);
+            font-family: 'Courier Prime', monospace; text-transform: uppercase;
+            letter-spacing: 0.2em; padding: 10px 20px 6px;
+        }
+        .toolkit-item {
+            padding: 16px 20px; background: rgba(11, 61, 46, 0.55);
+            border: 1px solid var(--border-color);
+            font-size: 13px; color: rgba(244, 244, 242, 0.85); line-height: 1.4;
+            display: flex; align-items: center; gap: 12px;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .toolkit-item:hover { background: rgba(11, 61, 46, 0.9); border-color: var(--accent-red); }
+        .toolkit-item:hover .toolkit-icon { color: var(--off-white); }
+        .toolkit-icon { color: var(--accent-red); font-size: 12px; flex-shrink: 0; width: 16px; text-align: center; }
+
+        /* Skills Chart */
+        .skills-chart-section {
+            max-width: 1400px; margin: 0 auto 60px;
+            border: 1px solid var(--border-color); padding: 48px;
+            background: rgba(11, 61, 46, 0.55);
+        }
+        .skills-chart { display: flex; flex-direction: column; gap: 18px; }
+        .chart-bar-row {
+            display: grid; grid-template-columns: 240px 1fr 56px;
+            align-items: center; gap: 20px;
+        }
+        .chart-label { font-size: 13px; color: rgba(244,244,242,0.75); text-align: right; white-space: nowrap; }
+        .chart-track {
+            height: 6px; background: rgba(244,244,242,0.1);
+            border-radius: 3px; overflow: hidden;
+        }
+        .chart-bar {
+            height: 100%; background: var(--accent-red);
+            border-radius: 3px; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .chart-pct {
+            font-size: 12px; font-family: 'Courier Prime', monospace;
+            color: rgba(244,244,242,0.5); font-weight: 700;
+        }
+
+        /* ===== STAGE SELECTOR ===== */
+        .stage-selector {
+            padding: 100px 40px; background: transparent;
+            border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
+        }
+        .stage-selector-inner { max-width: 1400px; margin: 0 auto; }
+        .stage-selector h2 { font-size: 56px; margin-bottom: 16px; text-align: left; font-family: 'Courier Prime', monospace; font-weight: 700; letter-spacing: -0.02em; }
+        .stage-selector-sub { text-align: left; font-size: 18px; color: rgba(244, 244, 242, 0.6); margin-bottom: 60px; }
+        .stage-rows { display: flex; flex-direction: column; gap: 2px; }
+        .stage-row {
+            display: grid; grid-template-columns: 160px 260px 1fr auto;
+            align-items: center; gap: 40px;
+            padding: 36px 48px; background: rgba(11, 61, 46, 0.65);
+            border: 1px solid var(--border-color);
+            cursor: pointer; transition: all 0.3s;
+        }
+        .stage-row:hover { background: rgba(11, 61, 46, 0.9); border-color: var(--accent-red); }
+        .stage-label {
+            font-family: 'Courier Prime', monospace; font-size: 28px; font-weight: 700;
+            color: var(--accent-red); white-space: nowrap;
+        }
+        .stage-problem {
+            font-size: 16px; color: rgba(244, 244, 242, 0.65); line-height: 1.5;
+            border-left: 1px solid var(--border-color); padding-left: 24px;
+        }
+        .stage-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+        .stage-tag {
+            font-size: 12px; color: rgba(244, 244, 242, 0.8); padding: 6px 14px;
+            border: 1px solid var(--border-color); white-space: nowrap;
+        }
+        .stage-cta {
+            font-size: 12px; color: rgba(244, 244, 242, 0.5); white-space: nowrap;
+            font-family: 'Courier Prime', monospace; text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .stage-row:hover .stage-cta { color: var(--accent-red); }
+        @media (max-width: 1024px) {
+            .stage-row { grid-template-columns: 140px 1fr; gap: 24px; }
+            .stage-problem { border-left: none; padding-left: 0; grid-column: 1 / -1; }
+            .stage-tags { grid-column: 1 / -1; }
+            .stage-cta { display: none; }
+        }
+        @media (max-width: 768px) {
+            .stage-row { grid-template-columns: 1fr; gap: 16px; padding: 28px 24px; }
+        }
+
+        /* ===== CASE STUDIES ===== */
+        .case-studies { padding: 100px 40px; background: var(--primary-green); border-top: 1px solid var(--border-color); }
+        .case-studies-inner { max-width: 1400px; margin: 0 auto; }
+        .case-studies h2 { font-size: 56px; margin-bottom: 60px; text-align: left; font-family: 'Courier Prime', monospace; font-weight: 700; letter-spacing: -0.02em; }
+        .case-studies-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+        .case-study-card { border: 1px solid var(--border-color); overflow: hidden; background: rgba(11, 61, 46, 0.65); transition: all 0.3s; cursor: pointer; }
+        .case-study-card:hover { background: rgba(11, 61, 46, 0.8); transform: translateY(-8px); border-color: var(--accent-red); }
+        .case-image { width: 100%; height: 240px; background: linear-gradient(135deg, rgba(11, 61, 46, 0.9), rgba(200, 44, 31, 0.2)); overflow: hidden; position: relative; }
+        .case-image img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: opacity 0.3s; }
+        .case-study-card:hover .case-image img { opacity: 1; }
+        .case-content { padding: 32px; }
+        .case-content h3 { font-size: 20px; font-weight: 700; color: var(--off-white); margin-bottom: 8px; line-height: 1.3; }
+        .case-sector { font-size: 11px; color: var(--accent-red); font-family: 'Courier Prime', monospace; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px; }
+        .case-result-highlight {
+            font-size: 14px; font-family: 'Courier Prime', monospace; font-weight: 700;
+            color: var(--off-white); letter-spacing: 0.04em; line-height: 1.6;
+            border-left: 2px solid var(--accent-red); padding-left: 16px; margin-bottom: 20px;
+        }
+        .case-detail-toggle {
+            font-size: 11px; font-weight: 700;
+            font-family: 'Courier Prime', monospace; text-transform: uppercase;
+            letter-spacing: 0.1em; border: none; background: none;
+            color: rgba(244,244,242,0.4); padding: 0; display: flex; align-items: center; gap: 8px;
+            transition: color 0.3s; pointer-events: none;
+        }
+        .case-study-card:hover .case-detail-toggle { color: var(--off-white); }
+        .case-detail {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .case-study-card:hover .case-detail { max-height: 500px; }
+        .case-problem, .case-action { font-size: 14px; color: rgba(244, 244, 242, 0.75); line-height: 1.7; margin-top: 16px; }
+        .case-result { font-size: 14px; color: rgba(244, 244, 242, 0.75); line-height: 1.7; margin-top: 12px; }
+
+        /* ===== CONTACT SECTION ===== */
+        .book-call {
+            padding: 100px 40px; background: transparent;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .book-call-inner { max-width: 860px; margin: 0 auto; }
+        .book-call h2 { font-size: 56px; margin-bottom: 16px; font-family: 'Courier Prime', monospace; font-weight: 700; letter-spacing: -0.02em; }
+        .section-description { font-size: 18px; color: rgba(244, 244, 242, 0.7); margin-bottom: 60px; font-weight: 400; line-height: 1.6; }
+
+        /* Contact card */
+        .contact-card {
+            background: var(--primary-green);
+            border: 1px solid var(--border-color);
+            padding: 56px 64px;
+            display: flex; flex-direction: column; align-items: center; gap: 36px;
+            position: relative;
+        }
+        .contact-card-logo { height: 48px; width: auto; opacity: 0.95; }
+        .contact-card-divider {
+            width: 40px; height: 1px; background: var(--border-color);
+        }
+        .contact-card-name {
+            font-family: 'Courier Prime', monospace; font-size: 22px; font-weight: 700;
+            color: var(--off-white); letter-spacing: 0.04em;
+        }
+        .contact-card-title {
+            font-size: 13px; color: rgba(244,244,242,0.55); text-transform: uppercase;
+            letter-spacing: 0.15em; margin-top: -24px;
+        }
+        .contact-card-details {
+            display: flex; flex-direction: column; gap: 14px; align-items: center;
+            width: 100%;
+        }
+        .contact-card-row {
+            display: flex; align-items: center; gap: 14px;
+            font-size: 16px; color: rgba(244,244,242,0.85);
+        }
+        .contact-card-row-icon {
+            font-size: 11px; color: var(--accent-red); width: 16px; text-align: center;
+        }
+        .contact-card-actions {
+            display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 4px;
+        }
+        .contact-action-btn {
+            padding: 14px 32px; font-size: 12px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.06em;
+            text-decoration: none; border: 1px solid; transition: all 0.3s; cursor: pointer;
+            font-family: inherit;
+        }
+        .contact-action-primary {
+            background: var(--accent-red); color: var(--off-white);
+            border-color: var(--accent-red);
+        }
+        .contact-action-primary:hover { background: transparent; color: var(--accent-red); }
+        .contact-action-secondary {
+            background: transparent; color: var(--off-white);
+            border-color: var(--border-color);
+        }
+        .contact-action-secondary:hover { border-color: var(--off-white); }
+        .contact-card-share {
+            font-size: 11px; color: rgba(244,244,242,0.3); text-transform: uppercase;
+            letter-spacing: 0.15em; cursor: pointer; background: none; border: none;
+            font-family: inherit; transition: color 0.3s;
+        }
+        .contact-card-share:hover { color: rgba(244,244,242,0.7); }
+        @media (max-width: 768px) {
+            .contact-card { padding: 40px 28px; }
+            .contact-action-btn { padding: 12px 20px; font-size: 11px; }
+        }
+
+        /* ===== FLOATING CTA ===== */
+        .floating-cta {
+            position: fixed; bottom: 32px; right: 32px; padding: 16px 28px;
+            background: var(--accent-red); color: #ffffff; border: 2px solid var(--accent-red);
+            cursor: pointer; font-size: 12px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.08em; transition: all 0.3s; z-index: 50; white-space: nowrap;
+            box-shadow: 0 8px 32px rgba(200, 44, 31, 0.5);
+        }
+        .floating-cta:hover { background: #ffffff; color: var(--accent-red); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(200, 44, 31, 0.7); }
+
+        /* ===== FOOTER ===== */
+        footer { padding: 40px; text-align: center; border-top: 1px solid var(--border-color); background: var(--dark-bg); }
+        .footer-content { max-width: 1400px; margin: 0 auto; }
+        .footer-content p { font-size: 12px; color: rgba(244, 244, 242, 0.6); margin-bottom: 8px; }
+        .footer-links { margin-top: 12px; }
+        .footer-links a { color: rgba(244, 244, 242, 0.6); text-decoration: none; margin: 0 12px; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--off-white); }
+
+        /* ===== CREDIBILITY TITLE ===== */
+        .credibility-title {
+            display: block; text-align: center;
+            font-size: 56px; font-family: 'Courier Prime', monospace;
+            font-weight: 700; letter-spacing: -0.02em; color: var(--off-white);
+            max-width: 1400px; margin: 0 auto 60px;
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        .about-section {
+            padding: 100px 40px; background: var(--dark-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .about-inner { max-width: 1400px; margin: 0 auto; }
+        .about-eyebrow {
+            font-size: 13px; font-weight: 700; color: var(--accent-red);
+            font-family: 'Courier Prime', monospace; text-transform: uppercase;
+            letter-spacing: 0.15em; margin-bottom: 20px;
+        }
+        .about-section h2 {
+            font-size: 56px; font-family: 'Courier Prime', monospace;
+            font-weight: 700; letter-spacing: -0.02em; margin-bottom: 60px; max-width: 800px;
+        }
+        .about-grid {
+            display: grid; grid-template-columns: 320px 1fr; gap: 60px; align-items: start;
+            margin-bottom: 0;
+        }
+        .about-photo {
+            position: relative; top: auto;
+        }
+        .about-photo-frame {
+            width: 100%; aspect-ratio: 3/4; border: 1px solid var(--border-color);
+            background: rgba(11, 61, 46, 0.55); overflow: hidden; position: relative;
+        }
+        .about-photo-frame img {
+            width: 100%; height: 100%; object-fit: cover; opacity: 0.9;
+            display: block;
+        }
+        .about-photo-placeholder {
+            width: 100%; height: 100%; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 12px;
+            color: rgba(244, 244, 242, 0.3); text-align: center; padding: 24px;
+        }
+        .about-photo-placeholder-icon {
+            font-size: 40px; opacity: 0.4;
+        }
+        .about-photo-placeholder-text {
+            font-size: 11px; font-family: 'Courier Prime', monospace;
+            text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .about-photo-caption {
+            margin-top: 16px; font-size: 11px;
+            color: rgba(244, 244, 242, 0.4); font-family: 'Courier Prime', monospace;
+            text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .about-bio { display: flex; flex-direction: column; gap: 20px; }
+        .about-bio p { font-size: 18px; color: rgba(244, 244, 242, 0.85); line-height: 1.75; }
+        .about-bio p strong { color: var(--off-white); }
+        .about-credentials {
+            grid-column: 1 / -1;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+            border: 1px solid var(--border-color);
+        }
+        .credential-row {
+            padding: 32px 36px;
+            border-right: 1px solid var(--border-color);
+            display: flex; flex-direction: column; gap: 6px;
+            background: rgba(11, 61, 46, 0.55);
+        }
+        .credential-row:last-child { border-right: none; }
+        .credential-number {
+            font-size: 32px; font-weight: 700; color: var(--accent-red);
+            font-family: 'Courier Prime', monospace; line-height: 1;
+        }
+        .credential-label { font-size: 15px; color: rgba(244, 244, 242, 0.7); line-height: 1.4; }
+        .credential-brands { font-size: 11px; color: rgba(244, 244, 242, 0.4); font-style: italic; margin-top: 2px; }
+
+        /* Why It Works */
+        .why-works { border-top: 1px solid var(--border-color); padding-top: 80px; margin-top: 48px; }
+        .why-works h3 {
+            font-size: 44px; font-family: 'Courier Prime', monospace;
+            font-weight: 700; letter-spacing: -0.02em; margin-bottom: 48px;
+        }
+        .why-stack {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
+        }
+        .why-card {
+            position: relative;
+            padding: 36px 40px;
+            background: rgba(11, 61, 46, 0.45);
+            border: 1px solid var(--border-color);
+            transition: border-color 0.3s, background 0.3s;
+            display: flex; align-items: flex-start; gap: 28px;
+        }
+        .why-card:hover {
+            border-color: var(--accent-red);
+            background: rgba(11, 61, 46, 0.85);
+        }
+        .why-card-icon {
+            font-size: 13px; font-weight: 700; color: var(--accent-red);
+            font-family: 'Courier Prime', monospace; flex-shrink: 0;
+            letter-spacing: 0.1em; text-transform: uppercase; padding-top: 5px;
+        }
+        .why-card-content { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+        .why-card-title {
+            font-size: 18px; font-weight: 700; color: var(--off-white);
+            line-height: 1.3; font-family: 'Courier Prime', monospace;
+        }
+        .why-card-text {
+            font-size: 15px; color: rgba(244, 244, 242, 0.7); line-height: 1.7;
+        }
+
+        /* ===== FAQ SECTION ===== */
+        .faq-section {
+            padding: 100px 40px; background: var(--dark-bg);
+            border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
+        }
+        .faq-inner { max-width: 900px; margin: 0 auto; }
+        .faq-section h2 {
+            font-size: 56px; font-family: 'Courier Prime', monospace;
+            font-weight: 700; letter-spacing: -0.02em; margin-bottom: 60px; text-align: left;
+        }
+        .faq-list { display: flex; flex-direction: column; gap: 2px; }
+        .faq-item {
+            border: 1px solid var(--border-color); background: rgba(11, 61, 46, 0.65);
+            overflow: hidden; transition: border-color 0.3s;
+        }
+        .faq-item.open { border-color: rgba(244, 244, 242, 0.4); }
+        .faq-question {
+            width: 100%; text-align: left; padding: 28px 32px;
+            background: none; border: none; color: var(--off-white);
+            font-size: 18px; font-weight: 600; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center; gap: 24px;
+            transition: background 0.3s;
+        }
+        .faq-question:hover { background: rgba(11, 61, 46, 0.8); }
+        .faq-icon {
+            font-size: 18px; color: var(--accent-red); flex-shrink: 0;
+            font-family: 'Courier Prime', monospace; transition: transform 0.3s;
+        }
+        .faq-item.open .faq-icon { transform: rotate(45deg); }
+        .faq-answer {
+            display: none; padding: 0 32px 28px;
+            font-size: 16px; color: rgba(244, 244, 242, 0.8); line-height: 1.75;
+        }
+        .faq-item.open .faq-answer { display: block; }
+        .faq-answer strong { color: var(--off-white); }
+
+        /* ===== WORD CLOUD ===== */
+        .wordcloud-section {
+            position: relative; height: 80vh; overflow: hidden;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            cursor: none;
+        }
+        .wordcloud-inner {
+            position: absolute; inset: 0;
+        }
+        .wc-word {
+            position: absolute;
+            font-family: 'Courier Prime', 'Courier', monospace;
+            color: #F4F4F2;
+            pointer-events: none;
+            user-select: none; white-space: nowrap;
+            transition: opacity 0.35s ease, color 0.2s ease, transform 0.2s ease;
+        }
+        .wc-cursor {
+            position: absolute; width: 8px; height: 8px;
+            background: var(--accent-red); border-radius: 50%;
+            pointer-events: none; z-index: 20;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 12px rgba(200, 44, 31, 0.8);
+        }
+        .wc-center-text {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center; pointer-events: none; z-index: 10;
+        }
+        .wc-center-line1 {
+            font-family: 'Courier Prime', monospace;
+            font-size: 32px; font-weight: 700; color: rgba(244,244,242,0.97);
+            letter-spacing: 0.02em; line-height: 1.25; white-space: nowrap;
+            text-shadow: 0 0 60px rgba(10,42,31,1), 0 0 30px rgba(10,42,31,0.9), 0 2px 8px rgba(0,0,0,0.6);
+        }
+
+        /* ===== ABOUT PULL-QUOTE ===== */
+        .about-pull-quote {
+            font-family: 'Courier Prime', monospace;
+            font-size: 24px; font-weight: 700; color: var(--off-white);
+            line-height: 1.35; border-left: 3px solid var(--accent-red);
+            padding-left: 24px; margin-top: 16px;
+        }
+
+        /* ===== TL;DR FRACTIONAL CMO ===== */
+        .tldr-section {
+            padding: 100px 40px;
+            background-color: var(--dark-bg);
+            background-image: linear-gradient(rgba(160,230,185,0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(160,230,185,0.10) 1px, transparent 1px);
+            background-size: 48px 48px;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .tldr-inner { max-width: 1400px; margin: 0 auto; }
+        .tldr-eyebrow {
+            font-size: 13px; font-weight: 700; color: var(--accent-red);
+            font-family: 'Courier Prime', monospace; text-transform: uppercase;
+            letter-spacing: 0.2em; margin-bottom: 20px;
+        }
+        .tldr-section h2 {
+            font-size: 56px; font-family: 'Courier Prime', monospace;
+            font-weight: 700; letter-spacing: -0.02em; margin-bottom: 60px; max-width: 800px;
+        }
+        .tldr-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+            border: 1px solid var(--border-color);
+        }
+        .tldr-card {
+            padding: 48px 40px;
+            border-right: 1px solid var(--border-color);
+            background: rgba(11, 61, 46, 0.55);
+            transition: background 0.3s;
+        }
+        .tldr-card:last-child { border-right: none; }
+        .tldr-card:hover { background: rgba(11, 61, 46, 0.85); }
+        .tldr-card-label {
+            font-size: 13px; font-weight: 700; color: var(--accent-red);
+            font-family: 'Courier Prime', monospace; text-transform: uppercase;
+            letter-spacing: 0.2em; margin-bottom: 16px;
+        }
+        .tldr-card-title {
+            font-size: 22px; font-weight: 700; color: var(--off-white);
+            font-family: 'Courier Prime', monospace; margin-bottom: 20px; line-height: 1.2;
+        }
+        .tldr-card-body {
+            font-size: 16px; color: rgba(244, 244, 242, 0.8); line-height: 1.7;
+        }
+        .tldr-card-body strong { color: var(--off-white); }
+
+        /* ===== METRIC COUNTER ===== */
+        .metric-number { transition: opacity 0.3s; }
+        .metric-number.counting { opacity: 1; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1200px) {
+            .about-grid { grid-template-columns: 260px 1fr; gap: 48px; }
+            .about-photo { position: relative; top: auto; }
+            .credential-row { padding: 20px 24px; }
+        }
+        @media (max-width: 1024px) {
+            .fractional-toolkit-grid { grid-template-columns: repeat(2, 1fr); }
+            .chart-bar-row { grid-template-columns: 180px 1fr 48px; gap: 14px; }
+            .hero-content { grid-template-columns: 1fr; gap: 60px; }
+            .services-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .service-card:nth-child(2n) { border-right: none; }
+            .service-card:nth-child(n+3) { border-bottom: none; }
+            .fractional-grid { grid-template-columns: 1fr; }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-photo { position: relative; top: auto; }
+            .credential-row { padding: 16px 20px; }
+            .why-stack { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .sticky-header { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .cta-button { display: none; }
+            .hamburger { display: block; }
+            .hero { padding: 60px 20px; }
+            .hero-title { font-size: 40px; }
+            .hero-proof { font-size: 14px; }
+            .challenge-selector, .services-section, .case-studies, .book-call,
+            .fractional-section, .metrics-strip, .about-section, .faq-section,
+            .tldr-section, .stage-selector { padding: 60px 20px; }
+            .challenge-selector h2, .services-section h2, .case-studies h2,
+            .book-call h2, .fractional-section h2, .metrics-strip h2,
+            .about-section h2, .faq-section h2, .tldr-section h2,
+            .stage-selector h2 { font-size: 32px; margin-bottom: 40px; }
+            .case-studies-grid { grid-template-columns: 1fr; }
+            .challenge-grid { grid-template-columns: repeat(2, 1fr); }
+            .floating-cta { bottom: 16px; right: 16px; padding: 12px 16px; font-size: 10px; }
+            .metric-number { font-size: 40px; }
+            .why-card { margin-left: 0 !important; }
+            .fractional-toolkit-grid { grid-template-columns: repeat(2, 1fr); }
+            .chart-bar-row { grid-template-columns: 1fr 2fr 40px; gap: 10px; }
+            .chart-label { text-align: left; font-size: 11px; }
+            .skills-chart-section { padding: 28px; }
+            .tldr-grid { grid-template-columns: 1fr; }
+            .tldr-card { border-right: none; border-bottom: 1px solid var(--border-color); }
+            .tldr-card:last-child { border-bottom: none; }
+            .wordcloud-section { height: 60vh; }
+            .credibility-title { font-size: 36px; }
+            .about-pull-quote { font-size: 18px; }
+            .faq-question { font-size: 14px; padding: 20px 24px; }
+            .faq-answer { padding: 0 24px 20px; }
+            .services-grid { grid-template-columns: 1fr !important; }
+            .service-card { border-right: none; }
+            .service-card:nth-child(n) { border-right: none; border-bottom: 1px solid var(--border-color); }
+            .service-card:last-child { border-bottom: none; }
+            .service-card:hover .service-card-body { max-height: 700px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-photo { display: none; }
+            .about-credentials { grid-template-columns: repeat(2, 1fr); }
+            .fractional-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .hero-title { font-size: 28px; }
+            .hero-signals { font-size: 14px; }
+            .hero-proof { font-size: 13px; letter-spacing: 0.06em; }
+            .challenge-grid { grid-template-columns: 1fr; }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+            .metric-number { font-size: 32px; }
+            .marquee-content { gap: 30px; }
+            .marquee-content img { height: 35px; max-width: 120px; }
+            .about-credentials { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="shader-bg" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;pointer-events:none;"></canvas>
+
+    <!-- ===== NAVIGATION ===== -->
+    <header class="sticky-header">
+        <div class="nav-container">
+            <div class="logo">Eigen<span>.</span>ally</div>
+            <nav class="nav-links">
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#fractional">Fractional CMO/COO</a>
+                <a href="#case-studies">Case Studies</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <a href="https://calendly.com/aishwarya-swarup/eigenally-exploratory-call" target="_blank" class="cta-button">Book your session</a>
+            <button class="hamburger" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </header>
+
+    <!-- ===== MOBILE MENU ===== -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <button class="close-menu" onclick="toggleMobileMenu()">✕</button>
+        <nav class="mobile-nav">
+            <a href="#about" onclick="toggleMobileMenu()">About</a>
+            <a href="#services" onclick="toggleMobileMenu()">Services</a>
+            <a href="#fractional" onclick="toggleMobileMenu()">Fractional CMO/COO</a>
+            <a href="#case-studies" onclick="toggleMobileMenu()">Case Studies</a>
+            <a href="#faq" onclick="toggleMobileMenu()">FAQ</a>
+            <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
+        </nav>
+    </div>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-left">
+                <h1 class="hero-title">
+                    <span>Clarity on what to build.</span>
+                    <span>Systems for how to grow.</span>
+                </h1>
+                <div class="hero-signals">
+                    <span>Build your path to product-market fit</span>
+                    <span>Build acquisition systems that compound</span>
+                    <span>Scale with systems built to hold under pressure</span>
+                </div>
+                <div class="hero-services">
+                    <span class="hero-services-tag">Strategy &amp; Brand</span>
+                    <span class="hero-services-tag">Performance &amp; Growth</span>
+                    <span class="hero-services-tag">Creating Cultural IP</span>
+                    <span class="hero-services-tag">Fundraising &amp; Launch</span>
+                    <span class="hero-services-tag">Fractional CMO / COO</span>
+                </div>
+                <div class="hero-proof">
+                    <span>10+ Years | 30+ Brands | 200+ Mentored</span>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="hero-right-text">Bring the brief.<br>Leave with a plan.</div>
+                <div class="hero-right-sub">One exploratory call. Every angle covered. Real direction from the first conversation.</div>
+                <a href="https://calendly.com/aishwarya-swarup/eigenally-exploratory-call" target="_blank" class="hero-calendly-btn">Book your session →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CREDIBILITY / MARQUEE ===== -->
+    <section class="credibility">
+        <h2 class="credibility-title">Companies who have trusted us</h2>
+        <div class="marquee-wrapper">
+            <div class="marquee">
+                <div class="marquee-content" aria-hidden="false">
+                    <img src="Logos/Paytm_logo.png" alt="Paytm">
+                    <img src="Logos/Swiggy_logo_(old).svg.png" alt="Swiggy">
+                    <img src="Logos/Sony_Pictures_Networks_India-Logo.wine.png" alt="Sony Pictures Networks">
+                    <img src="Logos/SET_HD_2016.webp" alt="Sony Entertainment Television">
+                    <img src="Logos/Sony_BBC_Earth.png" alt="Sony BBC Earth">
+                    <img src="Logos/Sony_YAY!_logo_(2017-present).png" alt="Sony YAY!">
+                    <img src="Logos/SonyLIV_2020.png" alt="Sony LIV">
+                    <img src="Logos/Shasn-logo.png" alt="SHASN">
+                    <img src="Logos/LieBluffWin.png" alt="Lie Bluff Win">
+                    <img src="Logos/imagesstb.png" alt="Stembridge Labs">
+                    <img src="Logos/imagesbizcon.png" alt="Bizcon">
+                    <img src="Logos/imagesdme.png" alt="Dimsum Express">
+                    <img src="Logos/brd.png" alt="Brandtainment">
+                    <img src="Logos/images.png" alt="Brand">
+                    <img src="Logos/idmZSGiFiM_logos.png" alt="Brand">
+                    <img src="Logos/unnamed.png" alt="Brand">
+                    <img src="Logos/yellow%20logo0.png" alt="Brand">
+                    <img src="Logos/pic9044358.png.webp" alt="Brand">
+                </div>
+                <div class="marquee-content" aria-hidden="true">
+                    <img src="Logos/Paytm_logo.png" alt="">
+                    <img src="Logos/Swiggy_logo_(old).svg.png" alt="">
+                    <img src="Logos/Sony_Pictures_Networks_India-Logo.wine.png" alt="">
+                    <img src="Logos/SET_HD_2016.webp" alt="">
+                    <img src="Logos/Sony_BBC_Earth.png" alt="">
+                    <img src="Logos/Sony_YAY!_logo_(2017-present).png" alt="">
+                    <img src="Logos/SonyLIV_2020.png" alt="">
+                    <img src="Logos/Shasn-logo.png" alt="">
+                    <img src="Logos/LieBluffWin.png" alt="">
+                    <img src="Logos/imagesstb.png" alt="">
+                    <img src="Logos/imagesbizcon.png" alt="">
+                    <img src="Logos/imagesdme.png" alt="">
+                    <img src="Logos/brd.png" alt="">
+                    <img src="Logos/images.png" alt="">
+                    <img src="Logos/idmZSGiFiM_logos.png" alt="">
+                    <img src="Logos/unnamed.png" alt="">
+                    <img src="Logos/yellow%20logo0.png" alt="">
+                    <img src="Logos/pic9044358.png.webp" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="credibility-text">
+            <p>10+ Yrs &bull; 30+ Brands &bull; 200+ Mentored</p>
+            <p>Fintech &bull; FoodTech &bull; Gaming &bull; Media &amp; Entertainment &bull; D2C &bull; Luxury</p>
+        </div>
+    </section>
+
+    <!-- ===== METRICS STRIP ===== -->
+    <section class="metrics-strip">
+        <h2>Numbers that moved P&amp;Ls</h2>
+        <div class="metrics-grid">
+            <div class="metric-item">
+                <span class="metric-number">0</span>
+                <div class="metric-label">Revenue growth in 8 months</div>
+                <div class="metric-source">Swiggy Virtual Kitchens</div>
+            </div>
+            <div class="metric-item">
+                <span class="metric-number">0</span>
+                <div class="metric-label">GMV growth</div>
+                <div class="metric-source">Swiggy West</div>
+            </div>
+            <div class="metric-item">
+                <span class="metric-number">0</span>
+                <div class="metric-label">Interactions generated</div>
+                <div class="metric-source">KBC Play Along / Sony</div>
+            </div>
+            <div class="metric-item">
+                <span class="metric-number">0</span>
+                <div class="metric-label">Merchants scaled</div>
+                <div class="metric-source">Paytm Soundbox</div>
+            </div>
+            <div class="metric-item">
+                <span class="metric-number">0</span>
+                <div class="metric-label">Crowdfunded in 30 days</div>
+                <div class="metric-source">Macaraccoon / Kickstarter</div>
+            </div>
+            <div class="metric-item">
+                <span class="metric-number">0</span>
+                <div class="metric-label">Retention lift</div>
+                <div class="metric-source">Swiggy CRM Campaigns</div>
+            </div>
+            <div class="metric-item">
+                <span class="metric-number">0</span>
+                <div class="metric-label">Channel reach increase</div>
+                <div class="metric-source">Sony YAY!</div>
+            </div>
+            <div class="metric-item">
+                <span class="metric-number">0</span>
+                <div class="metric-label">AOV increase via A/B testing</div>
+                <div class="metric-source">Swiggy Virtual Kitchens</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STAGE SELECTOR ===== -->
+    <section class="stage-selector">
+        <div class="stage-selector-inner">
+        <h2>Every inflection point has a playbook.</h2>
+        <p class="stage-selector-sub">A full-stack marketer who's been in the room at every stage, 0→1 cold starts, 1→10 growth ceilings, and 10+ scale inflections.</p>
+        <div class="stage-rows">
+            <div class="stage-row" onclick="window.open('https://calendly.com/aishwarya-swarup/eigenally-exploratory-call','_blank')">
+                <div class="stage-label">0 &rarr; 1</div>
+                <div class="stage-problem">You have the product. The market doesn't know you yet, and the GTM is either missing or untested.</div>
+                <div class="stage-tags">
+                    <span class="stage-tag">GTM Architecture</span>
+                    <span class="stage-tag">Brand Positioning</span>
+                    <span class="stage-tag">Launch Sequencing</span>
+                    <span class="stage-tag">PMF Strategy</span>
+                    <span class="stage-tag">TOFU Activation</span>
+                </div>
+                <div class="stage-cta">Book a session &rarr;</div>
+            </div>
+            <div class="stage-row" onclick="window.open('https://calendly.com/aishwarya-swarup/eigenally-exploratory-call','_blank')">
+                <div class="stage-label">1 &rarr; 10</div>
+                <div class="stage-problem">Traction is there. But growth has stalled, CAC is climbing, or unit economics are under pressure.</div>
+                <div class="stage-tags">
+                    <span class="stage-tag">Funnel Diagnostics</span>
+                    <span class="stage-tag">CAC / LTV Rebalancing</span>
+                    <span class="stage-tag">Retention Systems</span>
+                    <span class="stage-tag">Pricing Optimisation</span>
+                    <span class="stage-tag">Revenue Architecture</span>
+                </div>
+                <div class="stage-cta">Book a session &rarr;</div>
+            </div>
+            <div class="stage-row" onclick="window.open('https://calendly.com/aishwarya-swarup/eigenally-exploratory-call','_blank')">
+                <div class="stage-label">10 &rarr; ∞</div>
+                <div class="stage-problem">Scale is live. But margins, positioning, or velocity aren't keeping pace with the size of the business.</div>
+                <div class="stage-tags">
+                    <span class="stage-tag">Market Expansion</span>
+                    <span class="stage-tag">Brand Repositioning</span>
+                    <span class="stage-tag">P&amp;L Optimisation</span>
+                    <span class="stage-tag">Geo-Expansion Playbooks</span>
+                    <span class="stage-tag">Fractional CMO / COO</span>
+                </div>
+                <div class="stage-cta">Book a session &rarr;</div>
+            </div>
+        </div>
+        </div><!-- /stage-selector-inner -->
+    </section>
+
+    <!-- ===== ABOUT SECTION ===== -->
+    <section class="about-section" id="about">
+        <div class="about-inner">
+            <div class="about-eyebrow">About</div>
+            <h2>The full-stack marketer your team has been missing.</h2>
+            <div class="about-grid">
+                <div class="about-photo">
+                    <div class="about-photo-frame">
+                        <img src="Logos/About Image.jpeg" alt="Aishwarya Swarup — Founder, Eigenally" style="object-position: center top; transform: scale(1.25); transform-origin: center top;">
+                    </div>
+                    <p class="about-photo-caption">Aishwarya Swarup · Founder, Eigenally</p>
+                </div>
+                <div class="about-bio">
+                    <p><strong>Aishwarya Swarup</strong> is a culture-first brand curator, growth strategist, and full-stack marketer who understands how attention forms, how technology compounds it, and how systems turn it into scale.</p>
+                    <p>Her thinking is engineered through first-principles reasoning and sharpened by operating inside India's most competitive growth environments, including Swiggy, Paytm, and Sony Pictures Networks. She has owned P&amp;Ls, built and led growth organizations, and taken products from zero to scale across Gaming, FoodTech, Fintech, Media, and D2C.</p>
+                    <p>Her work moves seamlessly across the stack. At one end, she architects brand positioning and builds cultural IP that shapes perception. At the other, she drives CAC efficiency, retention systems, and durable unit economics. This is not fragmented thinking. It is integrated design.</p>
+                    <p>Eigenally exists to close the gap most businesses struggle with: the divide between what sounds right and what actually works.</p>
+                    <div class="about-pull-quote">Culture that moves markets. Strategy that wins boardrooms. Execution that compounds in dashboards.</div>
+                </div>
+                <div class="about-credentials">
+                    <div class="credential-row">
+                        <div class="credential-number">10+</div>
+                        <div class="credential-label">Years of P&L ownership across FoodTech, Fintech, Media & D2C</div>
+                    </div>
+                    <div class="credential-row">
+                        <div class="credential-number">30+</div>
+                        <div class="credential-label">Brands built, repositioned, or scaled to next stage</div>
+                    </div>
+                    <div class="credential-row">
+                        <div class="credential-number">200+</div>
+                        <div class="credential-label">Founders and marketers mentored across growth and brand</div>
+                    </div>
+                    <div class="credential-row">
+                        <div class="credential-number">6</div>
+                        <div class="credential-label">Industries: Fintech · FoodTech · Gaming · Media · D2C · Luxury</div>
+                        <div class="credential-brands">Swiggy · Paytm · Sony Pictures · Eigenally</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why It Works -->
+            <div class="why-works">
+                <h3>Why it works for our partners</h3>
+                <div class="why-stack">
+                    <div class="why-card">
+                        <div class="why-card-icon">01</div>
+                        <div class="why-card-content">
+                            <div class="why-card-title">CMO-level leadership, built into your team.</div>
+                            <div class="why-card-text">Strategic thinking and execution at the level you need, structured for where you are. The economics work at seed, at Series A, and everywhere in between.</div>
+                        </div>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-card-icon">02</div>
+                        <div class="why-card-content">
+                            <div class="why-card-title">Scope that bends around your reality.</div>
+                            <div class="why-card-text">One focused sprint to fix a specific problem, or an embedded six-month engagement. Built around your brief, your timeline, and your team. You define the shape.</div>
+                        </div>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-card-icon">03</div>
+                        <div class="why-card-content">
+                            <div class="why-card-title">A perspective your org can't grow from inside.</div>
+                            <div class="why-card-text">Fresh eyes on your strategy and funnel, with zero internal politics. The diagnosis is honest. The recommendations are built around what the business actually needs.</div>
+                        </div>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-card-icon">04</div>
+                        <div class="why-card-content">
+                            <div class="why-card-title">The deck and the doing, owned by one person.</div>
+                            <div class="why-card-text">Brand strategy, GTM architecture, performance systems, and team enablement, connected and driven by the same person from brief to results.</div>
+                        </div>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-card-icon">05</div>
+                        <div class="why-card-content">
+                            <div class="why-card-title">Fluent in how modern audiences actually move.</div>
+                            <div class="why-card-text">Creators, communities, meme cycles, AI-assisted creative, product-led growth — this is the native language of every strategy. Culture and technology, integrated from the start.</div>
+                        </div>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-card-icon">06</div>
+                        <div class="why-card-content">
+                            <div class="why-card-title">Proven playbooks. Results from week one.</div>
+                            <div class="why-card-text">Ten years and 30+ brands worth of pattern recognition, already calibrated. The learning curve is compressed before the engagement begins. Momentum starts immediately.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WORD CLOUD ===== -->
+    <section class="wordcloud-section" id="wordcloud">
+        <div class="wordcloud-inner" id="wordcloud-inner"></div>
+        <div class="wc-cursor" id="wc-cursor"></div>
+        <div class="wc-center-text">
+            <div class="wc-center-line1">Marketing is no longer linear.</div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES SECTION ===== -->
+    <section class="services-section" id="services">
+        <h2>What we do.</h2>
+        <div class="services-grid" style="grid-template-columns: repeat(2, 1fr);">
+
+            <!-- 01: STRATEGY & BRAND -->
+            <div class="service-card">
+                <div class="service-card-header">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&h=320&fit=crop" alt="Strategy & Brand" onerror="this.style.display='none'">
+                    <div class="service-card-header-overlay">
+                        <div class="service-card-num">01</div>
+                        <div class="service-card-title">Strategy &amp; Brand</div>
+                    </div>
+                </div>
+                <div class="service-card-body">
+                    <div style="font-size:11px;color:var(--accent-red);font-family:'Courier Prime',monospace;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:14px;">Full-stack Marketing · Distribution · Campaign Consulting</div>
+                    <ul>
+                        <li>End-to-end marketing ownership: strategy through execution, with P&amp;L accountability</li>
+                        <li>GTM architecture for 0&rarr;1 launches and 1&rarr;10 scale, including brand positioning and PMF strategy</li>
+                        <li>Channel architecture: owned, earned, paid, affiliate, marketplace, and geo-expansion</li>
+                        <li>Team building, vendor management, martech stack design, and cross-functional alignment</li>
+                        <li>Political campaign consulting: voter segmentation, narrative architecture, and digital mobilisation</li>
+                        <li>Brand campaign consulting: campaign positioning, creative direction, and launch strategy</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 02: PERFORMANCE & GROWTH -->
+            <div class="service-card">
+                <div class="service-card-header">
+                    <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=700&h=320&fit=crop" alt="Performance & Growth" onerror="this.style.display='none'">
+                    <div class="service-card-header-overlay">
+                        <div class="service-card-num">02</div>
+                        <div class="service-card-title">Performance &amp; Growth</div>
+                    </div>
+                </div>
+                <div class="service-card-body">
+                    <div style="font-size:11px;color:var(--accent-red);font-family:'Courier Prime',monospace;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:14px;">Performance Marketing · AI Integration</div>
+                    <ul>
+                        <li>AARRR funnel diagnostics to isolate the exact leak; CAC optimisation through channel mix and creative testing</li>
+                        <li>LTV growth via lifecycle CRM and repeat purchase strategy; media planning and budget allocation</li>
+                        <li>Unit economics: contribution margin, payback period, and EBITDA trajectory</li>
+                        <li>AI-native GTM: positioning, audience strategy, and creative pipeline automation</li>
+                        <li>Personalisation at scale: AI-driven CRM, segmentation, targeting, and performance bidding</li>
+                        <li>Team capability building: embedding AI as a habit, not a disruption</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 03: CREATIVE & IP -->
+            <div class="service-card">
+                <div class="service-card-header">
+                    <img src="https://images.unsplash.com/photo-1536849460588-696219a9e98d?w=700&h=320&fit=crop" alt="Creative & IP" onerror="this.style.display='none'">
+                    <div class="service-card-header-overlay">
+                        <div class="service-card-num">03</div>
+                        <div class="service-card-title">Creating Cultural IP</div>
+                    </div>
+                </div>
+                <div class="service-card-body">
+                    <div style="font-size:11px;color:var(--accent-red);font-family:'Courier Prime',monospace;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:14px;">Cultural IP Creation · Website Creation · Deck Building</div>
+                    <ul>
+                        <li>Build IP that becomes a cultural touchstone: creator ecosystems, franchise and licensing architecture</li>
+                        <li>Creative strategy across formats: short-form, long-form, experiential, digital, physical, and live events</li>
+                        <li>Strategy-first web design: every page built around a conversion goal — microsites to full marketing sites</li>
+                        <li>Investor decks built around a single, defensible narrative: problem, insight, solution, traction, ask</li>
+                        <li>Sales decks, partnership proposals, and board presentations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 04: FUNDRAISING & LAUNCH -->
+            <div class="service-card">
+                <div class="service-card-header">
+                    <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=700&h=320&fit=crop" alt="Fundraising & Launch" onerror="this.style.display='none'">
+                    <div class="service-card-header-overlay">
+                        <div class="service-card-num">04</div>
+                        <div class="service-card-title">Fundraising &amp; Launch</div>
+                    </div>
+                </div>
+                <div class="service-card-body">
+                    <div style="font-size:11px;color:var(--accent-red);font-family:'Courier Prime',monospace;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:14px;">Fundraising · GTM for New Ventures</div>
+                    <ul>
+                        <li>Fundraising narrative and investor pitch architecture; round strategy and investor positioning by stage</li>
+                        <li>Crowdfunding campaign design and community activation ($77K raised in 30 days on Kickstarter)</li>
+                        <li>Grant strategy, proposal development, and donor journey design</li>
+                        <li>Pre-launch GTM: positioning, PMF validation, TOFU activation, and launch sequencing</li>
+                        <li>0→1 playbooks for founder-led businesses: brand, growth, and distribution from day one</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== TL;DR: FRACTIONAL CMO ===== -->
+    <section class="tldr-section">
+        <div class="tldr-inner">
+            <div class="tldr-eyebrow">TL;DR</div>
+            <h2>Who is a Fractional CMO?</h2>
+            <div class="tldr-grid">
+                <div class="tldr-card">
+                    <div class="tldr-card-label">Who</div>
+                    <div class="tldr-card-title">An experienced marketing leader, embedded part-time.</div>
+                    <div class="tldr-card-body">CMO-level strategy and P&amp;L thinking, inside your team — without the full-time hire.</div>
+                </div>
+                <div class="tldr-card">
+                    <div class="tldr-card-label">Who it's for</div>
+                    <div class="tldr-card-title">Founders and teams at every inflection point.</div>
+                    <div class="tldr-card-body">Pre-launch, scaling, or optimising at size — when you need strategic leadership but not a full headcount.</div>
+                </div>
+                <div class="tldr-card">
+                    <div class="tldr-card-label">What they do</div>
+                    <div class="tldr-card-title">Own the strategy. Drive the outcomes.</div>
+                    <div class="tldr-card-body">Build brand architecture, run the performance funnel, align the team, and stay accountable to the numbers.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FRACTIONAL CMO/COO SECTION ===== -->
+    <section class="fractional-section" id="fractional">
+        <div class="fractional-inner">
+        <h2>Fractional CMO / COO</h2>
+        <p class="fractional-subhead">Full-stack marketing leadership. Embedded in your team.</p>
+
+        <!-- Toolkit -->
+        <div class="fractional-toolkit">
+            <div class="fractional-toolkit-label">The toolkit</div>
+            <div class="fractional-toolkit-grid">
+                <div class="toolkit-col">
+                    <div class="toolkit-col-label">Brand &amp; Strategy</div>
+                    <div class="toolkit-item"><i class="fa-solid fa-bullseye toolkit-icon"></i> Brand Strategy &amp; Positioning</div>
+                    <div class="toolkit-item"><i class="fa-solid fa-rocket toolkit-icon"></i> GTM Architecture &amp; Launch</div>
+                    <div class="toolkit-item"><i class="fa-solid fa-palette toolkit-icon"></i> Cultural IP &amp; Creative Direction</div>
+                    <div class="toolkit-item"><i class="fa-solid fa-tag toolkit-icon"></i> Pricing &amp; Revenue Architecture</div>
+                    <div class="toolkit-item"><i class="fa-solid fa-arrows-split-up-and-left toolkit-icon"></i> Cross-functional Alignment</div>
+                </div>
+                <div class="toolkit-col">
+                    <div class="toolkit-col-label">Growth &amp; Operations</div>
+                    <div class="toolkit-item"><i class="fa-solid fa-chart-line toolkit-icon"></i> Performance Marketing &amp; CAC</div>
+                    <div class="toolkit-item"><i class="fa-solid fa-rotate toolkit-icon"></i> Retention &amp; Lifecycle CRM</div>
+                    <div class="toolkit-item"><i class="fa-solid fa-scale-balanced toolkit-icon"></i> P&amp;L &amp; Unit Economics</div>
+                    <div class="toolkit-item"><i class="fa-solid fa-people-group toolkit-icon"></i> Team Building &amp; Org Design</div>
+                    <div class="toolkit-item"><i class="fa-solid fa-microchip toolkit-icon"></i> AI Integration &amp; Automation</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Engagements -->
+        <div class="fractional-engagements-label">Engagement models</div>
+        <div class="fractional-grid">
+            <div class="fractional-card">
+                <div class="fractional-card-label">Engagement 01</div>
+                <div class="fractional-card-title">6-Month Engagement</div>
+                <div class="fractional-card-sub">A full-stack marketer embedded in your leadership team.</div>
+                <ul>
+                    <li>End-to-end marketing strategy and execution ownership</li>
+                    <li>Team building, mentoring, and process design</li>
+                    <li>P&amp;L accountability with quarterly board-level reporting</li>
+                    <li>Cross-functional alignment across product, sales, and ops</li>
+                    <li>Monthly strategy reviews and ongoing performance tracking</li>
+                </ul>
+            </div>
+            <div class="fractional-card">
+                <div class="fractional-card-label">Engagement 02</div>
+                <div class="fractional-card-title">Brief-Based Engagement</div>
+                <div class="fractional-card-sub">One problem. One mandate. Built around your brief.</div>
+                <ul>
+                    <li>You define the problem: positioning, launch, funnel, distribution, or ops</li>
+                    <li>We own the diagnosis, the strategy, and the execution playbook</li>
+                    <li>Scope covers whatever marketing and operations the problem demands</li>
+                    <li>Deliverables and success metrics defined at the start</li>
+                    <li>Works for startups, growth-stage companies, and enterprise pivots alike</li>
+                </ul>
+            </div>
+            <div class="fractional-card">
+                <div class="fractional-card-label">Engagement 03</div>
+                <div class="fractional-card-title">Custom Engagement</div>
+                <div class="fractional-card-sub">No template. Built entirely around what you need.</div>
+                <ul>
+                    <li>Fully scoped from the first conversation</li>
+                    <li>Combines strategy, execution, and advisory in any proportion</li>
+                    <li>Flexible commitment: hours, days, or milestones</li>
+                    <li>Right for complex situations that don't fit a standard model</li>
+                    <li>Starts with a discovery call to define the exact shape of the engagement</li>
+                </ul>
+            </div>
+        </div>
+        <div class="fractional-cta">
+            <a href="https://calendly.com/aishwarya-swarup/eigenally-exploratory-call" target="_blank" class="fractional-cta-btn">Book a discovery call &rarr;</a>
+        </div>
+        </div><!-- /fractional-inner -->
+    </section>
+
+    <!-- ===== CASE STUDIES ===== -->
+    <section class="case-studies" id="case-studies">
+        <div class="case-studies-inner">
+        <h2>Case Studies</h2>
+        <div class="case-studies-grid">
+
+            <!-- CASE STUDY 1, SONY YAY! -->
+            <div class="case-study-card">
+                <div class="case-image">
+                    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&h=400&fit=crop" alt="Sony YAY! Television" onerror="this.style.display='none'">
+                </div>
+                <div class="case-content">
+                    <h3>Sony YAY!</h3>
+                    <p class="case-sector">Media &amp; Entertainment / Sony Pictures Networks India</p>
+                    <div class="case-result-highlight">67% channel reach &nbsp;&middot;&nbsp; 50% TAM unlocked &nbsp;&middot;&nbsp; 59% viewer growth</div>
+                    <div class="case-detail-toggle">The playbook</div>
+                    <div class="case-detail">
+                        <p class="case-problem"><strong>Brief:</strong> Kids channel viewership skewed 70:30 boys to girls, leaving 50% of the TAM untapped. Competing against Cartoon Network, Nickelodeon, and Disney Channel with a fragmented content mix.</p>
+                        <p class="case-action"><strong>Playbook:</strong> Two-pronged approach: bought media on competitor kids channels to capture attention where kids already were, then corrected the programming mix with female-friendly content. The real insight was that the problem wasn't marketing spend. It was product.</p>
+                        <p class="case-result">67% channel reach increase &middot; 70:30 gender skew corrected &middot; 50% of untapped TAM unlocked &middot; 59% viewer base growth (Gujarat)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CASE STUDY 2, PAYTM SOUNDBOX -->
+            <div class="case-study-card">
+                <div class="case-image">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=400&fit=crop" alt="Paytm Soundbox" onerror="this.style.display='none'">
+                </div>
+                <div class="case-content">
+                    <h3>Paytm Soundbox</h3>
+                    <p class="case-sector">Fintech / B2B Growth / North &amp; West India</p>
+                    <div class="case-result-highlight">200K+ merchants scaled &nbsp;&middot;&nbsp; Full P&amp;L ownership &nbsp;&middot;&nbsp; 20-member org</div>
+                    <div class="case-detail-toggle">The playbook</div>
+                    <div class="case-detail">
+                        <p class="case-problem"><strong>Brief:</strong> Scale Paytm Soundbox merchant adoption across North and West India. Full P&amp;L ownership with a 20-member growth org and multi-channel execution across performance, manpower, and sales layers.</p>
+                        <p class="case-action"><strong>Playbook:</strong> Built merchant segmentation frameworks to identify high-value acquisition targets. Redesigned onboarding and lifecycle interventions to reduce activation drop-offs. Orchestrated cross-channel GTM across performance marketing, field sales, and partner networks.</p>
+                        <p class="case-result">200K+ merchants scaled &middot; Full P&amp;L ownership across two geographies &middot; 20-member growth org directed</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CASE STUDY 3, SWIGGY VIRTUAL KITCHENS -->
+            <div class="case-study-card">
+                <div class="case-image">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=400&fit=crop" alt="Swiggy Virtual Kitchens" onerror="this.style.display='none'">
+                </div>
+                <div class="case-content">
+                    <h3>Swiggy Virtual Kitchens</h3>
+                    <p class="case-sector">FoodTech / D2C / West India</p>
+                    <div class="case-result-highlight">518% revenue growth &nbsp;&middot;&nbsp; 78% retention lift &nbsp;&middot;&nbsp; 22% EBITDA at scale</div>
+                    <div class="case-detail-toggle">The playbook</div>
+                    <div class="case-detail">
+                        <p class="case-problem"><strong>Brief:</strong> Premium cloud kitchen brand stuck at fewer than 5 orders per day for three consecutive months despite 100 clicks/day. A second brief: restore unit economics after aggressive scale collapsed EBITDA from 25% to -10%.</p>
+                        <p class="case-action"><strong>Playbook:</strong> AARRR funnel audit identified search suppression caused by excess prep time. Fixed the ops constraint first, then rebuilt TOFU. For unit economics: dynamic pricing and discount optimisation restructured the P&amp;L around the exact profitability ceiling.</p>
+                        <p class="case-result">518% revenue growth in 8 months &middot; 112% GMV growth &middot; 78% retention lift &middot; 22% EBITDA sustained at optimum scale</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CASE STUDY 4, AVOWDELY RESORTS -->
+            <div class="case-study-card">
+                <div class="case-image">
+                    <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&h=400&fit=crop" alt="Avowdely Resorts" onerror="this.style.display='none'">
+                </div>
+                <div class="case-content">
+                    <h3>Avowdely Resorts</h3>
+                    <p class="case-sector">Ultra-Luxury Hospitality / GTM Architecture &amp; Launch</p>
+                    <div class="case-result-highlight">13-city global blueprint &nbsp;&middot;&nbsp; HNWI ambassador matrix &nbsp;&middot;&nbsp; Full GTM delivered</div>
+                    <div class="case-detail-toggle">The playbook</div>
+                    <div class="case-detail">
+                        <p class="case-problem"><strong>Brief:</strong> End-to-end launch strategy for an ultra-luxury resort at the intersection of organic architecture, Indian heritage, and HNWI experiential travel. Target guests: HNWIs, UHNWIs, Corporate Elite, Celebrities.</p>
+                        <p class="case-action"><strong>Playbook:</strong> Prestige positioning built around the organic architecture USP. Three-phase launch: 8-week AR/VR pre-launch, grand opening event blueprint, post-launch PR and loyalty expansion. Influencer ecosystem of 15 global creators. Global Experience Centres across 13 cities.</p>
+                        <p class="case-result">Full GTM architecture delivered &middot; 13-city global presence blueprint &middot; Celebrity and HNWI ambassador matrix defined</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div><!-- /case-studies-inner -->
+    </section>
+
+    <!-- ===== FAQ SECTION ===== -->
+    <section class="faq-section" id="faq">
+        <div class="faq-inner">
+            <h2>Frequently asked questions.</h2>
+            <div class="faq-list">
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        What exactly is a Fractional CMO?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        A Fractional CMO is an experienced marketing leader who embeds into your team on a part-time or project basis, without the cost, commitment, or risk of a full-time executive hire. You get the same strategic depth, P&L thinking, and cross-functional leadership you'd expect from a CMO, applied at the scope and duration your business actually needs. It's not consulting from the sidelines. It's leadership from inside the room.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        How is this different from hiring a marketing consultant?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        A consultant delivers a report. A Fractional CMO owns the outcome. I don't hand you a strategy deck and walk away, I build the system, manage the execution, align the team, and stay accountable to the metrics. The difference is integration: I work inside your business, not around it.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Do you only do strategy, or do you execute too?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Both. I'm a <strong>full-stack marketer</strong>, which means I can build the brand strategy and run the acquisition funnel, design the GTM architecture and track it in a dashboard, define the positioning and write the brief. You don't need to find a separate person to implement what I recommend. That gap is where most marketing engagements fall apart, and it's what I'm specifically built to close.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        What's the difference between the Custom Stint and the 6-Month engagement?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        The <strong>Custom Stint</strong> is scoped to one defined problem, a GTM build, a brand repositioning, a funnel diagnostic and fix, a launch. Deliverables and success metrics are agreed upfront. It works for teams that have a clear problem and want it solved cleanly. The <strong>6-Month Engagement</strong> is the full Fractional CMO function: ongoing embedded leadership, team-building, P&L accountability, board reporting, and cross-functional alignment across product, sales, and ops. It's designed for businesses that need a marketing leader, not just a marketer.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        What business stage is this right for?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        All three inflection points: <strong>0→1</strong> (pre-launch GTM, positioning, PMF strategy), <strong>1→10</strong> (scaling acquisition, fixing CAC/LTV, building retention systems), and <strong>10+</strong> (market expansion, brand repositioning, P&L optimisation, geo-expansion). The engagement model is different at each stage, but the diagnostic thinking is the same.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Is this right for early-stage startups?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Yes, and arguably more valuable at this stage than any other. Early-stage mistakes in positioning, GTM sequencing, and channel strategy compound fast. Getting the foundation right, before you've spent the budget or built the wrong team, is the highest-leverage thing you can do. The Custom Stint model is specifically designed to be accessible for founder-led businesses that need executive-level thinking without full-time overhead.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        What industries do you work with?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        My deepest experience is in <strong>FoodTech, Fintech, Gaming, Media & Entertainment, D2C, and Luxury</strong>. But the frameworks, GTM architecture, funnel diagnostics, positioning, retention systems, are stage-agnostic and category-portable. If you're building something outside these sectors, the conversation is still worth having.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        What does a typical week look like?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        It depends on the engagement, but broadly: structured weekly strategy sessions with your leadership team, live involvement in key decisions as they arise, direct work on deliverables (playbooks, positioning docs, dashboards, briefs), and async availability for time-sensitive calls. I'm embedded, not occasional. The cadence is designed to feel like an internal leader, not an external vendor.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        How quickly can you start?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Typically within 1–2 weeks of an agreed brief. The onboarding is fast because I've done this at scale, I know what questions to ask, what to audit first, and where the leverage usually is. The first session is diagnostic: understand the business, the team, the P&L, and the real problem. By week two, you have a direction.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        How is pricing structured?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Pricing is scoped to the mandate, not billed by the hour. Custom Stint engagements are priced by deliverable and defined scope. The 6-Month engagement is a fixed monthly retainer. Both models prioritise predictability for your budgeting. Book a discovery call and we'll scope something that makes sense for where you are.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        What is a brief-based consulting project?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        A brief-based project is scoped to one clearly defined problem — a brand repositioning, a GTM plan, a launch strategy, a funnel audit, a channel architecture. You bring the brief; I bring the thinking, the framework, and the output. Fixed scope, defined deliverable, clean handoff. No retainer, no ambiguity.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        What does a consulting project look like end to end?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        It moves fast and stays focused. A discovery call to understand the brief → a scoping document with deliverables and timeline agreed upfront → 2–4 weeks of deep work → a final deliverable session with a full walkthrough. You leave with something your team can execute immediately. No trailing dependencies, no vague next steps.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        What deliverables can I expect from a project engagement?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Depends entirely on the brief. Common outputs include: a <strong>positioning document and messaging hierarchy</strong>, a <strong>GTM playbook</strong> with channel sequencing and budget logic, a <strong>funnel audit</strong> with a prioritised fix roadmap, a <strong>launch blueprint</strong> with campaign architecture and creative direction, or a <strong>brand strategy</strong> with identity principles and content frameworks. Every deliverable is built to be handed off and used — not filed and forgotten.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        How is a consulting project different from the Fractional CMO engagement?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        The <strong>Fractional CMO</strong> is ongoing embedded leadership — I'm in the room, accountable to the P&L, building systems and teams over months. A <strong>consulting project</strong> is a one-time sprint: one problem, one output, one handoff. You leave with a strategy your own team can own and run. Choose the project model when you know what you need. Choose Fractional when you need someone to own what comes after.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section class="book-call" id="contact">
+        <div class="book-call-inner">
+            <h2>Get in touch.</h2>
+            <p class="section-description">Bring the brief. Every conversation starts with one honest question: what does this business actually need?</p>
+
+            <div class="contact-card" id="contact-card">
+                <img src="Logos/Eigenally_logo.svg" alt="Eigenally" class="contact-card-logo" onerror="this.style.display='none'">
+                <div class="contact-card-divider"></div>
+                <div class="contact-card-name">Aishwarya Swarup</div>
+                <div class="contact-card-title">Founder &nbsp;·&nbsp; Eigenally</div>
+                <div class="contact-card-details">
+                    <div class="contact-card-row">
+                        <i class="fa-solid fa-envelope contact-card-row-icon"></i>
+                        aishwarya.swarup@gmail.com
+                    </div>
+                    <div class="contact-card-row">
+                        <i class="fa-solid fa-phone contact-card-row-icon"></i>
+                        +91 98719 33402
+                    </div>
+                    <div class="contact-card-row">
+                        <i class="fa-brands fa-linkedin contact-card-row-icon"></i>
+                        linkedin.com/in/aishwarya-swarup
+                    </div>
+                </div>
+                <div class="contact-card-actions">
+                    <a href="mailto:aishwarya.swarup@gmail.com?subject=Eigenally%20Enquiry" class="contact-action-btn contact-action-primary">Send an email &rarr;</a>
+                    <a href="https://calendly.com/aishwarya-swarup/eigenally-exploratory-call" target="_blank" class="contact-action-btn contact-action-secondary">Book a call &rarr;</a>
+                </div>
+                <button class="contact-card-share" onclick="shareCard()">&#8679; Share this card</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FLOATING CTA ===== -->
+    <a href="https://calendly.com/aishwarya-swarup/eigenally-exploratory-call" target="_blank" class="floating-cta">Book your session</a>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 Eigenally. All rights reserved.</p>
+            <p>aishwarya.swarup@gmail.com | +91 9871933402</p>
+            <div class="footer-links">
+                <a href="https://linkedin.com/in/aishwarya-swarup" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        function shareCard() {
+            const text = `Aishwarya Swarup — Founder, Eigenally\nEmail: aishwarya.swarup@gmail.com\nPhone: +91 98719 33402\nLinkedIn: linkedin.com/in/aishwarya-swarup\nBook a call: https://calendly.com/aishwarya-swarup/eigenally-exploratory-call`;
+            if (navigator.share) {
+                navigator.share({ title: 'Aishwarya Swarup — Eigenally', text });
+            } else {
+                navigator.clipboard.writeText(text).then(() => {
+                    const btn = document.querySelector('.contact-card-share');
+                    const orig = btn.innerHTML;
+                    btn.innerHTML = '✓ Copied to clipboard';
+                    setTimeout(() => { btn.innerHTML = orig; }, 2500);
+                });
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        function scrollToForm() {
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function selectChallenge(challenge) {
+            // Map stage-selector values to the 4-pillar service dropdown
+            const map = {
+                'launch':      'fundraising',
+                'growth':      'performance',
+                'performance': 'strategy'
+            };
+            document.getElementById('service').value = map[challenge] || challenge;
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openCalendly() {
+            const embed = document.getElementById('calendly-embed');
+            if (embed.style.display === 'none') {
+                embed.style.display = 'block';
+                embed.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                embed.style.display = 'none';
+            }
+        }
+
+        // ===== SHADER BACKGROUND =====
+        (function () {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            const canvas = document.getElementById('shader-bg');
+            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            if (!gl) return;
+
+            // Render at half resolution for performance; CSS stretches it to full viewport
+            function resize() {
+                const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+                canvas.width  = Math.floor(window.innerWidth  * dpr * 0.5);
+                canvas.height = Math.floor(window.innerHeight * dpr * 0.5);
+                gl.viewport(0, 0, canvas.width, canvas.height);
+            }
+
+            const VS = `
+                attribute vec2 a_pos;
+                void main(){gl_Position=vec4(a_pos,0.,1.);}
+            `;
+
+            const FS = `
+                precision mediump float;
+                uniform float u_time;
+                uniform vec2  u_res;
+
+                /* ---- Simplex noise (Ashima / Ian McEwan) ---- */
+                vec3 mod289v3(vec3 x){return x-floor(x*(1./289.))*289.;}
+                vec2 mod289v2(vec2 x){return x-floor(x*(1./289.))*289.;}
+                vec3 permute(vec3 x){return mod289v3(((x*34.)+1.)*x);}
+
+                float snoise(vec2 v){
+                    const vec4 C=vec4(.211324865,.366025404,-.577350269,.024390244);
+                    vec2 i=floor(v+dot(v,C.yy)),x0=v-i+dot(i,C.xx);
+                    vec2 i1=x0.x>x0.y?vec2(1.,0.):vec2(0.,1.);
+                    vec4 x12=x0.xyxy+C.xxzz; x12.xy-=i1;
+                    i=mod289v2(i);
+                    vec3 p=permute(permute(i.y+vec3(0.,i1.y,1.))+i.x+vec3(0.,i1.x,1.));
+                    vec3 m=max(.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.);
+                    m=m*m*m*m;
+                    vec3 xg=2.*fract(p*C.www)-1.,h=abs(xg)-.5,ox=floor(xg+.5),a0=xg-ox;
+                    m*=1.79284291-.85373472*(a0*a0+h*h);
+                    vec3 g; g.x=a0.x*x0.x+h.x*x0.y; g.yz=a0.yz*x12.xz+h.yz*x12.yw;
+                    return 130.*dot(m,g);
+                }
+
+                /* ---- Fractional Brownian Motion ---- */
+                float fbm(vec2 p){
+                    float v=0.,a=.5;
+                    mat2 rot=mat2(.8,.6,-.6,.8);
+                    for(int i=0;i<6;i++){v+=a*snoise(p);p=rot*p*2.02;a*=.5;}
+                    return v;
+                }
+
+                void main(){
+                    vec2 uv=gl_FragCoord.xy/u_res;
+                    uv.x*=u_res.x/u_res.y;
+                    float t=u_time*.045;
+
+                    /* Domain warping: two layers of distortion */
+                    vec2 q=vec2(fbm(uv+t), fbm(uv+vec2(5.2,1.3)+t));
+                    vec2 r=vec2(fbm(uv+3.2*q+vec2(1.7,9.2)+.14*t),
+                                fbm(uv+3.2*q+vec2(8.3,2.8)+.12*t));
+                    float f=fbm(uv+3.8*r+.05*t)*.5+.5;
+
+                    /* Colour palette */
+                    vec3 dark  =vec3(.039,.165,.122);
+                    vec3 mid   =vec3(.043,.239,.180);
+                    vec3 bright=vec3(.055,.314,.235);
+                    vec3 red   =vec3(.784,.173,.122);
+
+                    vec3 col=mix(dark, mid,    smoothstep(.20,.55,f));
+                    col      =mix(col, bright, smoothstep(.55,.80,f));
+                    col     +=.06*red*smoothstep(.82,1.,f);
+
+                    /* Vignette */
+                    vec2 cen=gl_FragCoord.xy/u_res-.5;
+                    col*=clamp(1.-dot(cen,cen)*1.6, 0., 1.);
+
+                    gl_FragColor=vec4(col,1.);
+                }
+            `;
+
+            function compileShader(type, src) {
+                const s = gl.createShader(type);
+                gl.shaderSource(s, src);
+                gl.compileShader(s);
+                if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+                    console.warn('Shader compile error:', gl.getShaderInfoLog(s));
+                    return null;
+                }
+                return s;
+            }
+
+            const vs = compileShader(gl.VERTEX_SHADER, VS);
+            const fs = compileShader(gl.FRAGMENT_SHADER, FS);
+            if (!vs || !fs) return;
+
+            const prog = gl.createProgram();
+            gl.attachShader(prog, vs);
+            gl.attachShader(prog, fs);
+            gl.linkProgram(prog);
+            if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+                console.warn('Shader link error:', gl.getProgramInfoLog(prog));
+                return;
+            }
+            gl.useProgram(prog);
+
+            // Full-screen triangle strip (2 triangles = quad)
+            const buf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+            const posLoc = gl.getAttribLocation(prog, 'a_pos');
+            gl.enableVertexAttribArray(posLoc);
+            gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+            const uTime = gl.getUniformLocation(prog, 'u_time');
+            const uRes  = gl.getUniformLocation(prog, 'u_res');
+
+            resize();
+            window.addEventListener('resize', resize);
+
+            let start = null;
+            function frame(ts) {
+                if (!start) start = ts;
+                gl.uniform1f(uTime, (ts - start) / 1000);
+                gl.uniform2f(uRes, canvas.width, canvas.height);
+                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
+        })();
+
+        // ===== METRIC COUNT-UP ANIMATION =====
+        (function(){
+            const metrics = [
+                { el: null, target: 518,  suffix: '%',  prefix: '' },
+                { el: null, target: 112,  suffix: '%',  prefix: '' },
+                { el: null, target: 1,    suffix: 'Bn+', prefix: '' },
+                { el: null, target: 200,  suffix: 'K+', prefix: '' },
+                { el: null, target: 77,   suffix: 'K',  prefix: '$' },
+                { el: null, target: 78,   suffix: '%',  prefix: '' },
+                { el: null, target: 67,   suffix: '%',  prefix: '' },
+                { el: null, target: 45,   suffix: '%',  prefix: '' },
+            ];
+            const nums = document.querySelectorAll('.metric-number');
+            nums.forEach((el, i) => { if(metrics[i]) metrics[i].el = el; });
+
+            function animateCount(el, target, prefix, suffix, duration) {
+                const start = performance.now();
+                function step(now) {
+                    const p = Math.min((now - start) / duration, 1);
+                    const ease = 1 - Math.pow(1 - p, 3); // ease-out cubic
+                    const val = Math.round(ease * target);
+                    el.textContent = prefix + val + suffix;
+                    if (p < 1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+            }
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const idx = [...nums].indexOf(entry.target);
+                        const m = metrics[idx];
+                        if (m && m.el) {
+                            animateCount(m.el, m.target, m.prefix, m.suffix, 1800);
+                            observer.unobserve(entry.target);
+                        }
+                    }
+                });
+            }, { threshold: 0.3 });
+            nums.forEach(el => observer.observe(el));
+        })();
+
+        // ===== LOGO SCRAMBLE (fun element) =====
+        // Hovering the nav logo scrambles the letters before settling back
+        (function(){
+            const logo = document.querySelector('.logo');
+            if (!logo) return;
+            const original = 'Eigen.ally';
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%';
+            let frame, running = false;
+            logo.addEventListener('mouseenter', () => {
+                if (running) return;
+                running = true;
+                let iter = 0;
+                clearInterval(frame);
+                frame = setInterval(() => {
+                    logo.innerHTML = original.split('').map((c, i) => {
+                        if (c === '.') return '<span>.</span>';
+                        if (i < iter) return c;
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    }).join('');
+                    if (iter >= original.length) {
+                        clearInterval(frame);
+                        logo.innerHTML = 'Eigen<span>.</span>ally';
+                        running = false;
+                    }
+                    iter += 0.4;
+                }, 40);
+            });
+        })();
+
+
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+                menu.classList.remove('active');
+            }
+        });
+
+        // ===== WORD CLOUD =====
+        (function () {
+            const section = document.getElementById('wordcloud');
+            const inner = document.getElementById('wordcloud-inner');
+            const cursor = document.getElementById('wc-cursor');
+            if (!section || !inner) return;
+
+            const words = [
+                'GTM strategy', 'brand positioning', 'CAC', 'retention', 'PMF',
+                'unit economics', 'growth ceiling', 'launch', 'LTV',
+                'distribution', 'acquisition', 'EBITDA', 'cohort', 'conversion',
+                'churn', 'velocity', 'pricing', 'roadmap', 'market fit',
+                'scale', 'competitive moat', 'P&L', 'channel mix', 'performance marketing',
+                'onboarding', 'activation', 'monetisation', 'repositioning', 'cultural IP',
+                'fractional CMO', 'creative strategy', 'go-to-market', 'growth org',
+                'product-market fit', 'A/B testing', 'engagement', 'audience',
+                'ecosystem', 'influencer', 'demand gen', 'lifecycle',
+                'playbook', 'brand equity', 'attribution', 'virality',
+                'identity', 'presence', 'visibility', 'content strategy', 'community',
+                'SEO', 'SEM', 'CRM', 'email marketing', 'organic growth',
+                'paid media', 'search', 'discovery', 'loyalty', 'trust',
+                'relevance', 'storytelling', 'narrative', 'awareness', 'consideration',
+                'advocacy', 'NPS', 'brand voice', 'media mix', 'omnichannel',
+                'touchpoints', 'persona', 'segmentation', 'targeting', 'positioning',
+                'social proof', 'share of voice', 'mindshare', 'recall', 'salience'
+            ];
+
+            // Exclusion zone: keep words away from the center headline
+            function isInCenterZone(left, top) {
+                return left > 28 && left < 72 && top > 35 && top < 65;
+            }
+
+            const wcWords = [];
+            words.forEach(word => {
+                const el = document.createElement('span');
+                el.className = 'wc-word';
+                let left, top, attempts = 0;
+                do {
+                    left = 4 + Math.random() * 88;
+                    top = 4 + Math.random() * 88;
+                    attempts++;
+                } while (isInCenterZone(left, top) && attempts < 30);
+                const size = 12 + Math.random() * 20;
+                const baseOpacity = 0.4 + Math.random() * 0.4;
+                el.textContent = word;
+                el.style.left = left + '%';
+                el.style.top = top + '%';
+                el.style.fontSize = size + 'px';
+                el.style.opacity = baseOpacity;
+                el.dataset.baseOpacity = baseOpacity;
+                inner.appendChild(el);
+                wcWords.push({ el, left, top, baseOpacity });
+            });
+
+            let mouseX = -999, mouseY = -999;
+            const CLEAR_R = 130, HIGHLIGHT_R = 70;
+
+            section.addEventListener('mousemove', e => {
+                const rect = section.getBoundingClientRect();
+                mouseX = ((e.clientX - rect.left) / rect.width) * 100;
+                mouseY = ((e.clientY - rect.top) / rect.height) * 100;
+                cursor.style.left = (e.clientX - rect.left) + 'px';
+                cursor.style.top = (e.clientY - rect.top) + 'px';
+
+                wcWords.forEach(w => {
+                    const dx = (w.left - mouseX) * (rect.width / 100);
+                    const dy = (w.top - mouseY) * (rect.height / 100);
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < HIGHLIGHT_R) {
+                        w.el.style.opacity = '1';
+                        w.el.style.color = '#F4F4F2';
+                        w.el.style.textShadow = '0 0 16px rgba(200,44,31,0.8)';
+                        w.el.style.transform = 'scale(1.3)';
+                    } else if (dist < CLEAR_R) {
+                        w.el.style.opacity = '0.05';
+                        w.el.style.textShadow = '';
+                        w.el.style.transform = 'scale(1)';
+                    } else {
+                        w.el.style.opacity = w.baseOpacity;
+                        w.el.style.color = '#F4F4F2';
+                        w.el.style.textShadow = '';
+                        w.el.style.transform = 'scale(1)';
+                    }
+                });
+            });
+
+            section.addEventListener('mouseleave', () => {
+                cursor.style.left = '-999px';
+                wcWords.forEach(w => {
+                    w.el.style.opacity = w.baseOpacity;
+                    w.el.style.color = '';
+                    w.el.style.textShadow = '';
+                });
+            });
+
+            // Slow ambient drift
+            let driftT = 0;
+            function drift() {
+                driftT += 0.004;
+                const ox = Math.sin(driftT * 0.7) * 12;
+                const oy = Math.cos(driftT * 0.5) * 8;
+                inner.style.transform = `translate(${ox}px, ${oy}px)`;
+                requestAnimationFrame(drift);
+            }
+            drift();
+        })();
+
+        // ===== CASE STUDY DETAIL TOGGLE =====
+        function toggleCaseDetail(target) {
+            // Accept either the card or the button
+            const btn = target.classList.contains('case-study-card')
+                ? target.querySelector('.case-detail-toggle')
+                : target;
+            const detail = btn.nextElementSibling;
+            const isOpen = detail.classList.contains('open');
+            btn.classList.toggle('open', !isOpen);
+            detail.classList.toggle('open', !isOpen);
+        }
+
+        // ===== SKILLS CHART ANIMATION =====
+        (function () {
+            const chart = document.getElementById('skills-chart');
+            if (!chart) return;
+            const bars = chart.querySelectorAll('.chart-bar-row');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        bars.forEach((row, i) => {
+                            const pct = row.dataset.pct;
+                            setTimeout(() => {
+                                row.querySelector('.chart-bar').style.width = pct + '%';
+                            }, i * 80);
+                        });
+                        observer.disconnect();
+                    }
+                });
+            }, { threshold: 0.3 });
+            observer.observe(chart);
+        })();
+    </script>
+</body>
+</html>

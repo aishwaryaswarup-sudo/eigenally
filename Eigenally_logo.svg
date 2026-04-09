@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="100" viewBox="0 0 480 100">
+  <rect width="480" height="100" fill="#0B3D2E"/>
+  <text x="32" y="70" font-family="'Courier Prime', 'Courier New', Courier, monospace"
+        font-size="54" font-weight="700" letter-spacing="2" fill="#F4F4F2">Eigen<tspan fill="#C82C1F">.</tspan>ally</text>
+</svg>
