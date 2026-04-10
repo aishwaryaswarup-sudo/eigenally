@@ -13,7 +13,7 @@
     <meta name="twitter:description" content="Fractional CMO and full-stack marketing by Aishwarya Swarup. 518% revenue growth. 200K+ merchants. 1Bn+ interactions.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         /* ===== RESET & VARIABLES ===== */
@@ -21,17 +21,22 @@
         :root {
             --primary-green: #0B3D2E;
             --dark-bg: #0A2A1F;
-            --off-white: #F4F4F2;
+            --off-white: rgba(244,244,242,0.88);
             --border-color: rgba(244, 244, 242, 0.2);
             --grid-color: rgba(76, 175, 80, 0.1);
             --accent-red: #C82C1F;
         }
         html { scroll-behavior: smooth; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
-            color: var(--off-white);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 17px;
+            color: rgba(244,244,242,0.88);
             background: var(--dark-bg); /* fallback when WebGL unavailable */
-            line-height: 1.6;
+            line-height: 1.75;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            color: rgba(244,244,242,0.9);
         }
         body::before {
             content: '';
@@ -47,53 +52,84 @@
             z-index: -1;
         }
 
-        /* ===== NAVIGATION ===== */
-        .sticky-header {
-            position: sticky; top: 0; z-index: 100;
-            background: rgba(11, 61, 46, 0.98);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            padding: 20px 40px;
+        /* ===== UNIFIED NAV ===== */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            background: rgba(11,61,46,0.97);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 48px;
+            gap: 24px;
         }
-        .nav-container {
-            max-width: 1400px; margin: 0 auto;
-            display: flex; justify-content: space-between; align-items: center; gap: 40px;
-        }
-        .logo {
-            font-family: 'Courier Prime', 'Monaco', monospace;
-            font-size: 18px; font-weight: 700; letter-spacing: 0.05em;
-            white-space: nowrap; text-transform: uppercase;
-        }
-        .logo span { color: var(--accent-red); }
-        .nav-links {
-            display: flex; gap: 4px; align-items: center; flex: 1; justify-content: center;
-        }
+        .nav-logo { text-decoration: none; display: flex; align-items: center; flex-shrink: 0; }
+        .nav-logo svg { height: 36px; width: auto; display: block; }
+        .nav-links { display: flex; align-items: center; gap: 6px; list-style: none; flex: 1; justify-content: center; }
         .nav-links a {
-            color: rgba(244, 244, 242, 0.8); text-decoration: none;
-            font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em;
-            padding: 8px 14px; border: 1px solid transparent;
-            transition: all 0.3s; white-space: nowrap;
+            font-family: 'Courier Prime', monospace;
+            font-size: 12px; font-weight: 700;
+            letter-spacing: 0.11em; text-transform: uppercase;
+            color: rgba(244,244,242,0.55);
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 3px;
+            transition: color 0.2s, background 0.2s;
+            white-space: nowrap;
         }
-        .nav-links a:hover { border-color: var(--border-color); color: var(--off-white); }
-        .cta-button {
-            padding: 12px 24px;
-            background: var(--off-white); color: var(--primary-green);
-            border: 1px solid var(--off-white); cursor: pointer;
-            font-size: 12px; font-weight: 600; text-transform: uppercase;
-            letter-spacing: 0.05em; transition: all 0.3s; white-space: nowrap;
+        .nav-links a:hover { color: #F4F4F2; }
+        .nav-links a.active { color: #F5CFC0; }
+        .nav-cta {
+            font-family: 'Courier Prime', monospace;
+            font-size: 12px; font-weight: 700;
+            letter-spacing: 0.11em; text-transform: uppercase;
+            color: #0B3D2E; background: #F5CFC0;
+            border: none; border-radius: 4px;
+            padding: 10px 22px; cursor: pointer;
+            text-decoration: none; display: inline-block;
+            transition: background 0.2s; white-space: nowrap; flex-shrink: 0;
         }
-        .cta-button:hover { background: var(--primary-green); color: var(--off-white); }
-        .hamburger { display: none; background: none; border: none; color: var(--off-white); font-size: 24px; cursor: pointer; }
-
-        /* ===== MOBILE MENU ===== */
-        .mobile-menu-overlay {
-            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(10, 42, 31, 0.98); z-index: 200; padding: 80px 40px 40px; overflow-y: auto;
+        .nav-cta:hover { background: #FDF8F5; }
+        /* Hamburger */
+        .nav-hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            background: none; border: none; cursor: pointer; padding: 4px; flex-shrink: 0;
         }
-        .mobile-menu-overlay.active { display: flex; flex-direction: column; }
-        .close-menu { position: absolute; top: 20px; right: 20px; font-size: 32px; cursor: pointer; color: var(--off-white); background: none; border: none; }
-        .mobile-nav { display: flex; flex-direction: column; gap: 20px; }
-        .mobile-nav a { color: var(--off-white); text-decoration: none; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .nav-hamburger span { display: block; width: 24px; height: 2px; background: #F4F4F2; border-radius: 2px; }
+        /* Mobile overlay */
+        .nav-mobile {
+            display: none; position: fixed; inset: 0;
+            background: rgba(10,42,31,0.99); z-index: 500;
+            flex-direction: column; align-items: flex-start; justify-content: center;
+            padding: 80px 48px; gap: 28px;
+        }
+        .nav-mobile.open { display: flex; }
+        .nav-mobile-close {
+            position: absolute; top: 24px; right: 32px;
+            background: none; border: none; color: rgba(244,244,242,0.7);
+            font-size: 28px; cursor: pointer; line-height: 1;
+        }
+        .nav-mobile a {
+            font-family: 'Courier Prime', monospace;
+            font-size: 22px; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: rgba(244,244,242,0.65); text-decoration: none; transition: color 0.2s;
+        }
+        .nav-mobile a:hover, .nav-mobile a.active { color: #F5CFC0; }
+        .nav-mobile-cta {
+            margin-top: 12px; font-size: 18px !important;
+            background: #F5CFC0 !important; color: #0B3D2E !important;
+            padding: 14px 32px; border-radius: 6px;
+        }
+        @media (max-width: 960px) {
+            .nav { padding: 0 24px; }
+            .nav-links, .nav-cta { display: none; }
+            .nav-hamburger { display: flex; }
+        }
 
         /* ===== HERO ===== */
         .hero {
@@ -106,8 +142,8 @@
         }
         .hero-left { display: flex; flex-direction: column; gap: 40px; }
         .hero-title {
-            font-size: 64px; font-weight: 700; line-height: 1.1; color: var(--off-white);
-            font-family: 'Courier Prime', monospace; letter-spacing: -0.02em;
+            font-size: clamp(36px, 4.5vw, 60px); font-weight: 700; line-height: 1.1; color: rgba(244,244,242,0.88);
+            font-family: 'Playfair Display', Georgia, serif; letter-spacing: -0.02em;
         }
         .hero-title span { display: block; }
         .hero-signals { display: flex; flex-direction: column; gap: 16px; font-size: 18px; color: rgba(244, 244, 242, 0.85); font-weight: 500; }
@@ -126,7 +162,7 @@
             gap: 32px; padding: 48px; border: 1px solid var(--border-color);
             background: rgba(11, 61, 46, 0.65); text-align: center;
         }
-        .hero-right-text { font-size: 22px; font-weight: 600; color: var(--off-white); line-height: 1.4; font-family: 'Courier Prime', monospace; }
+        .hero-right-text { font-size: 22px; font-weight: 600; color: rgba(244,244,242,0.88); line-height: 1.4; font-family: 'Inter', sans-serif; }
         .hero-right-sub { font-size: 16px; color: rgba(244, 244, 242, 0.6); }
         .hero-calendly-btn {
             padding: 16px 32px; background: var(--accent-red); color: var(--off-white);
@@ -152,6 +188,8 @@
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
         .credibility-text { max-width: 1400px; margin: 0 auto; text-align: center; font-size: 18px; color: rgba(244, 244, 242, 0.9); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
         .credibility-text p { margin: 10px 0; }
+        .credibility-text p:nth-child(2) { color: rgba(244,244,242,0.9); }
+        .credibility-text p:nth-child(2) span { color: var(--accent-red); }
 
         /* ===== METRICS STRIP ===== */
         .metrics-strip {
@@ -159,7 +197,7 @@
             border-bottom: 1px solid var(--border-color);
         }
         .metrics-strip h2 {
-            font-size: 56px; text-align: left; font-family: 'Courier Prime', monospace;
+            font-size: 64px; text-align: left; font-family: 'Playfair Display', Georgia, serif;
             font-weight: 700; letter-spacing: -0.02em; margin-bottom: 60px;
             max-width: 1400px; margin-left: auto; margin-right: auto;
         }
@@ -181,7 +219,7 @@
             padding: 100px 40px; background: transparent;
             border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
         }
-        .services-section h2 { font-size: 56px; margin-bottom: 60px; text-align: left; font-family: 'Courier Prime', monospace; font-weight: 700; letter-spacing: -0.02em; max-width: 1400px; margin-left: auto; margin-right: auto; }
+        .services-section h2 { font-size: 64px; margin-bottom: 60px; text-align: left; font-family: 'Playfair Display', Georgia, serif; font-weight: 700; letter-spacing: -0.02em; max-width: 1400px; margin-left: auto; margin-right: auto; }
         .services-grid {
             display: grid; grid-template-columns: repeat(3, 1fr);
             gap: 0; max-width: 1400px; margin: 0 auto;
@@ -218,9 +256,9 @@
             letter-spacing: 0.15em; margin-bottom: 6px;
         }
         .service-card-title {
-            font-size: 18px; font-weight: 700; color: var(--off-white);
-            font-family: 'Courier Prime', monospace; text-transform: uppercase;
-            letter-spacing: 0.08em; line-height: 1.3;
+            font-size: 18px; font-weight: 700; color: rgba(244,244,242,0.9);
+            font-family: 'Inter', sans-serif; text-transform: uppercase;
+            letter-spacing: 0.06em; line-height: 1.3;
         }
         .service-card-body {
             position: absolute; left: -1px; right: -1px; top: 100%;
@@ -241,7 +279,7 @@
         /* ===== FRACTIONAL CMO SECTION ===== */
         .fractional-section { padding: 100px 40px; background-color: var(--dark-bg); background-image: linear-gradient(rgba(160,230,185,0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(160,230,185,0.10) 1px, transparent 1px); background-size: 48px 48px; border-top: 1px solid var(--border-color); }
         .fractional-inner { max-width: 1400px; margin: 0 auto; }
-        .fractional-section h2 { font-size: 56px; margin-bottom: 12px; text-align: left; font-family: 'Courier Prime', monospace; font-weight: 700; letter-spacing: -0.02em; }
+        .fractional-section h2 { font-size: 64px; margin-bottom: 12px; text-align: left; font-family: 'Playfair Display', Georgia, serif; font-weight: 700; letter-spacing: -0.02em; }
         .fractional-subhead { text-align: left; font-size: 20px; color: rgba(244, 244, 242, 0.7); margin-bottom: 60px; }
         .fractional-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-bottom: 60px; }
         .fractional-card {
@@ -255,11 +293,11 @@
             letter-spacing: 0.15em; margin-bottom: 8px;
         }
         .fractional-card-title {
-            font-size: 22px; font-weight: 700; color: var(--off-white);
-            font-family: 'Courier Prime', monospace; margin-bottom: 8px;
+            font-size: 22px; font-weight: 700; color: rgba(244,244,242,0.9);
+            font-family: 'Inter', sans-serif; margin-bottom: 8px;
         }
         .fractional-card-sub {
-            font-size: 14px; color: rgba(244, 244, 242, 0.6); font-style: italic;
+            font-size: 15px; color: rgba(244, 244, 242, 0.6); font-style: italic;
             margin-bottom: 0;
         }
         .fractional-card ul {
@@ -309,7 +347,7 @@
         .toolkit-item {
             padding: 16px 20px; background: rgba(11, 61, 46, 0.55);
             border: 1px solid var(--border-color);
-            font-size: 13px; color: rgba(244, 244, 242, 0.85); line-height: 1.4;
+            font-size: 15px; color: rgba(244, 244, 242, 0.85); line-height: 1.4;
             display: flex; align-items: center; gap: 12px;
             transition: background 0.3s, border-color 0.3s;
         }
@@ -348,8 +386,8 @@
             border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
         }
         .stage-selector-inner { max-width: 1400px; margin: 0 auto; }
-        .stage-selector h2 { font-size: 56px; margin-bottom: 16px; text-align: left; font-family: 'Courier Prime', monospace; font-weight: 700; letter-spacing: -0.02em; }
-        .stage-selector-sub { text-align: left; font-size: 18px; color: rgba(244, 244, 242, 0.6); margin-bottom: 60px; }
+        .stage-selector h2 { font-size: 64px; margin-bottom: 16px; text-align: left; font-family: 'Playfair Display', Georgia, serif; font-weight: 700; letter-spacing: -0.02em; }
+        .stage-selector-sub { text-align: left; font-size: 17px; color: rgba(244, 244, 242, 0.6); margin-bottom: 60px; }
         .stage-rows { display: flex; flex-direction: column; gap: 2px; }
         .stage-row {
             display: grid; grid-template-columns: 160px 260px 1fr auto;
@@ -390,7 +428,7 @@
         /* ===== CASE STUDIES ===== */
         .case-studies { padding: 100px 40px; background: var(--primary-green); border-top: 1px solid var(--border-color); }
         .case-studies-inner { max-width: 1400px; margin: 0 auto; }
-        .case-studies h2 { font-size: 56px; margin-bottom: 60px; text-align: left; font-family: 'Courier Prime', monospace; font-weight: 700; letter-spacing: -0.02em; }
+        .case-studies h2 { font-size: 64px; margin-bottom: 60px; text-align: left; font-family: 'Playfair Display', Georgia, serif; font-weight: 700; letter-spacing: -0.02em; }
         .case-studies-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
         .case-study-card { border: 1px solid var(--border-color); overflow: hidden; background: rgba(11, 61, 46, 0.65); transition: all 0.3s; cursor: pointer; }
         .case-study-card:hover { background: rgba(11, 61, 46, 0.8); transform: translateY(-8px); border-color: var(--accent-red); }
@@ -401,7 +439,7 @@
         .case-content h3 { font-size: 20px; font-weight: 700; color: var(--off-white); margin-bottom: 8px; line-height: 1.3; }
         .case-sector { font-size: 11px; color: var(--accent-red); font-family: 'Courier Prime', monospace; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px; }
         .case-result-highlight {
-            font-size: 14px; font-family: 'Courier Prime', monospace; font-weight: 700;
+            font-size: 15px; font-family: 'Courier Prime', monospace; font-weight: 700;
             color: var(--off-white); letter-spacing: 0.04em; line-height: 1.6;
             border-left: 2px solid var(--accent-red); padding-left: 16px; margin-bottom: 20px;
         }
@@ -418,8 +456,8 @@
             transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .case-study-card:hover .case-detail { max-height: 500px; }
-        .case-problem, .case-action { font-size: 14px; color: rgba(244, 244, 242, 0.75); line-height: 1.7; margin-top: 16px; }
-        .case-result { font-size: 14px; color: rgba(244, 244, 242, 0.75); line-height: 1.7; margin-top: 12px; }
+        .case-problem, .case-action { font-size: 15px; color: rgba(244, 244, 242, 0.75); line-height: 1.7; margin-top: 16px; }
+        .case-result { font-size: 15px; color: rgba(244, 244, 242, 0.75); line-height: 1.7; margin-top: 12px; }
 
         /* ===== CONTACT SECTION ===== */
         .book-call {
@@ -428,15 +466,15 @@
             text-align: center;
         }
         .book-call-inner { max-width: 860px; margin: 0 auto; }
-        .book-call h2 { font-size: 56px; margin-bottom: 16px; font-family: 'Courier Prime', monospace; font-weight: 700; letter-spacing: -0.02em; }
+        .book-call h2 { font-size: 64px; margin-bottom: 16px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700; letter-spacing: -0.02em; }
         .section-description { font-size: 18px; color: rgba(244, 244, 242, 0.7); margin-bottom: 60px; font-weight: 400; line-height: 1.6; }
 
         /* Contact card */
         .contact-card {
             background: var(--primary-green);
             border: 1px solid var(--border-color);
-            padding: 56px 64px;
-            display: flex; flex-direction: column; align-items: center; gap: 36px;
+            padding: 32px 40px;
+            display: flex; flex-direction: column; align-items: center; gap: 20px;
             position: relative;
         }
         .contact-card-logo { height: 48px; width: auto; opacity: 0.95; }
@@ -444,16 +482,16 @@
             width: 40px; height: 1px; background: var(--border-color);
         }
         .contact-card-name {
-            font-family: 'Courier Prime', monospace; font-size: 22px; font-weight: 700;
-            color: var(--off-white); letter-spacing: 0.04em;
+            font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 700;
+            color: rgba(244,244,242,0.9); letter-spacing: 0.01em;
         }
         .contact-card-title {
             font-size: 13px; color: rgba(244,244,242,0.55); text-transform: uppercase;
             letter-spacing: 0.15em; margin-top: -24px;
         }
         .contact-card-details {
-            display: flex; flex-direction: column; gap: 14px; align-items: center;
-            width: 100%;
+            display: flex; flex-direction: row; gap: 28px; align-items: center;
+            justify-content: center; flex-wrap: wrap; width: 100%;
         }
         .contact-card-row {
             display: flex; align-items: center; gap: 14px;
@@ -513,8 +551,8 @@
         /* ===== CREDIBILITY TITLE ===== */
         .credibility-title {
             display: block; text-align: center;
-            font-size: 56px; font-family: 'Courier Prime', monospace;
-            font-weight: 700; letter-spacing: -0.02em; color: var(--off-white);
+            font-size: 64px; font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700; letter-spacing: -0.02em; color: rgba(244,244,242,0.88);
             max-width: 1400px; margin: 0 auto 60px;
         }
 
@@ -530,7 +568,7 @@
             letter-spacing: 0.15em; margin-bottom: 20px;
         }
         .about-section h2 {
-            font-size: 56px; font-family: 'Courier Prime', monospace;
+            font-size: 64px; font-family: 'Playfair Display', Georgia, serif;
             font-weight: 700; letter-spacing: -0.02em; margin-bottom: 60px; max-width: 800px;
         }
         .about-grid {
@@ -590,7 +628,7 @@
         /* Why It Works */
         .why-works { border-top: 1px solid var(--border-color); padding-top: 80px; margin-top: 48px; }
         .why-works h3 {
-            font-size: 44px; font-family: 'Courier Prime', monospace;
+            font-size: 44px; font-family: 'Playfair Display', Georgia, serif;
             font-weight: 700; letter-spacing: -0.02em; margin-bottom: 48px;
         }
         .why-stack {
@@ -615,8 +653,8 @@
         }
         .why-card-content { display: flex; flex-direction: column; gap: 10px; flex: 1; }
         .why-card-title {
-            font-size: 18px; font-weight: 700; color: var(--off-white);
-            line-height: 1.3; font-family: 'Courier Prime', monospace;
+            font-size: 18px; font-weight: 700; color: rgba(244,244,242,0.9);
+            line-height: 1.3; font-family: 'Inter', sans-serif;
         }
         .why-card-text {
             font-size: 15px; color: rgba(244, 244, 242, 0.7); line-height: 1.7;
@@ -629,7 +667,7 @@
         }
         .faq-inner { max-width: 900px; margin: 0 auto; }
         .faq-section h2 {
-            font-size: 56px; font-family: 'Courier Prime', monospace;
+            font-size: 64px; font-family: 'Playfair Display', Georgia, serif;
             font-weight: 700; letter-spacing: -0.02em; margin-bottom: 60px; text-align: left;
         }
         .faq-list { display: flex; flex-direction: column; gap: 2px; }
@@ -641,7 +679,7 @@
         .faq-question {
             width: 100%; text-align: left; padding: 28px 32px;
             background: none; border: none; color: var(--off-white);
-            font-size: 18px; font-weight: 600; cursor: pointer;
+            font-size: 17px; font-weight: 600; cursor: pointer;
             display: flex; justify-content: space-between; align-items: center; gap: 24px;
             transition: background 0.3s;
         }
@@ -689,16 +727,16 @@
             text-align: center; pointer-events: none; z-index: 10;
         }
         .wc-center-line1 {
-            font-family: 'Courier Prime', monospace;
-            font-size: 32px; font-weight: 700; color: rgba(244,244,242,0.97);
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 32px; font-weight: 700; color: rgba(244,244,242,0.88);
             letter-spacing: 0.02em; line-height: 1.25; white-space: nowrap;
             text-shadow: 0 0 60px rgba(10,42,31,1), 0 0 30px rgba(10,42,31,0.9), 0 2px 8px rgba(0,0,0,0.6);
         }
 
         /* ===== ABOUT PULL-QUOTE ===== */
         .about-pull-quote {
-            font-family: 'Courier Prime', monospace;
-            font-size: 24px; font-weight: 700; color: var(--off-white);
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 24px; font-weight: 700; font-style: italic; color: rgba(244,244,242,0.88);
             line-height: 1.35; border-left: 3px solid var(--accent-red);
             padding-left: 24px; margin-top: 16px;
         }
@@ -719,7 +757,7 @@
             letter-spacing: 0.2em; margin-bottom: 20px;
         }
         .tldr-section h2 {
-            font-size: 56px; font-family: 'Courier Prime', monospace;
+            font-size: 64px; font-family: 'Playfair Display', Georgia, serif;
             font-weight: 700; letter-spacing: -0.02em; margin-bottom: 60px; max-width: 800px;
         }
         .tldr-grid {
@@ -740,8 +778,8 @@
             letter-spacing: 0.2em; margin-bottom: 16px;
         }
         .tldr-card-title {
-            font-size: 22px; font-weight: 700; color: var(--off-white);
-            font-family: 'Courier Prime', monospace; margin-bottom: 20px; line-height: 1.2;
+            font-size: 22px; font-weight: 700; color: rgba(244,244,242,0.9);
+            font-family: 'Inter', sans-serif; margin-bottom: 20px; line-height: 1.2;
         }
         .tldr-card-body {
             font-size: 16px; color: rgba(244, 244, 242, 0.8); line-height: 1.7;
@@ -772,11 +810,16 @@
             .credential-row { padding: 16px 20px; }
             .why-stack { grid-template-columns: 1fr; }
         }
+        /* Word cloud mobile fallback */
         @media (max-width: 768px) {
-            .sticky-header { padding: 16px 20px; }
-            .nav-links { display: none; }
-            .cta-button { display: none; }
-            .hamburger { display: block; }
+            .wordcloud-section { height: auto; min-height: 220px; display: flex; align-items: center; justify-content: center; cursor: default; }
+            .wordcloud-inner { display: none; }
+            .wc-cursor { display: none; }
+            .wc-center-text { position: static; transform: none; padding: 60px 24px; text-align: center; }
+            .wc-center-line1 { font-size: 28px; white-space: normal; line-height: 1.35; }
+        }
+
+        @media (max-width: 768px) {
             .hero { padding: 60px 20px; }
             .hero-title { font-size: 40px; }
             .hero-proof { font-size: 14px; }
@@ -799,7 +842,7 @@
             .tldr-grid { grid-template-columns: 1fr; }
             .tldr-card { border-right: none; border-bottom: 1px solid var(--border-color); }
             .tldr-card:last-child { border-bottom: none; }
-            .wordcloud-section { height: 60vh; }
+            /* wordcloud mobile handled by the dedicated block above */
             .credibility-title { font-size: 36px; }
             .about-pull-quote { font-size: 18px; }
             .faq-question { font-size: 14px; padding: 20px 24px; }
@@ -831,33 +874,36 @@
     <canvas id="shader-bg" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;pointer-events:none;"></canvas>
 
     <!-- ===== NAVIGATION ===== -->
-    <header class="sticky-header">
-        <div class="nav-container">
-            <div class="logo">Eigen<span>.</span>ally</div>
-            <nav class="nav-links">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#fractional">Fractional CMO/COO</a>
-                <a href="#case-studies">Case Studies</a>
-                <a href="#faq">FAQ</a>
-                <a href="#contact">Contact</a>
-            </nav>
-            <a href="https://calendly.com/aishwarya-swarup/eigenally-exploratory-call" target="_blank" class="cta-button">Book your session</a>
-            <button class="hamburger" onclick="toggleMobileMenu()">☰</button>
-        </div>
-    </header>
-
-    <!-- ===== MOBILE MENU ===== -->
-    <div class="mobile-menu-overlay" id="mobileMenu">
-        <button class="close-menu" onclick="toggleMobileMenu()">✕</button>
-        <nav class="mobile-nav">
-            <a href="#about" onclick="toggleMobileMenu()">About</a>
-            <a href="#services" onclick="toggleMobileMenu()">Services</a>
-            <a href="#fractional" onclick="toggleMobileMenu()">Fractional CMO/COO</a>
-            <a href="#case-studies" onclick="toggleMobileMenu()">Case Studies</a>
-            <a href="#faq" onclick="toggleMobileMenu()">FAQ</a>
-            <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
-        </nav>
+    <nav class="nav">
+        <a href="index.html" class="nav-logo" aria-label="Eigenally">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 100" role="img" aria-hidden="true">
+                <text x="32" y="72" font-family="'Courier Prime','Courier New',Courier,monospace" font-size="54" font-weight="700" letter-spacing="2" fill="#F4F4F2">Eigen<tspan fill="#C82C1F">.</tspan>ally</text>
+            </svg>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="case-studies.html">Case Studies</a></li>
+            <li><a href="#tldr">Fractional CMO / COO</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="https://calendly.com/aishwarya-swarup/eigenally-exploratory-call"
+           target="_blank" rel="noopener" class="nav-cta">Book Your Session</a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+    <div class="nav-mobile" id="navMobile">
+        <button onclick="toggleNav()" class="nav-mobile-close">✕</button>
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="#services" onclick="toggleNav()">Services</a>
+        <a href="case-studies.html">Case Studies</a>
+        <a href="#tldr" onclick="toggleNav()">Fractional CMO / COO</a>
+        <a href="#contact" onclick="toggleNav()">Contact</a>
+        <a href="https://calendly.com/aishwarya-swarup/eigenally-exploratory-call"
+           target="_blank" rel="noopener" class="nav-mobile-cta">Book Your Session</a>
     </div>
 
     <!-- ===== HERO SECTION ===== -->
@@ -898,97 +944,50 @@
         <div class="marquee-wrapper">
             <div class="marquee">
                 <div class="marquee-content" aria-hidden="false">
-                    <img src="Assets/Images/Logos/AXN.png" alt="AXN">
-                    <img src="Assets/Images/Logos/Aromas.png" alt="Aromas Cafe">
-                    <img src="Assets/Images/Logos/Bizcon.png" alt="Bizcon Consulting">
-                    <img src="Assets/Images/Logos/Hsc.png" alt="Harvest Salad Co">
-                    <img src="Assets/Images/Logos/Brd.png" alt="Brandtainment">
-                    <img src="Assets/Images/Logos/Dme.png" alt="Dimsum Momo Express">
-                    <img src="Assets/Images/Logos/Lbw.png" alt="Lie Bluff Win">
-                    <img src="Assets/Images/Logos/Maca.png" alt="Macaraccoon">
-                    <img src="Assets/Images/Logos/Macaraccoon.png" alt="Macaraccon">
-                    <img src="Assets/Images/Logos/Sbl.png" alt="Stembridge Labs">
-                    <img src="Assets/Images/Logos/Paytm_logo.png" alt="Paytm">
-                    <img src="Assets/Images/Logos/Shyaway.png" alt="Shyaway">
-                    <img src="Assets/Images/Logos/Shasn-logo.png" alt="SHASN">
-                    <img src="Assets/Images/Logos/Sony LIV" alt="Sony LIV">
-                    <img src="Assets/Images/Logos/Sony_BBC_Earth.png" alt="Sony BBC Earth">
-                    <img src="Assets/Images/Logos/Spni.png" alt="Sony Pictures NI">
-                    <img src="Assets/Images/Logos/Swiggy.png" alt="Swiggy">
-                    <img src="Assets/Images/Logos/Sony_YAY!_logo_(2017-present).png" alt="Sony YAY!">
+                    <img src="Logos/Paytm_logo.png" alt="Paytm">
+                    <img src="Logos/Swiggy_logo_(old).svg.png" alt="Swiggy">
+                    <img src="Logos/Sony_Pictures_Networks_India-Logo.wine.png" alt="Sony Pictures Networks">
+                    <img src="Logos/SET_HD_2016.webp" alt="Sony Entertainment Television">
+                    <img src="Logos/Sony_BBC_Earth.png" alt="Sony BBC Earth">
+                    <img src="Logos/Sony_YAY!_logo_(2017-present).png" alt="Sony YAY!">
+                    <img src="Logos/SonyLIV_2020.png" alt="Sony LIV">
+                    <img src="Logos/Shasn-logo.png" alt="SHASN">
+                    <img src="Logos/LieBluffWin.png" alt="Lie Bluff Win">
+                    <img src="Logos/imagesstb.png" alt="Stembridge Labs">
+                    <img src="Logos/imagesbizcon.png" alt="Bizcon">
+                    <img src="Logos/imagesdme.png" alt="Dimsum Express">
+                    <img src="Logos/brd.png" alt="Brandtainment">
+                    <img src="Logos/images.png" alt="Brand">
+                    <img src="Logos/idmZSGiFiM_logos.png" alt="Brand">
+                    <img src="Logos/unnamed.png" alt="Brand">
+                    <img src="Logos/yellow%20logo0.png" alt="Brand">
+                    <img src="Logos/pic9044358.png.webp" alt="Brand">
                 </div>
                 <div class="marquee-content" aria-hidden="true">
-                    <img src="Assets/Images/Logos/AXN.png" alt="">
-                    <img src="Assets/Images/Logos/Aromas.png" alt="">
-                    <img src="Assets/Images/Logos/Bizcon.png" alt="">
-                    <img src="Assets/Images/Logos/Hsc.png" alt="">
-                    <img src="Assets/Images/Logos/Brd.png" alt="">
-                    <img src="Assets/Images/Logos/Dme.png" alt="">
-                    <img src="Assets/Images/Logos/Lbw.png" alt="">
-                    <img src="Assets/Images/Logos/Maca.png" alt="">
-                    <img src="Assets/Images/Logos/Macaraccoon.png" alt="">
-                    <img src="Assets/Images/Logos/Sbl.png" alt="">
-                    <img src="Assets/Images/Logos/Paytm_logo.png" alt="">
-                    <img src="Assets/Images/Logos/Shyaway.png" alt="">
-                    <img src="Assets/Images/Logos/Shasn-logo.png" alt="">
-                    <img src="Assets/Images/Logos/Sony LIV" alt="Sony LIV" alt="">
-                    <img src="Assets/Images/Logos/Sony_BBC_Earth.png" alt="">
-                    <img src="Assets/Images/Logos/Spni.png" alt="">
-                    <img src="Assets/Images/Logos/Swiggy.png" alt="">
-                    <img src="Assets/Images/Logos/Sony_YAY!_logo_(2017-present).png" alt="">
+                    <img src="Logos/Paytm_logo.png" alt="">
+                    <img src="Logos/Swiggy_logo_(old).svg.png" alt="">
+                    <img src="Logos/Sony_Pictures_Networks_India-Logo.wine.png" alt="">
+                    <img src="Logos/SET_HD_2016.webp" alt="">
+                    <img src="Logos/Sony_BBC_Earth.png" alt="">
+                    <img src="Logos/Sony_YAY!_logo_(2017-present).png" alt="">
+                    <img src="Logos/SonyLIV_2020.png" alt="">
+                    <img src="Logos/Shasn-logo.png" alt="">
+                    <img src="Logos/LieBluffWin.png" alt="">
+                    <img src="Logos/imagesstb.png" alt="">
+                    <img src="Logos/imagesbizcon.png" alt="">
+                    <img src="Logos/imagesdme.png" alt="">
+                    <img src="Logos/brd.png" alt="">
+                    <img src="Logos/images.png" alt="">
+                    <img src="Logos/idmZSGiFiM_logos.png" alt="">
+                    <img src="Logos/unnamed.png" alt="">
+                    <img src="Logos/yellow%20logo0.png" alt="">
+                    <img src="Logos/pic9044358.png.webp" alt="">
                 </div>
             </div>
         </div>
         <div class="credibility-text">
             <p>10+ Yrs &bull; 30+ Brands &bull; 200+ Mentored</p>
-            <p>Fintech &bull; FoodTech &bull; Gaming &bull; Media &amp; Entertainment &bull; D2C &bull; Luxury</p>
-        </div>
-    </section>
-
-    <!-- ===== METRICS STRIP ===== -->
-    <section class="metrics-strip">
-        <h2>Numbers that moved P&amp;Ls</h2>
-        <div class="metrics-grid">
-            <div class="metric-item">
-                <span class="metric-number">0</span>
-                <div class="metric-label">Revenue growth in 8 months</div>
-                <div class="metric-source">Swiggy Virtual Kitchens</div>
-            </div>
-            <div class="metric-item">
-                <span class="metric-number">0</span>
-                <div class="metric-label">GMV growth</div>
-                <div class="metric-source">Swiggy West</div>
-            </div>
-            <div class="metric-item">
-                <span class="metric-number">0</span>
-                <div class="metric-label">Interactions generated</div>
-                <div class="metric-source">KBC Play Along / Sony</div>
-            </div>
-            <div class="metric-item">
-                <span class="metric-number">0</span>
-                <div class="metric-label">Merchants scaled</div>
-                <div class="metric-source">Paytm Soundbox</div>
-            </div>
-            <div class="metric-item">
-                <span class="metric-number">0</span>
-                <div class="metric-label">Crowdfunded in 30 days</div>
-                <div class="metric-source">Macaraccoon / Kickstarter</div>
-            </div>
-            <div class="metric-item">
-                <span class="metric-number">0</span>
-                <div class="metric-label">Retention lift</div>
-                <div class="metric-source">Swiggy CRM Campaigns</div>
-            </div>
-            <div class="metric-item">
-                <span class="metric-number">0</span>
-                <div class="metric-label">Channel reach increase</div>
-                <div class="metric-source">Sony YAY!</div>
-            </div>
-            <div class="metric-item">
-                <span class="metric-number">0</span>
-                <div class="metric-label">AOV increase via A/B testing</div>
-                <div class="metric-source">Swiggy Virtual Kitchens</div>
-            </div>
+            <p><span>Fintech</span> &bull; <span>FoodTech</span> &bull; <span>Gaming</span> &bull; <span>Media &amp; Entertainment</span> &bull; <span>D2C</span> &bull; <span>Luxury</span></p>
         </div>
     </section>
 
@@ -1038,103 +1037,50 @@
         </div><!-- /stage-selector-inner -->
     </section>
 
-    <!-- ===== ABOUT SECTION ===== -->
-    <section class="about-section" id="about">
-        <div class="about-inner">
-            <div class="about-eyebrow">About</div>
-            <h2>The full-stack marketer your team has been missing.</h2>
-            <div class="about-grid">
-                <div class="about-photo">
-                    <div class="about-photo-frame">
-                        <img src="Assets/Images/Logos/About Image.jpeg" alt="Aishwarya Swarup — Founder, Eigenally" style="object-position: center top; transform: scale(1.25); transform-origin: center top;">
-                    </div>
-                    <p class="about-photo-caption">Aishwarya Swarup · Founder, Eigenally</p>
-                </div>
-                <div class="about-bio">
-                    <p><strong>Aishwarya Swarup</strong> is a culture-first brand curator, growth strategist, and full-stack marketer who understands how attention forms, how technology compounds it, and how systems turn it into scale.</p>
-                    <p>Her thinking is engineered through first-principles reasoning and sharpened by operating inside India's most competitive growth environments, including Swiggy, Paytm, and Sony Pictures Networks. She has owned P&amp;Ls, built and led growth organizations, and taken products from zero to scale across Gaming, FoodTech, Fintech, Media, and D2C.</p>
-                    <p>Her work moves seamlessly across the stack. At one end, she architects brand positioning and builds cultural IP that shapes perception. At the other, she drives CAC efficiency, retention systems, and durable unit economics. This is not fragmented thinking. It is integrated design.</p>
-                    <p>Eigenally exists to close the gap most businesses struggle with: the divide between what sounds right and what actually works.</p>
-                    <div class="about-pull-quote">Culture that comes alive in markets. Strategy that wins boardrooms. Execution that compounds in dashboards.</div>
-                </div>
-                <div class="about-credentials">
-                    <div class="credential-row">
-                        <div class="credential-number">10+</div>
-                        <div class="credential-label">Years of P&L ownership across FoodTech, Fintech, Media & D2C</div>
-                    </div>
-                    <div class="credential-row">
-                        <div class="credential-number">30+</div>
-                        <div class="credential-label">Brands built, repositioned, or scaled to next stage</div>
-                    </div>
-                    <div class="credential-row">
-                        <div class="credential-number">200+</div>
-                        <div class="credential-label">Founders and marketers mentored across growth and brand</div>
-                    </div>
-                    <div class="credential-row">
-                        <div class="credential-number">6</div>
-                        <div class="credential-label">Industries: Fintech · FoodTech · Gaming · Media · D2C · Luxury</div>
-                        <div class="credential-brands">Swiggy · Paytm · Sony Pictures · Eigenally</div>
-                    </div>
-                </div>
+    <!-- ===== METRICS STRIP ===== -->
+    <section class="metrics-strip">
+        <h2>Numbers that moved P&amp;Ls</h2>
+        <div class="metrics-grid">
+            <div class="metric-item">
+                <span class="metric-number">0</span>
+                <div class="metric-label">Revenue growth in 8 months</div>
+                <div class="metric-source">Swiggy Virtual Kitchens</div>
             </div>
-
-            <!-- Why It Works -->
-            <div class="why-works">
-                <h3>Why it works for our partners</h3>
-                <div class="why-stack">
-                    <div class="why-card">
-                        <div class="why-card-icon">01</div>
-                        <div class="why-card-content">
-                            <div class="why-card-title">CMO-level leadership, built into your team.</div>
-                            <div class="why-card-text">Strategic thinking and execution at the level you need, structured for where you are. The economics work at seed, at Series A, and everywhere in between.</div>
-                        </div>
-                    </div>
-                    <div class="why-card">
-                        <div class="why-card-icon">02</div>
-                        <div class="why-card-content">
-                            <div class="why-card-title">Scope that bends around your reality.</div>
-                            <div class="why-card-text">One focused sprint to fix a specific problem, or an embedded six-month engagement. Built around your brief, your timeline, and your team. You define the shape.</div>
-                        </div>
-                    </div>
-                    <div class="why-card">
-                        <div class="why-card-icon">03</div>
-                        <div class="why-card-content">
-                            <div class="why-card-title">A perspective your org can't grow from inside.</div>
-                            <div class="why-card-text">Fresh eyes on your strategy and funnel, with zero internal politics. The diagnosis is honest. The recommendations are built around what the business actually needs.</div>
-                        </div>
-                    </div>
-                    <div class="why-card">
-                        <div class="why-card-icon">04</div>
-                        <div class="why-card-content">
-                            <div class="why-card-title">The deck and the doing, owned by one person.</div>
-                            <div class="why-card-text">Brand strategy, GTM architecture, performance systems, and team enablement, connected and driven by the same person from brief to results.</div>
-                        </div>
-                    </div>
-                    <div class="why-card">
-                        <div class="why-card-icon">05</div>
-                        <div class="why-card-content">
-                            <div class="why-card-title">Fluent in how modern audiences actually move.</div>
-                            <div class="why-card-text">Creators, communities, meme cycles, AI-assisted creative, product-led growth — this is the native language of every strategy. Culture and technology, integrated from the start.</div>
-                        </div>
-                    </div>
-                    <div class="why-card">
-                        <div class="why-card-icon">06</div>
-                        <div class="why-card-content">
-                            <div class="why-card-title">Proven playbooks. Results from week one.</div>
-                            <div class="why-card-text">Ten years and 30+ brands worth of pattern recognition, already calibrated. The learning curve is compressed before the engagement begins. Momentum starts immediately.</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="metric-item">
+                <span class="metric-number">0</span>
+                <div class="metric-label">GMV growth</div>
+                <div class="metric-source">Swiggy West</div>
             </div>
-        </div>
-    </section>
-
-    <!-- ===== WORD CLOUD ===== -->
-    <section class="wordcloud-section" id="wordcloud">
-        <div class="wordcloud-inner" id="wordcloud-inner"></div>
-        <div class="wc-cursor" id="wc-cursor"></div>
-        <div class="wc-center-text">
-            <div class="wc-center-line1">Marketing is no longer linear.</div>
+            <div class="metric-item">
+                <span class="metric-number">0</span>
+                <div class="metric-label">Interactions generated</div>
+                <div class="metric-source">KBC Play Along / Sony</div>
+            </div>
+            <div class="metric-item">
+                <span class="metric-number">0</span>
+                <div class="metric-label">Merchants scaled</div>
+                <div class="metric-source">Paytm Soundbox</div>
+            </div>
+            <div class="metric-item">
+                <span class="metric-number">0</span>
+                <div class="metric-label">Crowdfunded in 30 days</div>
+                <div class="metric-source">Macaraccoon / Kickstarter</div>
+            </div>
+            <div class="metric-item">
+                <span class="metric-number">0</span>
+                <div class="metric-label">Retention lift</div>
+                <div class="metric-source">Swiggy CRM Campaigns</div>
+            </div>
+            <div class="metric-item">
+                <span class="metric-number">0</span>
+                <div class="metric-label">Channel reach increase</div>
+                <div class="metric-source">Sony YAY!</div>
+            </div>
+            <div class="metric-item">
+                <span class="metric-number">0</span>
+                <div class="metric-label">AOV increase via A/B testing</div>
+                <div class="metric-source">Swiggy Virtual Kitchens</div>
+            </div>
         </div>
     </section>
 
@@ -1232,8 +1178,93 @@
         </div>
     </section>
 
+    <!-- ===== CASE STUDIES ===== -->
+    <section class="case-studies" id="case-studies">
+        <div class="case-studies-inner">
+        <h2>Case Studies</h2>
+        <div class="case-studies-grid">
+
+            <!-- CASE STUDY 1, SONY YAY! -->
+            <div class="case-study-card">
+                <div class="case-image">
+                    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&h=400&fit=crop" alt="Sony YAY! Television" onerror="this.style.display='none'">
+                </div>
+                <div class="case-content">
+                    <h3>Sony YAY!</h3>
+                    <p class="case-sector">Media &amp; Entertainment / Sony Pictures Networks India</p>
+                    <div class="case-result-highlight">67% channel reach &nbsp;&middot;&nbsp; 50% TAM unlocked &nbsp;&middot;&nbsp; 59% viewer growth</div>
+                    <div class="case-detail-toggle">The playbook</div>
+                    <div class="case-detail">
+                        <p class="case-problem"><strong>Brief:</strong> Kids channel viewership skewed 70:30 boys to girls, leaving 50% of the TAM untapped. Competing against Cartoon Network, Nickelodeon, and Disney Channel with a fragmented content mix.</p>
+                        <p class="case-action"><strong>Playbook:</strong> Two-pronged approach: bought media on competitor kids channels to capture attention where kids already were, then corrected the programming mix with female-friendly content. The real insight was that the problem wasn't marketing spend. It was product.</p>
+                        <p class="case-result">67% channel reach increase &middot; 70:30 gender skew corrected &middot; 50% of untapped TAM unlocked &middot; 59% viewer base growth (Gujarat)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CASE STUDY 2, PAYTM SOUNDBOX -->
+            <div class="case-study-card">
+                <div class="case-image">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=400&fit=crop" alt="Paytm Soundbox" onerror="this.style.display='none'">
+                </div>
+                <div class="case-content">
+                    <h3>Paytm Soundbox</h3>
+                    <p class="case-sector">Fintech / B2B Growth / North &amp; West India</p>
+                    <div class="case-result-highlight">200K+ merchants scaled &nbsp;&middot;&nbsp; Full P&amp;L ownership &nbsp;&middot;&nbsp; 20-member org</div>
+                    <div class="case-detail-toggle">The playbook</div>
+                    <div class="case-detail">
+                        <p class="case-problem"><strong>Brief:</strong> Scale Paytm Soundbox merchant adoption across North and West India. Full P&amp;L ownership with a 20-member growth org and multi-channel execution across performance, manpower, and sales layers.</p>
+                        <p class="case-action"><strong>Playbook:</strong> Built merchant segmentation frameworks to identify high-value acquisition targets. Redesigned onboarding and lifecycle interventions to reduce activation drop-offs. Orchestrated cross-channel GTM across performance marketing, field sales, and partner networks.</p>
+                        <p class="case-result">200K+ merchants scaled &middot; Full P&amp;L ownership across two geographies &middot; 20-member growth org directed</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CASE STUDY 3, SWIGGY VIRTUAL KITCHENS -->
+            <div class="case-study-card">
+                <div class="case-image">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=400&fit=crop" alt="Swiggy Virtual Kitchens" onerror="this.style.display='none'">
+                </div>
+                <div class="case-content">
+                    <h3>Swiggy Virtual Kitchens</h3>
+                    <p class="case-sector">FoodTech / D2C / West India</p>
+                    <div class="case-result-highlight">518% revenue growth &nbsp;&middot;&nbsp; 78% retention lift &nbsp;&middot;&nbsp; 22% EBITDA at scale</div>
+                    <div class="case-detail-toggle">The playbook</div>
+                    <div class="case-detail">
+                        <p class="case-problem"><strong>Brief:</strong> Premium cloud kitchen brand stuck at fewer than 5 orders per day for three consecutive months despite 100 clicks/day. A second brief: restore unit economics after aggressive scale collapsed EBITDA from 25% to -10%.</p>
+                        <p class="case-action"><strong>Playbook:</strong> AARRR funnel audit identified search suppression caused by excess prep time. Fixed the ops constraint first, then rebuilt TOFU. For unit economics: dynamic pricing and discount optimisation restructured the P&amp;L around the exact profitability ceiling.</p>
+                        <p class="case-result">518% revenue growth in 8 months &middot; 112% GMV growth &middot; 78% retention lift &middot; 22% EBITDA sustained at optimum scale</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CASE STUDY 4, AVOWDELY RESORTS -->
+            <div class="case-study-card">
+                <div class="case-image">
+                    <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&h=400&fit=crop" alt="Avowdely Resorts" onerror="this.style.display='none'">
+                </div>
+                <div class="case-content">
+                    <h3>Avowdely Resorts</h3>
+                    <p class="case-sector">Ultra-Luxury Hospitality / GTM Architecture &amp; Launch</p>
+                    <div class="case-result-highlight">13-city global blueprint &nbsp;&middot;&nbsp; HNWI ambassador matrix &nbsp;&middot;&nbsp; Full GTM delivered</div>
+                    <div class="case-detail-toggle">The playbook</div>
+                    <div class="case-detail">
+                        <p class="case-problem"><strong>Brief:</strong> End-to-end launch strategy for an ultra-luxury resort at the intersection of organic architecture, Indian heritage, and HNWI experiential travel. Target guests: HNWIs, UHNWIs, Corporate Elite, Celebrities.</p>
+                        <p class="case-action"><strong>Playbook:</strong> Prestige positioning built around the organic architecture USP. Three-phase launch: 8-week AR/VR pre-launch, grand opening event blueprint, post-launch PR and loyalty expansion. Influencer ecosystem of 15 global creators. Global Experience Centres across 13 cities.</p>
+                        <p class="case-result">Full GTM architecture delivered &middot; 13-city global presence blueprint &middot; Celebrity and HNWI ambassador matrix defined</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div style="text-align:center;margin-top:48px;">
+            <a href="case-studies.html" style="display:block;text-align:center;margin-top:32px;font-family:'Courier Prime',monospace;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--off-white);text-decoration:none;border-bottom:1px solid var(--accent-red);padding-bottom:2px;transition:color 0.3s;" onmouseover="this.style.color='var(--accent-red)'" onmouseout="this.style.color='var(--off-white)'">View all case studies &rarr;</a>
+        </div>
+        </div><!-- /case-studies-inner -->
+    </section>
+
     <!-- ===== TL;DR: FRACTIONAL CMO ===== -->
-    <section class="tldr-section">
+    <section class="tldr-section" id="tldr">
         <div class="tldr-inner">
             <div class="tldr-eyebrow">TL;DR</div>
             <h2>Who is a Fractional CMO?</h2>
@@ -1332,86 +1363,66 @@
         </div><!-- /fractional-inner -->
     </section>
 
-    <!-- ===== CASE STUDIES ===== -->
-    <section class="case-studies" id="case-studies">
-        <div class="case-studies-inner">
-        <h2>Case Studies</h2>
-        <div class="case-studies-grid">
-
-            <!-- CASE STUDY 1, SONY YAY! -->
-            <div class="case-study-card">
-                <div class="case-image">
-                    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&h=400&fit=crop" alt="Sony YAY! Television" onerror="this.style.display='none'">
-                </div>
-                <div class="case-content">
-                    <h3>Sony YAY!</h3>
-                    <p class="case-sector">Media &amp; Entertainment / Sony Pictures Networks India</p>
-                    <div class="case-result-highlight">67% channel reach &nbsp;&middot;&nbsp; 50% TAM unlocked &nbsp;&middot;&nbsp; 59% viewer growth</div>
-                    <div class="case-detail-toggle">The playbook</div>
-                    <div class="case-detail">
-                        <p class="case-problem"><strong>Brief:</strong> Kids channel viewership skewed 70:30 boys to girls, leaving 50% of the TAM untapped. Competing against Cartoon Network, Nickelodeon, and Disney Channel with a fragmented content mix.</p>
-                        <p class="case-action"><strong>Playbook:</strong> Two-pronged approach: bought media on competitor kids channels to capture attention where kids already were, then corrected the programming mix with female-friendly content. The real insight was that the problem wasn't marketing spend. It was product.</p>
-                        <p class="case-result">67% channel reach increase &middot; 70:30 gender skew corrected &middot; 50% of untapped TAM unlocked &middot; 59% viewer base growth (Gujarat)</p>
+    <!-- ===== WHY IT WORKS FOR OUR PARTNERS ===== -->
+    <section class="about-section" style="background: var(--primary-green);">
+        <div class="about-inner">
+            <div class="why-works" style="border-top:none; padding-top:0; margin-top:0;">
+                <h3>Why it works for our partners</h3>
+                <div class="why-stack">
+                    <div class="why-card">
+                        <div class="why-card-icon">01</div>
+                        <div class="why-card-content">
+                            <div class="why-card-title">CMO-level leadership, built into your team.</div>
+                            <div class="why-card-text">Strategic thinking and execution at the level you need, structured for where you are. The economics work at seed, at Series A, and everywhere in between.</div>
+                        </div>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-card-icon">02</div>
+                        <div class="why-card-content">
+                            <div class="why-card-title">Scope that bends around your reality.</div>
+                            <div class="why-card-text">One focused sprint to fix a specific problem, or an embedded six-month engagement. Built around your brief, your timeline, and your team. You define the shape.</div>
+                        </div>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-card-icon">03</div>
+                        <div class="why-card-content">
+                            <div class="why-card-title">A perspective your org can't grow from inside.</div>
+                            <div class="why-card-text">Fresh eyes on your strategy and funnel, with zero internal politics. The diagnosis is honest. The recommendations are built around what the business actually needs.</div>
+                        </div>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-card-icon">04</div>
+                        <div class="why-card-content">
+                            <div class="why-card-title">The deck and the doing, owned by one person.</div>
+                            <div class="why-card-text">Brand strategy, GTM architecture, performance systems, and team enablement, connected and driven by the same person from brief to results.</div>
+                        </div>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-card-icon">05</div>
+                        <div class="why-card-content">
+                            <div class="why-card-title">Fluent in how modern audiences actually move.</div>
+                            <div class="why-card-text">Creators, communities, meme cycles, AI-assisted creative, product-led growth — this is the native language of every strategy. Culture and technology, integrated from the start.</div>
+                        </div>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-card-icon">06</div>
+                        <div class="why-card-content">
+                            <div class="why-card-title">Proven playbooks. Results from week one.</div>
+                            <div class="why-card-text">Ten years and 30+ brands worth of pattern recognition, already calibrated. The learning curve is compressed before the engagement begins. Momentum starts immediately.</div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <!-- CASE STUDY 2, PAYTM SOUNDBOX -->
-            <div class="case-study-card">
-                <div class="case-image">
-                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=400&fit=crop" alt="Paytm Soundbox" onerror="this.style.display='none'">
-                </div>
-                <div class="case-content">
-                    <h3>Paytm Soundbox</h3>
-                    <p class="case-sector">Fintech / B2B Growth / North &amp; West India</p>
-                    <div class="case-result-highlight">200K+ merchants scaled &nbsp;&middot;&nbsp; Full P&amp;L ownership &nbsp;&middot;&nbsp; 20-member org</div>
-                    <div class="case-detail-toggle">The playbook</div>
-                    <div class="case-detail">
-                        <p class="case-problem"><strong>Brief:</strong> Scale Paytm Soundbox merchant adoption across North and West India. Full P&amp;L ownership with a 20-member growth org and multi-channel execution across performance, manpower, and sales layers.</p>
-                        <p class="case-action"><strong>Playbook:</strong> Built merchant segmentation frameworks to identify high-value acquisition targets. Redesigned onboarding and lifecycle interventions to reduce activation drop-offs. Orchestrated cross-channel GTM across performance marketing, field sales, and partner networks.</p>
-                        <p class="case-result">200K+ merchants scaled &middot; Full P&amp;L ownership across two geographies &middot; 20-member growth org directed</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CASE STUDY 3, SWIGGY VIRTUAL KITCHENS -->
-            <div class="case-study-card">
-                <div class="case-image">
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=400&fit=crop" alt="Swiggy Virtual Kitchens" onerror="this.style.display='none'">
-                </div>
-                <div class="case-content">
-                    <h3>Swiggy Virtual Kitchens</h3>
-                    <p class="case-sector">FoodTech / D2C / West India</p>
-                    <div class="case-result-highlight">518% revenue growth &nbsp;&middot;&nbsp; 78% retention lift &nbsp;&middot;&nbsp; 22% EBITDA at scale</div>
-                    <div class="case-detail-toggle">The playbook</div>
-                    <div class="case-detail">
-                        <p class="case-problem"><strong>Brief:</strong> Premium cloud kitchen brand stuck at fewer than 5 orders per day for three consecutive months despite 100 clicks/day. A second brief: restore unit economics after aggressive scale collapsed EBITDA from 25% to -10%.</p>
-                        <p class="case-action"><strong>Playbook:</strong> AARRR funnel audit identified search suppression caused by excess prep time. Fixed the ops constraint first, then rebuilt TOFU. For unit economics: dynamic pricing and discount optimisation restructured the P&amp;L around the exact profitability ceiling.</p>
-                        <p class="case-result">518% revenue growth in 8 months &middot; 112% GMV growth &middot; 78% retention lift &middot; 22% EBITDA sustained at optimum scale</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CASE STUDY 4, AVOWDELY RESORTS -->
-            <div class="case-study-card">
-                <div class="case-image">
-                    <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&h=400&fit=crop" alt="Avowdely Resorts" onerror="this.style.display='none'">
-                </div>
-                <div class="case-content">
-                    <h3>Avowdely Resorts</h3>
-                    <p class="case-sector">Ultra-Luxury Hospitality / GTM Architecture &amp; Launch</p>
-                    <div class="case-result-highlight">13-city global blueprint &nbsp;&middot;&nbsp; HNWI ambassador matrix &nbsp;&middot;&nbsp; Full GTM delivered</div>
-                    <div class="case-detail-toggle">The playbook</div>
-                    <div class="case-detail">
-                        <p class="case-problem"><strong>Brief:</strong> End-to-end launch strategy for an ultra-luxury resort at the intersection of organic architecture, Indian heritage, and HNWI experiential travel. Target guests: HNWIs, UHNWIs, Corporate Elite, Celebrities.</p>
-                        <p class="case-action"><strong>Playbook:</strong> Prestige positioning built around the organic architecture USP. Three-phase launch: 8-week AR/VR pre-launch, grand opening event blueprint, post-launch PR and loyalty expansion. Influencer ecosystem of 15 global creators. Global Experience Centres across 13 cities.</p>
-                        <p class="case-result">Full GTM architecture delivered &middot; 13-city global presence blueprint &middot; Celebrity and HNWI ambassador matrix defined</p>
-                    </div>
-                </div>
-            </div>
-
         </div>
-        </div><!-- /case-studies-inner -->
+    </section>
+
+    <!-- ===== WORD CLOUD ===== -->
+    <section class="wordcloud-section" id="wordcloud">
+        <div class="wordcloud-inner" id="wordcloud-inner"></div>
+        <div class="wc-cursor" id="wc-cursor"></div>
+        <div class="wc-center-text">
+            <div class="wc-center-line1">Marketing is no longer linear.</div>
+        </div>
     </section>
 
     <!-- ===== FAQ SECTION ===== -->
@@ -1582,7 +1593,7 @@
                     </div>
                     <div class="contact-card-row">
                         <i class="fa-solid fa-phone contact-card-row-icon"></i>
-                        +91 98719 33402
+                        <span style="color:#F4F4F2;">+91 98719 33402</span>
                     </div>
                     <div class="contact-card-row">
                         <i class="fa-brands fa-linkedin contact-card-row-icon"></i>
@@ -1605,10 +1616,7 @@
     <footer>
         <div class="footer-content">
             <p>&copy; 2026 Eigenally. All rights reserved.</p>
-            <p>aishwarya.swarup@gmail.com | +91 9871933402</p>
-            <div class="footer-links">
-                <a href="https://linkedin.com/in/aishwarya-swarup" target="_blank">LinkedIn</a>
-            </div>
+            <p>aishwarya.swarup@gmail.com &nbsp;·&nbsp; +91 98719 33402 &nbsp;·&nbsp; <a href="https://linkedin.com/in/aishwarya-swarup" target="_blank" style="color:rgba(244,244,242,0.6);text-decoration:none;">linkedin.com/in/aishwarya-swarup</a></p>
         </div>
     </footer>
 
@@ -1628,9 +1636,9 @@
             }
         }
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('active');
+        function toggleNav() {
+            document.getElementById('navMobile').classList.toggle('open');
+            document.body.style.overflow = document.getElementById('navMobile').classList.contains('open') ? 'hidden' : '';
         }
 
         function scrollToForm() {
@@ -1833,34 +1841,7 @@
             nums.forEach(el => observer.observe(el));
         })();
 
-        // ===== LOGO SCRAMBLE (fun element) =====
-        // Hovering the nav logo scrambles the letters before settling back
-        (function(){
-            const logo = document.querySelector('.logo');
-            if (!logo) return;
-            const original = 'Eigen.ally';
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%';
-            let frame, running = false;
-            logo.addEventListener('mouseenter', () => {
-                if (running) return;
-                running = true;
-                let iter = 0;
-                clearInterval(frame);
-                frame = setInterval(() => {
-                    logo.innerHTML = original.split('').map((c, i) => {
-                        if (c === '.') return '<span>.</span>';
-                        if (i < iter) return c;
-                        return chars[Math.floor(Math.random() * chars.length)];
-                    }).join('');
-                    if (iter >= original.length) {
-                        clearInterval(frame);
-                        logo.innerHTML = 'Eigen<span>.</span>ally';
-                        running = false;
-                    }
-                    iter += 0.4;
-                }, 40);
-            });
-        })();
+        // ===== LOGO SCRAMBLE (disabled — logo is now image-based) =====
 
 
         function toggleFaq(btn) {
@@ -1871,10 +1852,11 @@
         }
 
         document.addEventListener('click', function(e) {
-            const menu = document.getElementById('mobileMenu');
-            const hamburger = document.querySelector('.hamburger');
-            if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
-                menu.classList.remove('active');
+            const menu = document.getElementById('navMobile');
+            const hamburger = document.querySelector('.nav-hamburger');
+            if (menu && hamburger && !menu.contains(e.target) && !hamburger.contains(e.target)) {
+                menu.classList.remove('open');
+                document.body.style.overflow = '';
             }
         });
 

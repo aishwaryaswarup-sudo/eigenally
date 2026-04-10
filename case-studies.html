@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Studies — Aishwarya Swarup · Eigenally</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@300;400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           PALETTE — Onion Pink · Forest Green (home) · Warm Cream
+        ============================================================ */
+        :root {
+            --bg:         #F5CFC0;
+            --bg-light:   #FDF3EF;
+            --bg-card:    #FAE8E0;
+            --bg-deep:    #EBBCAA;
+            --forest:     #0B3D2E;
+            --forest-mid: #1A5C40;
+            --forest-lt:  #D6EAE1;
+            --accent:     #C82C1F;
+            --cream:      #FDF8F5;
+            --text:       #0A2018;
+            --secondary:  rgba(10,32,24,0.68);
+            --muted:      rgba(10,32,24,0.42);
+            --border:     rgba(11,61,46,0.14);
+            --border-mid: rgba(11,61,46,0.24);
+            --shadow-sm:  0 2px 16px rgba(11,61,46,0.08);
+            --shadow-md:  0 4px 32px rgba(11,61,46,0.13);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ---- CANVAS DOTS ---- */
+        #dots-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ============================================================
+           NAV — unified
+        ============================================================ */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            background: rgba(11,61,46,0.97);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 48px;
+            gap: 24px;
+        }
+        .nav-logo { text-decoration: none; display: flex; align-items: center; flex-shrink: 0; }
+        .nav-logo svg { height: 36px; width: auto; display: block; }
+        .nav-links { display: flex; align-items: center; gap: 6px; list-style: none; flex: 1; justify-content: center; }
+        .nav-links a {
+            font-family: 'Courier Prime', monospace;
+            font-size: 12px; font-weight: 700;
+            letter-spacing: 0.11em; text-transform: uppercase;
+            color: rgba(244,244,242,0.55);
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 3px;
+            transition: color 0.2s, background 0.2s;
+            white-space: nowrap;
+        }
+        .nav-links a:hover { color: #F4F4F2; }
+        .nav-links a.active { color: #F5CFC0; }
+        .nav-cta {
+            font-family: 'Courier Prime', monospace;
+            font-size: 12px; font-weight: 700;
+            letter-spacing: 0.11em; text-transform: uppercase;
+            color: #0B3D2E; background: #F5CFC0;
+            border: none; border-radius: 4px;
+            padding: 10px 22px; cursor: pointer;
+            text-decoration: none; display: inline-block;
+            transition: background 0.2s; white-space: nowrap; flex-shrink: 0;
+        }
+        .nav-cta:hover { background: #FDF8F5; }
+        /* Hamburger */
+        .nav-hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            background: none; border: none; cursor: pointer; padding: 4px; flex-shrink: 0;
+        }
+        .nav-hamburger span { display: block; width: 24px; height: 2px; background: #F4F4F2; border-radius: 2px; }
+        /* Mobile overlay */
+        .nav-mobile {
+            display: none; position: fixed; inset: 0;
+            background: rgba(10,42,31,0.99); z-index: 500;
+            flex-direction: column; align-items: flex-start; justify-content: center;
+            padding: 80px 48px; gap: 28px;
+        }
+        .nav-mobile.open { display: flex; }
+        .nav-mobile-close {
+            position: absolute; top: 24px; right: 32px;
+            background: none; border: none; color: rgba(244,244,242,0.7);
+            font-size: 28px; cursor: pointer; line-height: 1;
+        }
+        .nav-mobile a {
+            font-family: 'Courier Prime', monospace;
+            font-size: 22px; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: rgba(244,244,242,0.65); text-decoration: none; transition: color 0.2s;
+        }
+        .nav-mobile a:hover, .nav-mobile a.active { color: #F5CFC0; }
+        .nav-mobile-cta {
+            margin-top: 12px; font-size: 18px !important;
+            background: #F5CFC0 !important; color: #0B3D2E !important;
+            padding: 14px 32px; border-radius: 6px;
+        }
+        @media (max-width: 960px) {
+            .nav { padding: 0 24px; }
+            .nav-links, .nav-cta { display: none; }
+            .nav-hamburger { display: flex; }
+        }
+
+        /* ============================================================
+           SHARED
+        ============================================================ */
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding-left: 52px;
+            padding-right: 52px;
+        }
+
+        .section-label {
+            font-family: 'Courier Prime', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .section-label::before {
+            content: '';
+            display: inline-block;
+            width: 28px;
+            height: 2px;
+            background: var(--forest);
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        /* ============================================================
+           PAGE HEADER
+        ============================================================ */
+        .page-header {
+            position: relative;
+            z-index: 1;
+            padding: 88px 52px 64px;
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+
+        .header-eyebrow {
+            font-family: 'Courier Prime', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 22px;
+        }
+
+        .header-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(56px, 9vw, 110px);
+            font-weight: 800;
+            line-height: 0.92;
+            letter-spacing: -0.025em;
+            color: var(--forest);
+            margin-bottom: 36px;
+        }
+
+        .header-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .header-subtitle {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-style: italic;
+            font-size: 18px;
+            color: var(--secondary);
+            font-weight: 400;
+            max-width: 480px;
+            line-height: 1.5;
+        }
+
+        .header-stat {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .header-stat-num {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--forest);
+            letter-spacing: -0.03em;
+            opacity: 0.18;
+        }
+
+        .header-stat-lbl {
+            font-family: 'Courier Prime', monospace;
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        /* ============================================================
+           FILTER BAR
+        ============================================================ */
+        .filter-bar {
+            position: relative;
+            z-index: 1;
+            padding: 0 52px 40px;
+            max-width: 1240px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-family: 'Courier Prime', monospace;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-right: 4px;
+        }
+
+        .filter-tag {
+            font-family: 'Courier Prime', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            border: 1px solid var(--border-mid);
+            border-radius: 100px;
+            padding: 7px 18px;
+            cursor: pointer;
+            background: transparent;
+            transition: color 0.2s, border-color 0.2s, background 0.2s;
+        }
+
+        .filter-tag:hover,
+        .filter-tag.active {
+            color: var(--forest);
+            border-color: var(--forest);
+            background: var(--forest-lt);
+        }
+
+        /* ============================================================
+           CASE STUDY CARDS
+        ============================================================ */
+        .cs-list {
+            position: relative;
+            z-index: 1;
+            padding: 0 52px 100px;
+            max-width: 1240px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .cs-card {
+            background: var(--bg-light);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        .cs-card:hover { box-shadow: var(--shadow-md); }
+
+        .cs-card-header {
+            display: grid;
+            grid-template-columns: 60px 1fr auto;
+            gap: 28px;
+            align-items: start;
+            padding: 36px 40px;
+            cursor: pointer;
+        }
+
+        .cs-number {
+            font-family: 'Courier Prime', monospace;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            padding-top: 6px;
+            opacity: 0.7;
+        }
+
+        .cs-main { flex: 1; min-width: 0; }
+
+        .cs-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .cs-tag {
+            font-family: 'Courier Prime', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: rgba(200,44,31,0.1);
+            border-radius: 100px;
+            padding: 3px 11px;
+        }
+
+        .cs-brand {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(22px, 2.8vw, 34px);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--forest);
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .cs-role {
+            font-family: 'Courier Prime', monospace;
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 0.06em;
+            margin-bottom: 16px;
+        }
+
+        .cs-challenge {
+            font-size: 14px;
+            color: var(--secondary);
+            line-height: 1.7;
+            max-width: 640px;
+            font-weight: 300;
+        }
+
+        .cs-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .cs-badge {
+            font-family: 'Courier Prime', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: var(--forest);
+            background: var(--forest-lt);
+            border-radius: 100px;
+            padding: 5px 14px;
+            border: 1px solid rgba(11,61,46,0.18);
+        }
+
+        /* Toggle button */
+        .cs-toggle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding-top: 4px;
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        .cs-toggle-lbl {
+            font-family: 'Courier Prime', monospace;
+            font-size: 10px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            transition: color 0.2s;
+        }
+
+        .cs-toggle:hover .cs-toggle-lbl { color: var(--forest); }
+
+        .cs-toggle-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--border-mid);
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.25s, border-color 0.25s;
+        }
+
+        .cs-toggle-icon svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--muted);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), stroke 0.2s;
+        }
+
+        .cs-card.open .cs-toggle-icon {
+            background: var(--forest);
+            border-color: var(--forest);
+        }
+
+        .cs-card.open .cs-toggle-icon svg {
+            transform: rotate(180deg);
+            stroke: var(--bg-light);
+        }
+
+        /* Expandable body */
+        .cs-card-body {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.55s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        .cs-card.open .cs-card-body { max-height: 900px; }
+
+        .cs-card-body-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .cs-body-col {
+            padding: 36px 40px;
+        }
+
+        .cs-body-col:first-child {
+            border-right: 1px solid var(--border);
+        }
+
+        .cs-body-lbl {
+            font-family: 'Courier Prime', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cs-body-content {
+            font-size: 13px;
+            color: var(--secondary);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .cs-body-content ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .cs-body-content li {
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .cs-body-content li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 11px;
+            top: 3px;
+        }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        .footer {
+            position: relative;
+            z-index: 1;
+            background: var(--forest);
+            padding: 44px 52px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-logo img { height: 28px; width: auto; opacity: 0.7; }
+
+        .footer-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-family: 'Courier Prime', monospace;
+            font-size: 11px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(244,244,242,0.40);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: #F4F4F2; }
+
+        .footer-copy {
+            font-family: 'Courier Prime', monospace;
+            font-size: 11px;
+            color: rgba(244,244,242,0.22);
+            letter-spacing: 0.05em;
+        }
+
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+        @media (max-width: 880px) {
+            .page-header { padding: 64px 24px 48px; }
+            .filter-bar { padding: 0 24px 32px; }
+            .cs-list { padding: 0 24px 72px; }
+
+            .cs-card-header {
+                grid-template-columns: 40px 1fr;
+                gap: 18px;
+                padding: 28px 24px;
+            }
+
+            .cs-toggle {
+                grid-column: 1 / -1;
+                flex-direction: row;
+                justify-content: flex-start;
+                margin-top: 12px;
+                gap: 10px;
+            }
+
+            .cs-card-body-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .cs-body-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+            .cs-body-col { padding: 28px 24px; }
+
+            .footer { padding: 36px 24px; }
+        }
+
+        @media (max-width: 540px) {
+            .header-title { font-size: 56px; }
+            .header-bottom { flex-direction: column; align-items: flex-start; }
+            .header-stat { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MOVING DOTS CANVAS -->
+    <canvas id="dots-bg"></canvas>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <a href="index.html" class="nav-logo" aria-label="Eigenally">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 100" role="img" aria-hidden="true">
+                <text x="32" y="72" font-family="'Courier Prime','Courier New',Courier,monospace" font-size="54" font-weight="700" letter-spacing="2" fill="#F4F4F2">Eigen<tspan fill="#C82C1F">.</tspan>ally</text>
+            </svg>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="case-studies.html" class="active">Case Studies</a></li>
+            <li><a href="index.html#tldr">Fractional CMO / COO</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <a href="https://calendly.com/aishwarya-swarup/eigenally-exploratory-call"
+           target="_blank" rel="noopener" class="nav-cta">Book Your Session</a>
+        <button class="nav-hamburger" onclick="toggleNav()" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+    <div class="nav-mobile" id="navMobile">
+        <button onclick="toggleNav()" class="nav-mobile-close">✕</button>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="index.html#services">Services</a>
+        <a href="case-studies.html" class="active">Case Studies</a>
+        <a href="index.html#tldr">Fractional CMO / COO</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="https://calendly.com/aishwarya-swarup/eigenally-exploratory-call"
+           target="_blank" rel="noopener" class="nav-mobile-cta">Book Your Session</a>
+    </div>
+
+    <!-- PAGE HEADER -->
+    <header class="page-header">
+        <p class="header-eyebrow">Eigenally · Portfolio 2026</p>
+        <h1 class="header-title">Case<br>Studies.</h1>
+        <div class="header-bottom">
+            <p class="header-subtitle">Selected work across brand strategy, data, GTM, cultural IP, and operations.</p>
+            <div class="header-stat">
+                <div class="header-stat-num">10</div>
+                <div class="header-stat-lbl">Engagements · 2019–2026</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+        <span class="filter-label">Filter —</span>
+        <button class="filter-tag active" data-filter="all">All</button>
+        <button class="filter-tag" data-filter="gaming">Gaming</button>
+        <button class="filter-tag" data-filter="media">Media</button>
+        <button class="filter-tag" data-filter="foodtech">Foodtech</button>
+        <button class="filter-tag" data-filter="fintech">Fintech</button>
+        <button class="filter-tag" data-filter="d2c">D2C</button>
+        <button class="filter-tag" data-filter="advisory">Advisory</button>
+    </div>
+
+    <!-- CASE STUDIES -->
+    <main class="cs-list">
+
+        <!-- CS 01 -->
+        <article class="cs-card" data-sectors="gaming">
+            <div class="cs-card-header" onclick="toggleCase(this)">
+                <span class="cs-number">CS·01</span>
+                <div class="cs-main">
+                    <div class="cs-tags">
+                        <span class="cs-tag">Gaming</span>
+                        <span class="cs-tag">Cultural IP</span>
+                    </div>
+                    <h2 class="cs-brand">SHASN + Macaraccoon</h2>
+                    <p class="cs-role">Memesys (Fractional CMO) &nbsp;·&nbsp; Jun 2024 – Present</p>
+                    <p class="cs-challenge">India's largest tabletop IP with zero international infrastructure. A second board game with no brand equity in any market. Two IPs. Zero infrastructure. One mandate: go global.</p>
+                    <div class="cs-badges">
+                        <span class="cs-badge">$77K / 30 days</span>
+                        <span class="cs-badge">India's #1 tabletop</span>
+                        <span class="cs-badge">4 international markets</span>
+                    </div>
+                </div>
+                <button class="cs-toggle" aria-expanded="false">
+                    <span class="cs-toggle-lbl">Playbook</span>
+                    <span class="cs-toggle-icon">
+                        <svg viewBox="0 0 14 14"><polyline points="2,4 7,10 12,4"/></svg>
+                    </span>
+                </button>
+            </div>
+            <div class="cs-card-body">
+                <div class="cs-card-body-inner">
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Approach</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>Built global supply chain across India, EU, US, and China from scratch</li>
+                                <li>Designed dual-track D2C + B2B distribution architecture per geography</li>
+                                <li>Launched Macaraccoon on Kickstarter with community-first, creator-led GTM to reduce CAC</li>
+                                <li>Built demand forecasting models aligned with regional adoption curves</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Outcomes</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>$77K crowdfunded in 30 days on Kickstarter</li>
+                                <li>SHASN live and distributing in 4 international markets (India, EU, US, China)</li>
+                                <li>Positive unit economics achieved globally</li>
+                                <li>India's #1 tabletop IP positioning maintained and extended internationally</li>
+                                <li>Macaraccoon community converted into long-term brand advocates</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- CS 02 -->
+        <article class="cs-card" data-sectors="media">
+            <div class="cs-card-header" onclick="toggleCase(this)">
+                <span class="cs-number">CS·02</span>
+                <div class="cs-main">
+                    <div class="cs-tags">
+                        <span class="cs-tag">Media</span>
+                        <span class="cs-tag">OTT</span>
+                    </div>
+                    <h2 class="cs-brand">Sony YAY!</h2>
+                    <p class="cs-role">Sony Pictures Networks India &nbsp;·&nbsp; 2019–2021</p>
+                    <p class="cs-challenge">Generic kids TV channel competing with digital-first platforms on licensed content alone. No owned IP, no distinct cultural identity. The mandate: build one from scratch.</p>
+                    <div class="cs-badges">
+                        <span class="cs-badge">27% CPE reduction</span>
+                        <span class="cs-badge">#1 kids category</span>
+                        <span class="cs-badge">1B+ interactions</span>
+                    </div>
+                </div>
+                <button class="cs-toggle" aria-expanded="false">
+                    <span class="cs-toggle-lbl">Playbook</span>
+                    <span class="cs-toggle-icon">
+                        <svg viewBox="0 0 14 14"><polyline points="2,4 7,10 12,4"/></svg>
+                    </span>
+                </button>
+            </div>
+            <div class="cs-card-body">
+                <div class="cs-card-body-inner">
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Approach</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>Developed Sony YAY!'s original digital content IP strategy</li>
+                                <li>Led IMC campaign across ATL, BTL, and digital with unified messaging</li>
+                                <li>Designed YouTube-native shortform content strategy for kids 6–12</li>
+                                <li>Used BARC data for content windowing, scheduling, and gap identification</li>
+                                <li>Built YouTube + Instagram + Facebook analytics infrastructure in-house</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Outcomes</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>27% reduction in CPE across digital platforms</li>
+                                <li>#1 engagement in the kids category</li>
+                                <li>1B+ total brand interactions engineered across all platforms</li>
+                                <li>Sony YAY! established multi-platform identity with owned digital IPs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- CS 03 -->
+        <article class="cs-card" data-sectors="media">
+            <div class="cs-card-header" onclick="toggleCase(this)">
+                <span class="cs-number">CS·03</span>
+                <div class="cs-main">
+                    <div class="cs-tags">
+                        <span class="cs-tag">Media</span>
+                        <span class="cs-tag">Brand</span>
+                    </div>
+                    <h2 class="cs-brand">AXN</h2>
+                    <p class="cs-role">Sony Pictures Networks India &nbsp;·&nbsp; 2019–2021</p>
+                    <p class="cs-challenge">Overwhelmingly male viewership. Female millennial audiences negligible. Without meaningful female reach, AXN could not credibly claim India's premium English entertainment positioning.</p>
+                    <div class="cs-badges">
+                        <span class="cs-badge">4L reach</span>
+                        <span class="cs-badge">50+ partnerships</span>
+                        <span class="cs-badge">#1 premium</span>
+                    </div>
+                </div>
+                <button class="cs-toggle" aria-expanded="false">
+                    <span class="cs-toggle-lbl">Playbook</span>
+                    <span class="cs-toggle-icon">
+                        <svg viewBox="0 0 14 14"><polyline points="2,4 7,10 12,4"/></svg>
+                    </span>
+                </button>
+            </div>
+            <div class="cs-card-body">
+                <div class="cs-card-body-inner">
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Approach</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>Repositioned AXN around shared millennial culture — not gender-coded content</li>
+                                <li>Built the College Contact Program as campus ambassador IP with equal gender reach</li>
+                                <li>Activated 50+ FMCG and lifestyle brand partnerships with female-skew relevance</li>
+                                <li>AXN presence at Comic Con India as annual experiential IP for mixed audiences</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Outcomes</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>4 Lakh direct millennial touchpoints with significantly improved female representation</li>
+                                <li>50+ brand partnerships reinforcing premium positioning</li>
+                                <li>AXN established as India's #1 premium English entertainment brand</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- CS 04 -->
+        <article class="cs-card" data-sectors="foodtech d2c">
+            <div class="cs-card-header" onclick="toggleCase(this)">
+                <span class="cs-number">CS·04</span>
+                <div class="cs-main">
+                    <div class="cs-tags">
+                        <span class="cs-tag">Foodtech</span>
+                        <span class="cs-tag">D2C</span>
+                    </div>
+                    <h2 class="cs-brand">Swiggy Virtual Kitchens</h2>
+                    <p class="cs-role">Swiggy West &nbsp;·&nbsp; Oct 2021 – Nov 2022</p>
+                    <p class="cs-challenge">Cloud kitchen vertical with a damaged reputation. Restaurant partners distrustful. The mandate: build West India's vertical from scratch and take it EBITDA-positive.</p>
+                    <div class="cs-badges">
+                        <span class="cs-badge">20+ brands EBITDA+</span>
+                        <span class="cs-badge">518% revenue (flagship)</span>
+                        <span class="cs-badge">45% AOV lift</span>
+                        <span class="cs-badge">Negative → EBITDA+</span>
+                    </div>
+                </div>
+                <button class="cs-toggle" aria-expanded="false">
+                    <span class="cs-toggle-lbl">Playbook</span>
+                    <span class="cs-toggle-icon">
+                        <svg viewBox="0 0 14 14"><polyline points="2,4 7,10 12,4"/></svg>
+                    </span>
+                </button>
+            </div>
+            <div class="cs-card-body">
+                <div class="cs-card-body-inner">
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Approach</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>Rebuilt partner relationships through transparent co-creation</li>
+                                <li>Demand-gap modelling using Swiggy's order data across micro-geographies</li>
+                                <li>Full brand architecture per IP: naming, identity, packaging, menu design</li>
+                                <li>GTM design: launch sequencing, pricing, channel selection per brand</li>
+                                <li>EBITDA stress-tested each brand before scaling</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Outcomes</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>20+ consumer brands built to EBITDA+ profitability</li>
+                                <li>518% revenue growth for flagship brand in the portfolio</li>
+                                <li>45% improvement in average order value across portfolio</li>
+                                <li>Cloud kitchen vertical taken from negative margin to EBITDA-positive</li>
+                                <li>Brands: Oh! Hashi · Wonton Pot · Neapolitan Oven · NYC Burger Co. · Harvest Salad Co. · Kuro's</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- CS 05 -->
+        <article class="cs-card" data-sectors="fintech">
+            <div class="cs-card-header" onclick="toggleCase(this)">
+                <span class="cs-number">CS·05</span>
+                <div class="cs-main">
+                    <div class="cs-tags">
+                        <span class="cs-tag">Fintech</span>
+                        <span class="cs-tag">B2B</span>
+                    </div>
+                    <h2 class="cs-brand">Paytm</h2>
+                    <p class="cs-role">AGM – B2B Product &amp; Growth, North + West India &nbsp;·&nbsp; Dec 2022 – May 2023</p>
+                    <p class="cs-challenge">Aggressive revenue targets. Immature team structure, unclear merchant journey, and fragmented processes across North and West India.</p>
+                    <div class="cs-badges">
+                        <span class="cs-badge">B2B GTM built end-to-end</span>
+                        <span class="cs-badge">North + West India</span>
+                        <span class="cs-badge">6-month turnaround</span>
+                    </div>
+                </div>
+                <button class="cs-toggle" aria-expanded="false">
+                    <span class="cs-toggle-lbl">Playbook</span>
+                    <span class="cs-toggle-icon">
+                        <svg viewBox="0 0 14 14"><polyline points="2,4 7,10 12,4"/></svg>
+                    </span>
+                </button>
+            </div>
+            <div class="cs-card-body">
+                <div class="cs-card-body-inner">
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Approach</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>Redesigned the end-to-end merchant onboarding and success journey</li>
+                                <li>Built B2B product GTM and channel strategy from scratch</li>
+                                <li>Created merchant success KPI framework for field team accountability</li>
+                                <li>Structured and scaled field team activation across North + West India</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Outcomes</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>B2B merchant payment GTM system built end-to-end and operational</li>
+                                <li>Field team structure scaled and KPI-accountable across both regions</li>
+                                <li>Merchant success framework adopted as standard operational process</li>
+                                <li>Revenue targets met within the 6-month engagement window</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- CS 06 -->
+        <article class="cs-card" data-sectors="d2c advisory">
+            <div class="cs-card-header" onclick="toggleCase(this)">
+                <span class="cs-number">CS·06</span>
+                <div class="cs-main">
+                    <div class="cs-tags">
+                        <span class="cs-tag">Advisory</span>
+                        <span class="cs-tag">D2C</span>
+                    </div>
+                    <h2 class="cs-brand">Shyaway</h2>
+                    <p class="cs-role">Eigenally &nbsp;·&nbsp; 2023–2024</p>
+                    <p class="cs-challenge">Strong equity with one core segment. No product categorisation for different TGs. Almost entirely online with no retail expansion strategy.</p>
+                    <div class="cs-badges">
+                        <span class="cs-badge">43% retention lift</span>
+                        <span class="cs-badge">TG-based categorisation</span>
+                        <span class="cs-badge">Multi-channel expansion</span>
+                    </div>
+                </div>
+                <button class="cs-toggle" aria-expanded="false">
+                    <span class="cs-toggle-lbl">Playbook</span>
+                    <span class="cs-toggle-icon">
+                        <svg viewBox="0 0 14 14"><polyline points="2,4 7,10 12,4"/></svg>
+                    </span>
+                </button>
+            </div>
+            <div class="cs-card-body">
+                <div class="cs-card-body-inner">
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Approach</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>RFM segmentation and full cohort analysis to identify distinct TG clusters</li>
+                                <li>Created TG-specific categorisation including pocket-sensitive pathways</li>
+                                <li>Redesigned communication architecture per RFM cluster</li>
+                                <li>Campaign strategy targeting each cluster by purchase triggers and churn signals</li>
+                                <li>Developed strategy for digital proliferation and store expansion</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Outcomes</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>43% improvement in customer retention</li>
+                                <li>TG-based website categorisation implemented and live</li>
+                                <li>Communication architecture adopted permanently across all segments</li>
+                                <li>Brand moved toward multi-channel presence (digital + retail)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- CS 07 -->
+        <article class="cs-card" data-sectors="gaming">
+            <div class="cs-card-header" onclick="toggleCase(this)">
+                <span class="cs-number">CS·07</span>
+                <div class="cs-main">
+                    <div class="cs-tags">
+                        <span class="cs-tag">Gaming</span>
+                        <span class="cs-tag">Operations</span>
+                    </div>
+                    <h2 class="cs-brand">SHASN: Global Supply Chain</h2>
+                    <p class="cs-role">Memesys (Fractional CMO) &nbsp;·&nbsp; 2026</p>
+                    <p class="cs-challenge">Scaling India's #1 tabletop IP to 4 geographies simultaneously — each with different fulfilment infrastructure, import regulations, and distributor landscapes.</p>
+                    <div class="cs-badges">
+                        <span class="cs-badge">4-geo supply chain</span>
+                        <span class="cs-badge">Positive unit economics</span>
+                    </div>
+                </div>
+                <button class="cs-toggle" aria-expanded="false">
+                    <span class="cs-toggle-lbl">Playbook</span>
+                    <span class="cs-toggle-icon">
+                        <svg viewBox="0 0 14 14"><polyline points="2,4 7,10 12,4"/></svg>
+                    </span>
+                </button>
+            </div>
+            <div class="cs-card-body">
+                <div class="cs-card-body-inner">
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Approach</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>Built end-to-end supply chain across India, EU, US, and China from scratch</li>
+                                <li>Demand forecasting tied to sales velocity data per geography</li>
+                                <li>Localised fulfilment partners and production volume alignment per market</li>
+                                <li>Dual-track D2C + B2B distribution architecture per region</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Outcomes</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>4-geography supply chain operational with positive unit economics</li>
+                                <li>SHASN distributed and selling across India, EU, US, and China</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- CS 08 -->
+        <article class="cs-card" data-sectors="advisory">
+            <div class="cs-card-header" onclick="toggleCase(this)">
+                <span class="cs-number">CS·08</span>
+                <div class="cs-main">
+                    <div class="cs-tags">
+                        <span class="cs-tag">Advisory</span>
+                        <span class="cs-tag">Fractional</span>
+                    </div>
+                    <h2 class="cs-brand">Eigenally</h2>
+                    <p class="cs-role">Founder &nbsp;·&nbsp; Jul 2023 – Present</p>
+                    <p class="cs-challenge">Founded to apply cross-sector expertise as a structured advisory and creative practice — working with brands, founders, and early-stage companies on brand strategy, GTM, and cultural IP.</p>
+                    <div class="cs-badges">
+                        <span class="cs-badge">Founder</span>
+                        <span class="cs-badge">Fractional CMO</span>
+                        <span class="cs-badge">Jul 2023 – Present</span>
+                    </div>
+                </div>
+                <button class="cs-toggle" aria-expanded="false">
+                    <span class="cs-toggle-lbl">Playbook</span>
+                    <span class="cs-toggle-icon">
+                        <svg viewBox="0 0 14 14"><polyline points="2,4 7,10 12,4"/></svg>
+                    </span>
+                </button>
+            </div>
+            <div class="cs-card-body">
+                <div class="cs-card-body-inner">
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Approach</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>Founder-led positioning and brand architecture for client companies</li>
+                                <li>Advisory across brand strategy, GTM design, and cultural IP</li>
+                                <li>Fractional CMO engagements and strategic consulting</li>
+                                <li>Cross-sector GTM playbooks for 0-to-1 companies</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Outcomes</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>Practice active with ongoing client engagements since Jul 2023</li>
+                                <li>Fractional CMO at Memesys (Jun 2024 – Present)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- CS 09 — Cloud Kitchen: Cold Start Problem -->
+        <article class="cs-card" data-sectors="foodtech">
+            <div class="cs-card-header" onclick="toggleCase(this)">
+                <span class="cs-number">CS·09</span>
+                <div class="cs-main">
+                    <div class="cs-tags">
+                        <span class="cs-tag">Foodtech</span>
+                        <span class="cs-tag">Growth Problem</span>
+                    </div>
+                    <h2 class="cs-brand">Cloud Kitchen: The Cold Start Problem</h2>
+                    <p class="cs-role">Swiggy Virtual Kitchens &nbsp;·&nbsp; 2021–2022 &nbsp;·&nbsp; Problem level: Easy to Intermediate</p>
+                    <p class="cs-challenge">A premium cloud kitchen brand launched on a food delivery platform with solid fundamentals — AOV ₹650, 30% discounts, 100 ad clicks/day budgeted. Brand targets: OPD of 20 (Month 1), 35 (Month 2), 50 (Month 3). Actual performance: ad burn ₹0, OPD under 5/day across all three months. Why isn't it moving?</p>
+                    <div class="cs-badges">
+                        <span class="cs-badge">Funnel diagnostics</span>
+                        <span class="cs-badge">Platform algorithm</span>
+                        <span class="cs-badge">Cold start fix</span>
+                    </div>
+                </div>
+                <button class="cs-toggle" aria-expanded="false">
+                    <span class="cs-toggle-lbl">Playbook</span>
+                    <span class="cs-toggle-icon">
+                        <svg viewBox="0 0 14 14"><polyline points="2,4 7,10 12,4"/></svg>
+                    </span>
+                </button>
+            </div>
+            <div class="cs-card-body">
+                <div class="cs-card-body-inner">
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Diagnosis — where the funnel broke</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li><strong>Awareness:</strong> Search = 0 — brand not displayed in search despite buying ads</li>
+                                <li><strong>Acquisition:</strong> Ad clicks under 5 — ad spend not converting to impressions</li>
+                                <li><strong>Activation through Referral:</strong> All AARRR stages at zero</li>
+                                <li>Root cause: Prep time logged as 50 minutes vs. platform standard of 20 minutes — algorithm suppressing the listing entirely</li>
+                                <li>Secondary: Ratings at 0, giving the algorithm no positive signal to surface the brand</li>
+                                <li>UI and food QC passed — the problem was operational, not product</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Actions taken</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>Reduced ad spend — pointless to buy traffic that the algorithm won't show</li>
+                                <li>Reduced prep time to platform standard (under 20 minutes) — unlocked algorithm eligibility</li>
+                                <li>Worked with platform to retrain restaurant score via early order incentives and manual review</li>
+                                <li>TOFU reiteration: rebuilt brand listing, images, and menu copy to improve click-through once listing became eligible</li>
+                                <li>Orders began flowing once restaurant score crossed threshold — ad spend resumed at a fraction of original burn</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- CS 10 — Cloud Kitchen: Scaling Beyond Cold Start -->
+        <article class="cs-card" data-sectors="foodtech">
+            <div class="cs-card-header" onclick="toggleCase(this)">
+                <span class="cs-number">CS·10</span>
+                <div class="cs-main">
+                    <div class="cs-tags">
+                        <span class="cs-tag">Foodtech</span>
+                        <span class="cs-tag">Growth Problem</span>
+                    </div>
+                    <h2 class="cs-brand">Cloud Kitchen: Scaling After the Cold Start</h2>
+                    <p class="cs-role">Swiggy Virtual Kitchens &nbsp;·&nbsp; 2021–2022 &nbsp;·&nbsp; Problem level: Intermediate</p>
+                    <p class="cs-challenge">Same platform, second brand. Post cold start resolution, the brand had achieved baseline orders but plateaued. Ads are running, search visibility is recovered, but growth has stalled. The question shifts from "why isn't it moving?" to "how do we scale?"</p>
+                    <div class="cs-badges">
+                        <span class="cs-badge">AARRR framework</span>
+                        <span class="cs-badge">Retention & revenue</span>
+                        <span class="cs-badge">Platform scaling</span>
+                    </div>
+                </div>
+                <button class="cs-toggle" aria-expanded="false">
+                    <span class="cs-toggle-lbl">Playbook</span>
+                    <span class="cs-toggle-icon">
+                        <svg viewBox="0 0 14 14"><polyline points="2,4 7,10 12,4"/></svg>
+                    </span>
+                </button>
+            </div>
+            <div class="cs-card-body">
+                <div class="cs-card-body-inner">
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Framework applied — Contextualise → Identify → Act</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li><strong>Contextualise:</strong> Mapped the full AARRR funnel — Awareness, Acquisition, Activation, Retention, Revenue, Referral — to identify where the leak was</li>
+                                <li><strong>Identify:</strong> Acquisition was functional; the break was at Retention and Revenue. Repeat order rate was low; average order value was not growing</li>
+                                <li><strong>Act:</strong> Rebuilt the retention layer — loyalty nudges, combo pricing, and reorder prompts via platform mechanics</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cs-body-col">
+                        <p class="cs-body-lbl">Outcomes</p>
+                        <div class="cs-body-content">
+                            <ul>
+                                <li>Repeat order rate improved within 6 weeks of retention layer activation</li>
+                                <li>AOV increased through strategic bundling — moved from single-item to combo ordering</li>
+                                <li>Platform algorithm rewarded improved retention signals with higher organic ranking</li>
+                                <li>Playbook systematised and applied across 6 other virtual kitchen brands in the portfolio</li>
+                                <li>Contributed to the broader 45% AOV lift and 518% revenue growth across the Swiggy Virtual Kitchens vertical</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-logo">
+            <img src="Logos/Eigenally_logo.svg" alt="Eigenally"
+                 onerror="this.src='Logos/Eigenally_logo.png'">
+        </div>
+        <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="mailto:aishwarya.swarup@gmail.com">Email</a></li>
+            <li><a href="https://linkedin.com/in/aishwarya-swarup" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+        <p class="footer-copy">© Eigenally 2026</p>
+    </footer>
+
+    <!-- MOVING DOTS ANIMATION -->
+    <script>
+    (function() {
+        const canvas = document.getElementById('dots-bg');
+        const ctx    = canvas.getContext('2d');
+
+        let W, H, particles = [];
+        const COUNT        = 72;
+        const CONNECT_DIST = 140;
+        const REPEL_DIST   = 90;
+        const DOT_COLOR    = '11,61,46';
+        let mx = null, my = null;
+
+        function resize() {
+            W = canvas.width  = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+
+        class Dot {
+            constructor() { this.init(); }
+            init() {
+                this.x  = Math.random() * W;
+                this.y  = Math.random() * H;
+                this.vx = (Math.random() - 0.5) * 0.55;
+                this.vy = (Math.random() - 0.5) * 0.55;
+                this.r  = Math.random() * 2.2 + 0.8;
+                this.a  = Math.random() * 0.29 + 0.12;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > W) { this.vx *= -1; this.x = Math.max(0, Math.min(W, this.x)); }
+                if (this.y < 0 || this.y > H) { this.vy *= -1; this.y = Math.max(0, Math.min(H, this.y)); }
+                if (mx !== null) {
+                    const dx = this.x - mx, dy = this.y - my;
+                    const d  = Math.sqrt(dx*dx + dy*dy);
+                    if (d < REPEL_DIST && d > 0) {
+                        const f = (REPEL_DIST - d) / REPEL_DIST * 1.8;
+                        this.x += (dx / d) * f;
+                        this.y += (dy / d) * f;
+                    }
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${DOT_COLOR},${this.a})`;
+                ctx.fill();
+            }
+        }
+
+        function drawLines() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const d  = Math.sqrt(dx*dx + dy*dy);
+                    if (d < CONNECT_DIST) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(${DOT_COLOR},${0.17 * (1 - d / CONNECT_DIST)})`;
+                        ctx.lineWidth = 0.7;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function frame() {
+            ctx.clearRect(0, 0, W, H);
+            drawLines();
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(frame);
+        }
+
+        function init() {
+            resize();
+            particles = [];
+            for (let i = 0; i < COUNT; i++) particles.push(new Dot());
+        }
+
+        window.addEventListener('resize', resize);
+        window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+        window.addEventListener('mouseleave', () => { mx = null; my = null; });
+
+        init();
+        frame();
+    })();
+
+    /* ---- Card toggle ---- */
+    function toggleCase(header) {
+        const card   = header.closest('.cs-card');
+        const btn    = header.querySelector('.cs-toggle');
+        const isOpen = card.classList.contains('open');
+        card.classList.toggle('open');
+        btn.setAttribute('aria-expanded', !isOpen);
+    }
+
+    /* ---- Sector filter ---- */
+    document.querySelectorAll('.filter-tag').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-tag').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            document.querySelectorAll('.cs-card').forEach(card => {
+                const sectors = card.dataset.sectors || '';
+                card.style.display = (filter === 'all' || sectors.split(' ').includes(filter)) ? '' : 'none';
+            });
+        });
+    });
+
+    function toggleNav() {
+        document.getElementById('navMobile').classList.toggle('open');
+        document.body.style.overflow = document.getElementById('navMobile').classList.contains('open') ? 'hidden' : '';
+    }
+    </script>
+
+</body>
+</html>
