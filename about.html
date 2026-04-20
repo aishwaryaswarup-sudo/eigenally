@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About — Aishwarya Swarup · Eigenally</title>
+    <meta name="description" content="Aishwarya Swarup — fractional CMO and full-stack marketing strategist. 10+ years, 30+ brands across FoodTech, Fintech, Media, D2C, and Luxury.">
+    <meta property="og:title" content="About — Aishwarya Swarup · Eigenally">
+    <meta property="og:description" content="Aishwarya Swarup — fractional CMO and full-stack marketing strategist. 10+ years, 30+ brands across FoodTech, Fintech, Media, D2C, and Luxury.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.eigenally.com/about.html">
+    <meta property="og:image" content="https://www.eigenally.com/Logos/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About — Aishwarya Swarup · Eigenally">
+    <meta name="twitter:description" content="Aishwarya Swarup — fractional CMO and full-stack marketing strategist. 10+ years, 30+ brands across FoodTech, Fintech, Media, D2C, and Luxury.">
+    <meta name="twitter:image" content="https://www.eigenally.com/Logos/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,700&family=Inter:wght@300;400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
@@ -353,7 +365,7 @@
         }
 
         /* ============================================================
-           CAREER TIMELINE
+           CAREER TIMELINE — horizontal single line
         ============================================================ */
         .timeline-section {
             position: relative;
@@ -361,114 +373,73 @@
             padding: 24px 0 64px;
         }
 
-        .timeline-wrap {
-            background: var(--bg-light);
-            border-radius: 24px;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
-            overflow: hidden;
+        .tl-line-scroll {
+            overflow-x: auto;
+            padding-bottom: 8px;
         }
 
-        .timeline-entry {
-            display: grid;
-            grid-template-columns: 200px 1fr auto;
-            gap: 32px;
-            align-items: start;
-            padding: 28px 40px;
-            border-bottom: 1px solid var(--border);
-            transition: background 0.2s;
-        }
-
-        .timeline-entry:last-child { border-bottom: none; }
-        .timeline-entry:hover { background: rgba(11,61,46,0.03); }
-
-        .tl-period {
-            font-family: 'Courier Prime', monospace;
-            font-size: 13px;
-            color: var(--accent);
-            letter-spacing: 0.06em;
-            padding-top: 3px;
-            line-height: 1.6;
-            font-weight: 700;
-        }
-
-        .tl-role {
-            font-size: 17px;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 4px;
-        }
-
-        .tl-org {
-            font-size: 14px;
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        .tl-tags {
+        .tl-line {
             display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            justify-content: flex-end;
+            position: relative;
+            padding-top: 28px;
+            min-width: max-content;
+            gap: 0;
         }
 
-        .tl-tag {
-            font-family: 'Courier Prime', monospace;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--accent);
-            background: rgba(200,44,31,0.1);
-            border-radius: 100px;
-            padding: 3px 10px;
+        .tl-line::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 10px;
+            right: 10px;
+            height: 2px;
+            background: var(--border-mid);
         }
 
-        /* ============================================================
-           EDUCATION
-        ============================================================ */
-        .edu-section {
+        .tl-stop {
+            flex: 1;
+            min-width: 148px;
+            padding-right: 16px;
+            padding-top: 0;
+            position: relative;
+        }
+
+        .tl-stop-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid var(--bg);
+            margin-bottom: 12px;
             position: relative;
             z-index: 1;
-            padding: 0 0 64px;
         }
 
-        .edu-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .edu-card {
-            background: var(--forest);
-            border-radius: 20px;
-            padding: 40px 40px;
-            color: var(--bg-light);
-        }
-
-        .edu-institution {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 26px;
-            font-weight: 700;
-            color: var(--bg-light);
-            margin-bottom: 10px;
-            letter-spacing: -0.01em;
-        }
-
-        .edu-degree {
-            font-size: 15px;
-            color: rgba(253,240,236,0.75);
-            margin-bottom: 14px;
-            font-weight: 400;
-        }
-
-        .edu-detail {
+        .tl-stop-year {
             font-family: 'Courier Prime', monospace;
-            font-size: 12px;
-            color: rgba(253,240,236,0.5);
-            letter-spacing: 0.05em;
-            line-height: 1.9;
+            font-size: 10px;
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            margin-bottom: 3px;
         }
+
+        .tl-stop-role {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.3;
+            margin-bottom: 2px;
+        }
+
+        .tl-stop-org {
+            font-size: 11px;
+            color: var(--muted);
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        /* Education section removed */
 
         /* ============================================================
            SELECTED WORK
@@ -494,83 +465,89 @@
         }
 
         .work-entries {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .work-entry {
+            display: grid;
+            grid-template-columns: 2fr 3fr;
             background: var(--bg-light);
-            border-radius: 18px;
+            border-radius: 16px;
             border: 1px solid var(--border);
-            padding: 28px 32px;
             box-shadow: var(--shadow-sm);
-            transition: transform 0.22s, box-shadow 0.22s;
+            overflow: hidden;
+            transition: box-shadow 0.22s;
         }
 
-        .work-entry:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
+        .work-entry:hover { box-shadow: var(--shadow-md); }
 
-        .we-header {
+        .we-left {
+            padding: 24px 28px;
+            border-right: 1px solid var(--border);
+            background: var(--bg-card);
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 6px;
+            gap: 10px;
         }
 
-        .we-brand {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text);
-            line-height: 1.3;
-        }
-
-        .we-period {
-            font-family: 'Courier Prime', monospace;
-            font-size: 12px;
-            color: var(--accent);
-            letter-spacing: 0.05em;
-            white-space: nowrap;
-            flex-shrink: 0;
-            padding-top: 2px;
+        .we-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(17px, 1.8vw, 22px);
             font-weight: 700;
+            color: var(--forest);
+            line-height: 1.2;
         }
 
         .we-org {
             font-family: 'Courier Prime', monospace;
-            font-size: 13px;
+            font-size: 11px;
             color: var(--accent);
-            letter-spacing: 0.04em;
-            margin-bottom: 12px;
             font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .we-period {
+            font-family: 'Courier Prime', monospace;
+            font-size: 10px;
+            color: var(--muted);
+            letter-spacing: 0.05em;
+        }
+
+        .we-right {
+            padding: 24px 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 14px;
         }
 
         .we-desc {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--secondary);
-            line-height: 1.75;
+            line-height: 1.7;
             font-weight: 300;
-            margin-bottom: 14px;
+            flex: 1;
         }
 
         .we-results {
             display: flex;
-            gap: 8px;
+            gap: 7px;
             flex-wrap: wrap;
         }
 
         .result-pill {
             font-family: 'Courier Prime', monospace;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             letter-spacing: 0.06em;
             color: var(--forest);
             background: var(--forest-lt);
             border-radius: 100px;
-            padding: 4px 12px;
+            padding: 3px 10px;
         }
 
         /* ============================================================
@@ -607,68 +584,51 @@
             color: var(--muted);
         }
 
-        .ip-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-        }
-
-        .ip-card {
-            background: var(--bg-light);
-            border-radius: 16px;
+        .ip-list {
             border: 1px solid var(--border);
-            padding: 24px 26px;
-            transition: background 0.2s, border-color 0.2s;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--bg-light);
         }
 
-        .ip-card:hover {
-            background: var(--forest);
-            border-color: var(--forest);
+        .ip-row {
+            display: grid;
+            grid-template-columns: 180px 1fr auto;
+            gap: 20px;
+            align-items: center;
+            padding: 13px 24px;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.18s;
         }
 
-        .ip-card:hover .ip-name { color: var(--bg-light); }
-        .ip-card:hover .ip-cat  { color: rgba(253,240,236,0.6); }
-        .ip-card:hover .ip-org  { color: rgba(253,240,236,0.55); }
-        .ip-card:hover .ip-res  { color: rgba(253,240,236,0.75); background: rgba(253,240,236,0.1); }
+        .ip-row:last-child { border-bottom: none; }
+        .ip-row:hover { background: var(--bg-card); }
 
         .ip-name {
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 600;
             color: var(--text);
-            margin-bottom: 4px;
             transition: color 0.2s;
         }
 
-        .ip-cat {
+        .ip-desc {
+            font-size: 12px;
+            color: var(--secondary);
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        .ip-tag {
             font-family: 'Courier Prime', monospace;
             font-size: 10px;
             font-weight: 700;
-            letter-spacing: 0.14em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--accent);
-            margin-bottom: 8px;
-            transition: color 0.2s;
-        }
-
-        .ip-org {
-            font-size: 13px;
-            color: var(--accent);
-            margin-bottom: 10px;
-            transition: color 0.2s;
-            font-weight: 600;
-        }
-
-        .ip-res {
-            display: inline-block;
-            font-family: 'Courier Prime', monospace;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.06em;
-            color: var(--forest);
-            background: var(--forest-lt);
+            background: rgba(200,44,31,0.08);
             border-radius: 100px;
             padding: 3px 10px;
-            transition: color 0.2s, background 0.2s;
+            white-space: nowrap;
         }
 
         /* ============================================================
@@ -680,44 +640,47 @@
             padding: 0 0 64px;
         }
 
-        .impact-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-        }
-
-        .impact-cell {
-            background: var(--bg-light);
-            border-radius: 18px;
+        .impact-strip {
+            display: flex;
+            flex-wrap: wrap;
             border: 1px solid var(--border);
-            padding: 30px 28px;
-            transition: transform 0.22s, box-shadow 0.22s, background 0.22s;
+            border-radius: 18px;
+            overflow: hidden;
+            background: var(--bg-light);
         }
 
-        .impact-cell:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-            background: var(--bg-card);
+        .impact-item {
+            flex: 1;
+            min-width: 120px;
+            padding: 20px 18px;
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
         }
+
+        .impact-item:nth-child(6n) { border-right: none; }
+        .impact-item:nth-last-child(-n+6) { border-bottom: none; }
 
         .impact-num {
+            display: block;
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(28px, 2.8vw, 38px);
+            font-size: clamp(22px, 2vw, 28px);
             font-weight: 800;
-            line-height: 1.05;
+            line-height: 1;
             color: var(--forest);
             letter-spacing: -0.02em;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
         .impact-lbl {
+            display: block;
             font-family: 'Courier Prime', monospace;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--muted);
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         /* ============================================================
@@ -997,7 +960,7 @@
             </div>
             <div class="hero-photo-wrap">
                 <img class="hero-photo"
-                     src="Assets/Images/Logos/About Image.jpeg"
+                     src="Logos/About Image.jpeg"
                      alt="Aishwarya Swarup"
                      onerror="this.style.background='var(--bg-card)';this.style.minHeight='400px'">
             </div>
@@ -1036,115 +999,68 @@
     <!-- CAREER TIMELINE -->
     <section class="timeline-section">
         <div class="wrap">
-            <p class="section-label">Career timeline</p>
-            <div class="timeline-wrap">
-                <div class="timeline-entry">
-                    <div class="tl-period">Jun 2024 – Present</div>
-                    <div>
-                        <div class="tl-role">Fractional CMO</div>
-                        <div class="tl-org">Memesys (SHASN &amp; Macaraccoon)</div>
+            <p class="section-label">Career</p>
+            <div class="tl-line-scroll">
+                <div class="tl-line">
+                    <div class="tl-stop">
+                        <div class="tl-stop-dot"></div>
+                        <div class="tl-stop-year">2014–16</div>
+                        <div class="tl-stop-role">Systems Engineer</div>
+                        <div class="tl-stop-org">Infosys · RBS</div>
                     </div>
-                    <div class="tl-tags">
-                        <span class="tl-tag">Gaming</span>
-                        <span class="tl-tag">Cultural IP</span>
+                    <div class="tl-stop">
+                        <div class="tl-stop-dot"></div>
+                        <div class="tl-stop-year">2016–17</div>
+                        <div class="tl-stop-role">Programme Manager</div>
+                        <div class="tl-stop-org">Stembridge Labs</div>
                     </div>
-                </div>
-                <div class="timeline-entry">
-                    <div class="tl-period">Jul 2023 – Present</div>
-                    <div>
-                        <div class="tl-role">Founder</div>
-                        <div class="tl-org">Eigenally</div>
+                    <div class="tl-stop">
+                        <div class="tl-stop-dot"></div>
+                        <div class="tl-stop-year">2017–19</div>
+                        <div class="tl-stop-role">PGDM</div>
+                        <div class="tl-stop-org">MICA, Ahmedabad</div>
                     </div>
-                    <div class="tl-tags">
-                        <span class="tl-tag">Advisory</span>
+                    <div class="tl-stop">
+                        <div class="tl-stop-dot"></div>
+                        <div class="tl-stop-year">2019–21</div>
+                        <div class="tl-stop-role">Asst. Brand &amp; Insights Manager</div>
+                        <div class="tl-stop-org">Sony Pictures Networks India</div>
                     </div>
-                </div>
-                <div class="timeline-entry">
-                    <div class="tl-period">Jun 2023 – May 2024</div>
-                    <div>
-                        <div class="tl-role">Growth &amp; Marketing Consultant</div>
-                        <div class="tl-org">Shyaway · Brandtainment · Bizcon · Growth School</div>
+                    <div class="tl-stop">
+                        <div class="tl-stop-dot"></div>
+                        <div class="tl-stop-year">2021–22</div>
+                        <div class="tl-stop-role">Category Brand Manager</div>
+                        <div class="tl-stop-org">Swiggy West</div>
                     </div>
-                    <div class="tl-tags">
-                        <span class="tl-tag">Multi-sector</span>
+                    <div class="tl-stop">
+                        <div class="tl-stop-dot"></div>
+                        <div class="tl-stop-year">2022–23</div>
+                        <div class="tl-stop-role">AGM – B2B Product &amp; Growth</div>
+                        <div class="tl-stop-org">Paytm North + West</div>
                     </div>
-                </div>
-                <div class="timeline-entry">
-                    <div class="tl-period">Dec 2022 – May 2023</div>
-                    <div>
-                        <div class="tl-role">AGM – B2B Product &amp; Growth</div>
-                        <div class="tl-org">Paytm (North + West India)</div>
+                    <div class="tl-stop">
+                        <div class="tl-stop-dot"></div>
+                        <div class="tl-stop-year">2023–24</div>
+                        <div class="tl-stop-role">Growth Consultant</div>
+                        <div class="tl-stop-org">Shyaway · Brandtainment · Bizcon</div>
                     </div>
-                    <div class="tl-tags">
-                        <span class="tl-tag">Fintech</span>
+                    <div class="tl-stop">
+                        <div class="tl-stop-dot"></div>
+                        <div class="tl-stop-year">2023–Now</div>
+                        <div class="tl-stop-role">Founder</div>
+                        <div class="tl-stop-org">Eigenally</div>
                     </div>
-                </div>
-                <div class="timeline-entry">
-                    <div class="tl-period">Oct 2021 – Nov 2022</div>
-                    <div>
-                        <div class="tl-role">Category Brand Manager – B2B &amp; D2C</div>
-                        <div class="tl-org">Swiggy West</div>
-                    </div>
-                    <div class="tl-tags">
-                        <span class="tl-tag">Foodtech</span>
-                    </div>
-                </div>
-                <div class="timeline-entry">
-                    <div class="tl-period">Apr 2019 – Sep 2021</div>
-                    <div>
-                        <div class="tl-role">Asst. Brand &amp; Insights Manager</div>
-                        <div class="tl-org">Sony Pictures Networks India (SET, LIV, AXN, YAY!)</div>
-                    </div>
-                    <div class="tl-tags">
-                        <span class="tl-tag">Media</span>
-                        <span class="tl-tag">OTT</span>
-                    </div>
-                </div>
-                <div class="timeline-entry">
-                    <div class="tl-period">Sep 2016 – Aug 2017</div>
-                    <div>
-                        <div class="tl-role">Programme Manager</div>
-                        <div class="tl-org">Stembridge Labs</div>
-                    </div>
-                    <div class="tl-tags">
-                        <span class="tl-tag">EdTech</span>
-                    </div>
-                </div>
-                <div class="timeline-entry">
-                    <div class="tl-period">Dec 2014 – Mar 2016</div>
-                    <div>
-                        <div class="tl-role">Systems Engineer</div>
-                        <div class="tl-org">Infosys – Royal Bank of Scotland</div>
-                    </div>
-                    <div class="tl-tags">
-                        <span class="tl-tag">BFSI</span>
+                    <div class="tl-stop">
+                        <div class="tl-stop-dot"></div>
+                        <div class="tl-stop-year">2024–Now</div>
+                        <div class="tl-stop-role">Fractional CMO</div>
+                        <div class="tl-stop-org">Memesys (SHASN · Macaraccoon)</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- EDUCATION -->
-    <section class="edu-section">
-        <div class="wrap">
-            <p class="section-label">Education</p>
-            <div class="edu-grid">
-                <div class="edu-card">
-                    <h3 class="edu-institution">MICA, Ahmedabad</h3>
-                    <p class="edu-degree">PGDM — Marketing · Advertising &amp; Brand Management</p>
-                    <p class="edu-detail">
-                        Minor: Marketing Analytics<br>
-                        2017 – 2019
-                    </p>
-                </div>
-                <div class="edu-card">
-                    <h3 class="edu-institution">UP Technical University</h3>
-                    <p class="edu-degree">B.Tech — Computer Science Engineering</p>
-                    <p class="edu-detail">2010 – 2014</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- SELECTED WORK -->
     <section class="work-section">
@@ -1156,52 +1072,60 @@
                 <h3 class="work-cat-title">Brand Strategy &amp; Positioning</h3>
                 <div class="work-entries">
                     <div class="work-entry">
-                        <div class="we-header">
-                            <span class="we-brand">Sony YAY! Brand Overhaul</span>
-                            <span class="we-period">2019–2021</span>
+                        <div class="we-left">
+                            <div class="we-title">Sony YAY! Brand Overhaul</div>
+                            <div class="we-org">Sony Pictures Networks India</div>
+                            <div class="we-period">2019–2021</div>
                         </div>
-                        <p class="we-org">Sony Pictures Networks India</p>
-                        <p class="we-desc">Repositioned Sony YAY! from generic kids channel to multi-platform cultural brand. IMC across ATL, BTL, digital. Owned IP creation.</p>
-                        <div class="we-results">
-                            <span class="result-pill">27% CPE reduction</span>
-                            <span class="result-pill">#1 kids engagement</span>
-                            <span class="result-pill">1B+ interactions</span>
-                        </div>
-                    </div>
-                    <div class="work-entry">
-                        <div class="we-header">
-                            <span class="we-brand">AXN Premium Brand Strategy</span>
-                            <span class="we-period">2019–2021</span>
-                        </div>
-                        <p class="we-org">Sony Pictures Networks India</p>
-                        <p class="we-desc">Repositioned AXN to drive gender balance. 50+ FMCG/lifestyle brand partnerships with female-skew relevance.</p>
-                        <div class="we-results">
-                            <span class="result-pill">4L millennial reach</span>
-                            <span class="result-pill">50+ partnerships</span>
+                        <div class="we-right">
+                            <p class="we-desc">Repositioned Sony YAY! from generic kids channel to multi-platform cultural brand, owning IP creation across ATL, BTL and digital.</p>
+                            <div class="we-results">
+                                <span class="result-pill">27% CPE reduction</span>
+                                <span class="result-pill">#1 kids engagement</span>
+                                <span class="result-pill">1B+ interactions</span>
+                            </div>
                         </div>
                     </div>
                     <div class="work-entry">
-                        <div class="we-header">
-                            <span class="we-brand">Swiggy Virtual Kitchen Brands</span>
-                            <span class="we-period">2021–2022</span>
+                        <div class="we-left">
+                            <div class="we-title">AXN Premium Brand Strategy</div>
+                            <div class="we-org">Sony Pictures Networks India</div>
+                            <div class="we-period">2019–2021</div>
                         </div>
-                        <p class="we-org">Swiggy West</p>
-                        <p class="we-desc">Built 20+ consumer food brands from scratch using demand-gap intelligence from delivery data.</p>
-                        <div class="we-results">
-                            <span class="result-pill">20+ brands EBITDA+</span>
-                            <span class="result-pill">45% AOV lift</span>
+                        <div class="we-right">
+                            <p class="we-desc">Repositioned AXN toward gender-balanced premium audiences through 50+ FMCG and lifestyle brand partnerships with female-skew relevance.</p>
+                            <div class="we-results">
+                                <span class="result-pill">4L millennial reach</span>
+                                <span class="result-pill">50+ partnerships</span>
+                            </div>
                         </div>
                     </div>
                     <div class="work-entry">
-                        <div class="we-header">
-                            <span class="we-brand">Shyaway D2C Repositioning</span>
-                            <span class="we-period">2023</span>
+                        <div class="we-left">
+                            <div class="we-title">Swiggy Virtual Kitchen Brands</div>
+                            <div class="we-org">Swiggy West</div>
+                            <div class="we-period">2021–2022</div>
                         </div>
-                        <p class="we-org">Eigenally</p>
-                        <p class="we-desc">RFM + cohort analysis. TG-based segmentation for pocket-sensitive audiences. ₹100 Cr brand repositioned digitally.</p>
-                        <div class="we-results">
-                            <span class="result-pill">43% retention lift</span>
-                            <span class="result-pill">₹100 Cr brand</span>
+                        <div class="we-right">
+                            <p class="we-desc">Built 20+ consumer food brands from scratch using demand-gap intelligence extracted from Swiggy delivery data across micro-geographies.</p>
+                            <div class="we-results">
+                                <span class="result-pill">20+ brands EBITDA+</span>
+                                <span class="result-pill">45% AOV lift</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-entry">
+                        <div class="we-left">
+                            <div class="we-title">Shyaway D2C Repositioning</div>
+                            <div class="we-org">Eigenally</div>
+                            <div class="we-period">2023</div>
+                        </div>
+                        <div class="we-right">
+                            <p class="we-desc">RFM and cohort analysis to reposition a ₹100 Cr D2C brand digitally, targeting pocket-sensitive audiences with precision segmentation.</p>
+                            <div class="we-results">
+                                <span class="result-pill">43% retention lift</span>
+                                <span class="result-pill">₹100 Cr brand</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1212,41 +1136,49 @@
                 <h3 class="work-cat-title">Data Analysis &amp; Insights</h3>
                 <div class="work-entries">
                     <div class="work-entry">
-                        <div class="we-header">
-                            <span class="we-brand">BARC Audience Research</span>
-                            <span class="we-period">2019–2021</span>
+                        <div class="we-left">
+                            <div class="we-title">BARC Audience Research</div>
+                            <div class="we-org">Sony Networks</div>
+                            <div class="we-period">2019–2021</div>
                         </div>
-                        <p class="we-org">Sony Networks</p>
-                        <p class="we-desc">Deep BARC viewership analysis across SET, AXN, YAY!. Identified content gaps, airing windows, and audience migration patterns.</p>
-                    </div>
-                    <div class="work-entry">
-                        <div class="we-header">
-                            <span class="we-brand">Swiggy Demand Modelling</span>
-                            <span class="we-period">2021–2022</span>
-                        </div>
-                        <p class="we-org">Swiggy West</p>
-                        <p class="we-desc">Demand-gap modelling using Swiggy order data across micro-geographies. Designed 20+ virtual kitchen brands against each gap.</p>
-                    </div>
-                    <div class="work-entry">
-                        <div class="we-header">
-                            <span class="we-brand">Swiggy CRM Architecture</span>
-                            <span class="we-period">2021–2022</span>
-                        </div>
-                        <p class="we-org">Swiggy</p>
-                        <p class="we-desc">Clevertap CRM across 8 user segments. 150 concurrent campaigns at peak.</p>
-                        <div class="we-results">
-                            <span class="result-pill">150 concurrent campaigns</span>
+                        <div class="we-right">
+                            <p class="we-desc">Deep BARC viewership analysis across SET, AXN and YAY! to identify content gaps, optimal airing windows and audience migration patterns.</p>
                         </div>
                     </div>
                     <div class="work-entry">
-                        <div class="we-header">
-                            <span class="we-brand">Shyaway Cohort Analysis</span>
-                            <span class="we-period">2023</span>
+                        <div class="we-left">
+                            <div class="we-title">Swiggy Demand Modelling</div>
+                            <div class="we-org">Swiggy West</div>
+                            <div class="we-period">2021–2022</div>
                         </div>
-                        <p class="we-org">Eigenally</p>
-                        <p class="we-desc">Full RFM segmentation. Identified high-value segments, churn signals, and purchase triggers.</p>
-                        <div class="we-results">
-                            <span class="result-pill">43% retention improvement</span>
+                        <div class="we-right">
+                            <p class="we-desc">Demand-gap modelling using order data across micro-geographies to design 20+ virtual kitchen brand concepts against each identified gap.</p>
+                        </div>
+                    </div>
+                    <div class="work-entry">
+                        <div class="we-left">
+                            <div class="we-title">Swiggy CRM Architecture</div>
+                            <div class="we-org">Swiggy</div>
+                            <div class="we-period">2021–2022</div>
+                        </div>
+                        <div class="we-right">
+                            <p class="we-desc">Built Clevertap CRM infrastructure across 8 user segments, running 150 concurrent campaigns at peak to drive retention and order frequency.</p>
+                            <div class="we-results">
+                                <span class="result-pill">150 concurrent campaigns</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-entry">
+                        <div class="we-left">
+                            <div class="we-title">Shyaway Cohort Analysis</div>
+                            <div class="we-org">Eigenally</div>
+                            <div class="we-period">2023</div>
+                        </div>
+                        <div class="we-right">
+                            <p class="we-desc">Full RFM segmentation to surface high-value customer cohorts, churn signals and purchase triggers for a ₹100 Cr D2C lingerie brand.</p>
+                            <div class="we-results">
+                                <span class="result-pill">43% retention improvement</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1257,47 +1189,55 @@
                 <h3 class="work-cat-title">Growth Architecture (0 to 1)</h3>
                 <div class="work-entries">
                     <div class="work-entry">
-                        <div class="we-header">
-                            <span class="we-brand">Macaraccoon Global Launch</span>
-                            <span class="we-period">2026</span>
+                        <div class="we-left">
+                            <div class="we-title">Macaraccoon Global Launch</div>
+                            <div class="we-org">Memesys</div>
+                            <div class="we-period">2026</div>
                         </div>
-                        <p class="we-org">Memesys</p>
-                        <p class="we-desc">Community-first Kickstarter GTM from zero. Creator partnerships for CAC reduction. Global D2C + distributor architecture.</p>
-                        <div class="we-results">
-                            <span class="result-pill">$77K / 30 days</span>
-                            <span class="result-pill">4-market launch</span>
-                        </div>
-                    </div>
-                    <div class="work-entry">
-                        <div class="we-header">
-                            <span class="we-brand">Swiggy Virtual Kitchen GTM</span>
-                            <span class="we-period">2021–2022</span>
-                        </div>
-                        <p class="we-org">Swiggy West</p>
-                        <p class="we-desc">Built West India's cloud kitchen vertical from scratch. Category definition, pricing, launch sequencing for 20+ brands.</p>
-                        <div class="we-results">
-                            <span class="result-pill">518% revenue growth</span>
-                            <span class="result-pill">EBITDA+</span>
+                        <div class="we-right">
+                            <p class="we-desc">Community-first Kickstarter GTM from zero — creator partnerships for CAC reduction, global D2C and distributor architecture across 4 markets.</p>
+                            <div class="we-results">
+                                <span class="result-pill">$77K / 30 days</span>
+                                <span class="result-pill">4-market launch</span>
+                            </div>
                         </div>
                     </div>
                     <div class="work-entry">
-                        <div class="we-header">
-                            <span class="we-brand">Paytm Merchant GTM</span>
-                            <span class="we-period">Dec 2022–May 2023</span>
+                        <div class="we-left">
+                            <div class="we-title">Swiggy Virtual Kitchen GTM</div>
+                            <div class="we-org">Swiggy West</div>
+                            <div class="we-period">2021–2022</div>
                         </div>
-                        <p class="we-org">Paytm</p>
-                        <p class="we-desc">Designed merchant onboarding and success journey. B2B channel strategy from scratch across North + West India.</p>
+                        <div class="we-right">
+                            <p class="we-desc">Built West India's cloud kitchen vertical from scratch — category definition, pricing architecture and launch sequencing for 20+ brands.</p>
+                            <div class="we-results">
+                                <span class="result-pill">518% revenue growth</span>
+                                <span class="result-pill">EBITDA+</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="work-entry">
-                        <div class="we-header">
-                            <span class="we-brand">SHASN International Expansion</span>
-                            <span class="we-period">2026</span>
+                        <div class="we-left">
+                            <div class="we-title">Paytm Merchant GTM</div>
+                            <div class="we-org">Paytm</div>
+                            <div class="we-period">Dec 2022–May 2023</div>
                         </div>
-                        <p class="we-org">Memesys</p>
-                        <p class="we-desc">Extended SHASN from India into EU, US, China simultaneously. Distributor network + global supply chain architecture.</p>
-                        <div class="we-results">
-                            <span class="result-pill">4-geo supply chain</span>
-                            <span class="result-pill">Positive unit economics</span>
+                        <div class="we-right">
+                            <p class="we-desc">Designed the merchant onboarding and success journey, building B2B channel strategy from zero across North and West India.</p>
+                        </div>
+                    </div>
+                    <div class="work-entry">
+                        <div class="we-left">
+                            <div class="we-title">SHASN International Expansion</div>
+                            <div class="we-org">Memesys</div>
+                            <div class="we-period">2026</div>
+                        </div>
+                        <div class="we-right">
+                            <p class="we-desc">Extended SHASN from India into EU, US and China simultaneously — distributor network buildout and global supply chain architecture.</p>
+                            <div class="we-results">
+                                <span class="result-pill">4-geo supply chain</span>
+                                <span class="result-pill">Positive unit economics</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1309,77 +1249,62 @@
     <!-- CULTURAL IP VAULT -->
     <section class="ip-section">
         <div class="wrap">
-            <p class="section-label">Cultural IP vault</p>
-            <div class="ip-count-row">
-                <span class="ip-count-num">11</span>
-                <span class="ip-count-text">Original properties<br>created</span>
-            </div>
-            <div class="ip-grid">
-                <div class="ip-card">
+            <p class="section-label">Cultural IP vault — 11 original properties</p>
+            <div class="ip-list">
+                <div class="ip-row">
                     <div class="ip-name">SHASN</div>
-                    <div class="ip-cat">Gaming</div>
-                    <div class="ip-org">Memesys</div>
-                    <span class="ip-res">$77K · 4 markets</span>
+                    <div class="ip-desc">Political strategy board game launched globally via Kickstarter, crossing $77K in 30 days across 4 international markets.</div>
+                    <span class="ip-tag">Gaming</span>
                 </div>
-                <div class="ip-card">
+                <div class="ip-row">
                     <div class="ip-name">Macaraccoon</div>
-                    <div class="ip-cat">Gaming (Board Game)</div>
-                    <div class="ip-org">Memesys</div>
-                    <span class="ip-res">Global D2C · 4 markets</span>
+                    <div class="ip-desc">Family board game taken from concept to global D2C and retail distribution across 4 markets with community-first GTM.</div>
+                    <span class="ip-tag">Gaming</span>
                 </div>
-                <div class="ip-card">
+                <div class="ip-row">
                     <div class="ip-name">YAY! Digital Content Slate</div>
-                    <div class="ip-cat">OTT / Digital</div>
-                    <div class="ip-org">Sony YAY! · SPNI</div>
-                    <span class="ip-res">1B+ interactions</span>
+                    <div class="ip-desc">Owned digital IP and interactive content for Sony YAY! generating 1B+ brand interactions across OTT and social platforms.</div>
+                    <span class="ip-tag">OTT / Media</span>
                 </div>
-                <div class="ip-card">
+                <div class="ip-row">
                     <div class="ip-name">AXN College Contact Program</div>
-                    <div class="ip-cat">Media / Events</div>
-                    <div class="ip-org">AXN · SPNI</div>
-                    <span class="ip-res">4L direct touchpoints</span>
+                    <div class="ip-desc">Annual campus activation IP reaching 4L+ millennials directly, driving premium brand recall and FMCG partnership revenues for AXN.</div>
+                    <span class="ip-tag">Events</span>
                 </div>
-                <div class="ip-card">
+                <div class="ip-row">
                     <div class="ip-name">Oh! Hashi</div>
-                    <div class="ip-cat">Foodtech</div>
-                    <div class="ip-org">Swiggy Virtual Kitchens</div>
-                    <span class="ip-res">EBITDA+ · 45% AOV</span>
+                    <div class="ip-desc">Delivery-native Japanese comfort food brand built against a demand gap in West India's cloud kitchen market, scaled to EBITDA positive.</div>
+                    <span class="ip-tag">Foodtech</span>
                 </div>
-                <div class="ip-card">
+                <div class="ip-row">
                     <div class="ip-name">The Neapolitan Oven</div>
-                    <div class="ip-cat">Foodtech</div>
-                    <div class="ip-org">Swiggy Virtual Kitchens</div>
-                    <span class="ip-res">Premium · EBITDA+</span>
+                    <div class="ip-desc">Premium artisan pizza brand designed for Swiggy's higher-AOV urban segment, built on delivery-only infrastructure with EBITDA+ unit economics.</div>
+                    <span class="ip-tag">Foodtech</span>
                 </div>
-                <div class="ip-card">
+                <div class="ip-row">
                     <div class="ip-name">NYC Burger Co.</div>
-                    <div class="ip-cat">Foodtech</div>
-                    <div class="ip-org">Swiggy Virtual Kitchens</div>
-                    <span class="ip-res">Demand-gap product</span>
+                    <div class="ip-desc">American-style QSR burger brand filling a demand gap in Swiggy's delivery ecosystem, engineered from menu through packaging and pricing.</div>
+                    <span class="ip-tag">Foodtech</span>
                 </div>
-                <div class="ip-card">
+                <div class="ip-row">
                     <div class="ip-name">Harvest Salad Co.</div>
-                    <div class="ip-cat">Foodtech</div>
-                    <div class="ip-org">Swiggy Virtual Kitchens</div>
-                    <span class="ip-res">Urban millennial niche</span>
+                    <div class="ip-desc">Health-first delivery brand targeting urban millennials with a gap in clean, high-frequency lunch options on Swiggy.</div>
+                    <span class="ip-tag">Foodtech</span>
                 </div>
-                <div class="ip-card">
+                <div class="ip-row">
                     <div class="ip-name">Kuro's Sushi &amp; Ramen</div>
-                    <div class="ip-cat">Foodtech</div>
-                    <div class="ip-org">Swiggy Virtual Kitchens</div>
-                    <span class="ip-res">Niche · EBITDA+</span>
+                    <div class="ip-desc">Niche Japanese cuisine brand filling a premium delivery gap in Mumbai and Pune, scaled to EBITDA positive through menu engineering.</div>
+                    <span class="ip-tag">Foodtech</span>
                 </div>
-                <div class="ip-card">
+                <div class="ip-row">
                     <div class="ip-name">Wonton Pot</div>
-                    <div class="ip-cat">Foodtech</div>
-                    <div class="ip-org">Swiggy Virtual Kitchens</div>
-                    <span class="ip-res">Comfort-Asian · Delivery-native</span>
+                    <div class="ip-desc">Comfort-Asian cloud kitchen brand designed for high-frequency delivery occasions, built delivery-native from day one.</div>
+                    <span class="ip-tag">Foodtech</span>
                 </div>
-                <div class="ip-card">
+                <div class="ip-row">
                     <div class="ip-name">Comic Con India IPs</div>
-                    <div class="ip-cat">Events</div>
-                    <div class="ip-org">AXN + YAY! · SPNI</div>
-                    <span class="ip-res">Annual IP · Earned media</span>
+                    <div class="ip-desc">Annual event IP co-created for AXN and YAY! at Comic Con India, generating earned media and premium brand positioning in the youth segment.</div>
+                    <span class="ip-tag">Events</span>
                 </div>
             </div>
         </div>
@@ -1389,55 +1314,19 @@
     <section class="impact-section">
         <div class="wrap">
             <p class="section-label">Impact at scale</p>
-            <div class="impact-grid">
-                <div class="impact-cell">
-                    <div class="impact-num">$77K</div>
-                    <div class="impact-lbl">Crowdfunded in 30 days</div>
-                </div>
-                <div class="impact-cell">
-                    <div class="impact-num">1B+</div>
-                    <div class="impact-lbl">Brand interactions engineered</div>
-                </div>
-                <div class="impact-cell">
-                    <div class="impact-num">20+</div>
-                    <div class="impact-lbl">Consumer brands built to EBITDA+</div>
-                </div>
-                <div class="impact-cell">
-                    <div class="impact-num">518%</div>
-                    <div class="impact-lbl">Revenue growth — Swiggy flagship</div>
-                </div>
-                <div class="impact-cell">
-                    <div class="impact-num">45%</div>
-                    <div class="impact-lbl">Average order value improvement</div>
-                </div>
-                <div class="impact-cell">
-                    <div class="impact-num">43%</div>
-                    <div class="impact-lbl">Customer retention lift</div>
-                </div>
-                <div class="impact-cell">
-                    <div class="impact-num">27%</div>
-                    <div class="impact-lbl">CPE reduction</div>
-                </div>
-                <div class="impact-cell">
-                    <div class="impact-num">4L</div>
-                    <div class="impact-lbl">Direct millennial touchpoints</div>
-                </div>
-                <div class="impact-cell">
-                    <div class="impact-num">4</div>
-                    <div class="impact-lbl">International markets entered</div>
-                </div>
-                <div class="impact-cell">
-                    <div class="impact-num">11</div>
-                    <div class="impact-lbl">Original cultural IPs created</div>
-                </div>
-                <div class="impact-cell">
-                    <div class="impact-num">150</div>
-                    <div class="impact-lbl">Concurrent CRM campaigns</div>
-                </div>
-                <div class="impact-cell">
-                    <div class="impact-num">10 yrs</div>
-                    <div class="impact-lbl">Experience · 5 sectors</div>
-                </div>
+            <div class="impact-strip">
+                <div class="impact-item"><span class="impact-num">$77K</span><span class="impact-lbl">Crowdfunded · 30 days</span></div>
+                <div class="impact-item"><span class="impact-num">1B+</span><span class="impact-lbl">Brand interactions</span></div>
+                <div class="impact-item"><span class="impact-num">518%</span><span class="impact-lbl">Revenue growth</span></div>
+                <div class="impact-item"><span class="impact-num">45%</span><span class="impact-lbl">AOV improvement</span></div>
+                <div class="impact-item"><span class="impact-num">43%</span><span class="impact-lbl">Retention lift</span></div>
+                <div class="impact-item"><span class="impact-num">27%</span><span class="impact-lbl">CPE reduction</span></div>
+                <div class="impact-item"><span class="impact-num">20+</span><span class="impact-lbl">Brands to EBITDA+</span></div>
+                <div class="impact-item"><span class="impact-num">150</span><span class="impact-lbl">CRM campaigns · peak</span></div>
+                <div class="impact-item"><span class="impact-num">11</span><span class="impact-lbl">Original IPs</span></div>
+                <div class="impact-item"><span class="impact-num">4</span><span class="impact-lbl">Global markets</span></div>
+                <div class="impact-item"><span class="impact-num">4L</span><span class="impact-lbl">Millennial touchpoints</span></div>
+                <div class="impact-item"><span class="impact-num">10 yrs</span><span class="impact-lbl">5 sectors</span></div>
             </div>
         </div>
     </section>
@@ -1471,8 +1360,8 @@
     <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-logo">
-            <img src="Assets/Images/Logos/Eigenally_logo.svg" alt="Eigenally"
-                 onerror="this.src='Logos/Eigenally_logo.svg'">
+            <img src="Logos/Eigenally_logo.svg" alt="Eigenally"
+                 onerror="this.src='Logos/Eigenally_logo.png'">
         </div>
         <ul class="footer-links">
             <li><a href="index.html">Home</a></li>
